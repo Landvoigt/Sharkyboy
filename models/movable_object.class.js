@@ -27,13 +27,17 @@ class MovableObject {
         })
     }
 
-    moveLeft(){
+    moveLeft() {
         setInterval(() => {
             this.x -= this.speed;
         }, 1000 / 60);
     }
 
-    moveRight() {
-
+    playAnimation(images) {
+        // Swim Animation
+        let i = this.currentImage % images.length; // infinity loop for elements in array 0,1,2,3,....,0,1,2,3...,0,1,2
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
     }
 }

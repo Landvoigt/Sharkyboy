@@ -2,7 +2,8 @@ const level_1 = new Level(
     [
         new Enemy_1(),
         new Enemy_1(),
-        new Enemy_1()
+        new Enemy_1(),
+        new Endboss()
     ],
     [
         new BackgroundObject('../img/3. Background/Layers/5. Water/D2.png', -1920),

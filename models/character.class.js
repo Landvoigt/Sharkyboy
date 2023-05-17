@@ -25,7 +25,7 @@ class Character extends MovableObject {
         '../img/1.Sharkie/1.IDLE/17.png',
         '../img/1.Sharkie/1.IDLE/18.png'
     ];
-    WALKING_IMG = [
+    SWIMMING_IMG = [
         '../img/1.Sharkie/3.Swim/1.png',
         '../img/1.Sharkie/3.Swim/2.png',
         '../img/1.Sharkie/3.Swim/3.png',
@@ -33,11 +33,11 @@ class Character extends MovableObject {
         '../img/1.Sharkie/3.Swim/5.png',
         '../img/1.Sharkie/3.Swim/6.png'
     ];
-    WALKING_SOUND = new Audio('linklinklink');
+    SWIMMING_SOUND = new Audio('linklinklink');
 
     constructor() {
-        super().loadImage('../img/1.Sharkie/1.IDLE/1.png');
-        this.loadImages(this.WALKING_IMG);
+        super().loadImage(this.SWIMMING_IMG[0]);
+        this.loadImages(this.SWIMMING_IMG);
 
         this.animate();
     }
@@ -45,27 +45,23 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
-            this.WALKING_SOUND.pause();
+            this.SWIMMING_SOUND.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEnd_x) {
                 this.x += this.speed;
                 this.otherDirection = false;
-                this.WALKING_SOUND.play();
+                this.SWIMMING_SOUND.play();
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.x -= this.speed;
                 this.otherDirection = true;
-                this.WALKING_SOUND.play();
+                this.SWIMMING_SOUND.play();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                // Swim Animation
-                let i = this.currentImage % this.WALKING_IMG.length; // infinity loop for elements in array 0,1,2,3,....,0,1,2,3...,0,1,2
-                let path = this.WALKING_IMG[i];
-                this.img = this.imageCache[path];
-                this.currentImage++;
+                this.playAnimation(this.SWIMMING_IMG);
             }
         }, 90);
     }
