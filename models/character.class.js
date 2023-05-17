@@ -1,8 +1,9 @@
 class Character extends MovableObject {
     x = 100;
-    y = 400;
+    y = 300;
     height = 500;
     width = 500;
+    speed = 10;
     world;
     IDLE_IMG = [
         '../img/1.Sharkie/1.IDLE/1.png',
@@ -32,6 +33,7 @@ class Character extends MovableObject {
         '../img/1.Sharkie/3.Swim/5.png',
         '../img/1.Sharkie/3.Swim/6.png'
     ];
+    WALKING_SOUND = new Audio('linklinklink');
 
     constructor() {
         super().loadImage('../img/1.Sharkie/1.IDLE/1.png');
@@ -41,14 +43,31 @@ class Character extends MovableObject {
     }
 
     animate() {
+
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
+            this.WALKING_SOUND.pause();
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEnd_x) {
+                this.x += this.speed;
+                this.otherDirection = false;
+                this.WALKING_SOUND.play();
+            }
+            if (this.world.keyboard.LEFT && this.x > 0) {
+                this.x -= this.speed;
+                this.otherDirection = true;
+                this.WALKING_SOUND.play();
+            }
+            this.world.camera_x = -this.x + 100;
+        }, 1000 / 60);
+
+        setInterval(() => {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                // Swim Animation
                 let i = this.currentImage % this.WALKING_IMG.length; // infinity loop for elements in array 0,1,2,3,....,0,1,2,3...,0,1,2
                 let path = this.WALKING_IMG[i];
                 this.img = this.imageCache[path];
                 this.currentImage++;
             }
-        }, 100)
+        }, 90);
     }
 
     jump() {

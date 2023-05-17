@@ -1,6 +1,6 @@
 class Background_Fish extends MovableObject {
     // x = 100;
-    y = 250;
+    y = 150;
     width = 120;
     height = 120;
 

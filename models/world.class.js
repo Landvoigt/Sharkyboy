@@ -1,27 +1,10 @@
 class World {
     character = new Character();
-    enemies = [
-        new Enemy_1(),
-        new Enemy_1(),
-        new Enemy_1()
-    ];
-
-    backgroundObjects = [
-        new BackgroundObject('../img/3. Background/Legacy/Layers/5. Water/d1.png', 0),
-        new BackgroundObject('../img/3. Background/Legacy/Layers/4.Fondo 2/L1.png', 0),
-        new BackgroundObject('../img/3. Background/Legacy/Layers/3.Fondo 1/D1.png', 0),
-        new BackgroundObject('../img/3. Background/Layers/2. Floor/D1.png', 0)
-    ];
-
-    backgroundFishes = [
-        new Background_Fish(),
-        new Background_Fish(),
-        new Background_Fish()
-    ];
-
+    level = level_1;
     canvas;
     ctx;
     keyboard;
+    camera_x = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -38,10 +21,14 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.addObjectsToMap(this.backgroundObjects);
+        this.ctx.translate(this.camera_x, 0);
+
+        this.addObjectsToMap(this.level.backgroundObjects);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.backgroundFishes);
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.level.backgroundFishes);
+        this.addObjectsToMap(this.level.enemies);
+
+        this.ctx.translate(-this.camera_x, 0);
 
         // draw infinity loop
         let self = this;
@@ -57,6 +44,16 @@ class World {
     }
 
     addToMap(mo) {
+        if (mo.otherDirection) {
+            this.ctx.save();
+            this.ctx.translate(mo.width, 0);
+            this.ctx.scale(-1, 1);
+            mo.x = mo.x * -1;
+        }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.height, mo.width);
+        if (mo.otherDirection) {
+            mo.x = mo.x * -1;
+            this.ctx.restore();
+        }
     }
 }

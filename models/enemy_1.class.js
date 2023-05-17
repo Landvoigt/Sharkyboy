@@ -1,6 +1,6 @@
 class Enemy_1 extends MovableObject {  // Pufferfish
     x = 900;
-    y = 800;
+    y = 650;
     height = 170;
     width = 170;
     WALKING_IMG = [
