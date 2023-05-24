@@ -1,6 +1,6 @@
 class Character extends MovableObject {
     x = 100;
-    y = 300;
+    y = 0;
     height = 500;
     width = 500;
     speed = 10;
@@ -38,7 +38,7 @@ class Character extends MovableObject {
     constructor() {
         super().loadImage(this.SWIMMING_IMG[0]);
         this.loadImages(this.SWIMMING_IMG);
-
+        this.applyGravity();
         this.animate();
     }
 
@@ -47,14 +47,17 @@ class Character extends MovableObject {
         setInterval(() => {
             this.SWIMMING_SOUND.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEnd_x) {
-                this.x += this.speed;
+                this.moveRight();
                 this.otherDirection = false;
-                this.SWIMMING_SOUND.play();
+                // this.SWIMMING_SOUND.play();
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
-                this.x -= this.speed;
+                this.moveLeft();
                 this.otherDirection = true;
-                this.SWIMMING_SOUND.play();
+                // this.SWIMMING_SOUND.play();
+            }
+            if (this.world.keyboard.JUMP && !this.isAboveGround()) {
+                this.jump();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
@@ -67,6 +70,6 @@ class Character extends MovableObject {
     }
 
     jump() {
-
+        this.fallSpeed = 30;
     }
 }
