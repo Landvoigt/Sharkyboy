@@ -1,14 +1,17 @@
 class StatusBar extends DrawableObject {
     IMG = [
-        '../img/4.Marcadores/orange/coin_0.png',
-        '../img/4.Marcadores/orange/coin_20.png',
-        '../img/4.Marcadores/orange/coin_40.png',
-        '../img/4.Marcadores/orange/coin_60.png',
-        '../img/4.Marcadores/orange/coin_80.png',
-        '../img/4.Marcadores/orange/coin_100.png'
+        '../img/status/health_points/hp_0.png',
+        '../img/status/health_points/hp_20.png',
+        '../img/status/health_points/hp_40.png',
+        '../img/status/health_points/hp_60.png',
+        '../img/status/health_points/hp_80.png',
+        '../img/status/health_points/hp_100.png'
+
     ];
-    x = 100;
-    y = 100;
+    x = 5;
+    y = -20;
+    width = 90;
+    height = 320;
     percentage = 100;
 
     constructor() {

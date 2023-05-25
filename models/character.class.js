@@ -26,30 +26,30 @@ class Character extends MovableObject {
         '../img/1.Sharkie/1.IDLE/18.png'
     ];
     SWIMMING_IMG = [
-        '../img/1.Sharkie/3.Swim/1.png',
-        '../img/1.Sharkie/3.Swim/2.png',
-        '../img/1.Sharkie/3.Swim/3.png',
-        '../img/1.Sharkie/3.Swim/4.png',
-        '../img/1.Sharkie/3.Swim/5.png',
-        '../img/1.Sharkie/3.Swim/6.png'
+        '../img/character/swim/(1).png',
+        '../img/character/swim/(2).png',
+        '../img/character/swim/(3).png',
+        '../img/character/swim/(4).png',
+        '../img/character/swim/(5).png',
+        '../img/character/swim/(6).png'
     ];
     DEAD_FROM_POISON_IMG = [
-        '../img/1.Sharkie/6.dead/1.Poisoned/1.png',
-        '../img/1.Sharkie/6.dead/1.Poisoned/2.png',
-        '../img/1.Sharkie/6.dead/1.Poisoned/3.png',
-        '../img/1.Sharkie/6.dead/1.Poisoned/4.png',
-        '../img/1.Sharkie/6.dead/1.Poisoned/5.png',
-        '../img/1.Sharkie/6.dead/1.Poisoned/6.png',
-        '../img/1.Sharkie/6.dead/1.Poisoned/7.png',
-        '../img/1.Sharkie/6.dead/1.Poisoned/8.png',
-        '../img/1.Sharkie/6.dead/1.Poisoned/9.png',
-        '../img/1.Sharkie/6.dead/1.Poisoned/10.png'
+        '../img/character/dead/poisoned/(1).png',
+        '../img/character/dead/poisoned/(2).png',
+        '../img/character/dead/poisoned/(3).png',
+        '../img/character/dead/poisoned/(4).png',
+        '../img/character/dead/poisoned/(5).png',
+        '../img/character/dead/poisoned/(6).png',
+        '../img/character/dead/poisoned/(7).png',
+        '../img/character/dead/poisoned/(8).png',
+        '../img/character/dead/poisoned/(9).png',
+        '../img/character/dead/poisoned/(10).png'
     ];
     HURT_FROM_POISON_IMG = [
-        './img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
-        './img/1.Sharkie/5.Hurt/1.Poisoned/3.png',   
-        './img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
-        './img/1.Sharkie/5.Hurt/1.Poisoned/5.png',
+        '../img/character/hurt/poisoned/(1).png',
+        '../img/character/hurt/poisoned/(2).png',   
+        '../img/character/hurt/poisoned/(3).png',
+        '../img/character/hurt/poisoned/(4).png',
     ];
     // SWIMMING_SOUND = new Audio('linklinklink');
 

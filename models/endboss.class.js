@@ -4,19 +4,19 @@ class Endboss extends MovableObject {
     height = 850;
     width = 850;
     SWIMMING_IMG = [
-        'img/2.Enemy/3 Final Enemy/2.floating/1.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/2.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/3.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/4.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/5.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/6.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/7.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/8.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/9.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/10.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/11.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/12.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/13.png'
+        '../img/enemies/endboss/swim/(1).png',
+        '../img/enemies/endboss/swim/(2).png',
+        '../img/enemies/endboss/swim/(3).png',
+        '../img/enemies/endboss/swim/(4).png',
+        '../img/enemies/endboss/swim/(5).png',
+        '../img/enemies/endboss/swim/(6).png',
+        '../img/enemies/endboss/swim/(7).png',
+        '../img/enemies/endboss/swim/(8).png',
+        '../img/enemies/endboss/swim/(9).png',
+        '../img/enemies/endboss/swim/(10).png',
+        '../img/enemies/endboss/swim/(11).png',
+        '../img/enemies/endboss/swim/(12).png',
+        '../img/enemies/endboss/swim/(13).png'
     ];
 
 

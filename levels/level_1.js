@@ -6,30 +6,30 @@ const level_1 = new Level(
         new Endboss()
     ],
     [
-        new BackgroundObject('../img/3. Background/Layers/5. Water/D2.png', -1920),
-        new BackgroundObject('../img/3. Background/Layers/4.Fondo 2/L2.png', -1920),
-        new BackgroundObject('../img/3. Background/Layers/3.Fondo 1/D2.png', -1920),
-        new BackgroundObject('../img/3. Background/Layers/2. Floor/D2.png', -1920),
+        new BackgroundObject('../img/background/water/2.png', -1920),
+        new BackgroundObject('../img/background/layer_1/2.png', -1920),
+        new BackgroundObject('../img/background/layer_2/1.png', -1920),
+        new BackgroundObject('../img/background/floor/2.png', -1920),
 
-        new BackgroundObject('../img/3. Background/Layers/5. Water/d1.png', 0),
-        new BackgroundObject('../img/3. Background/Layers/4.Fondo 2/L1.png', 0),
-        new BackgroundObject('../img/3. Background/Layers/3.Fondo 1/D1.png', 0),
-        new BackgroundObject('../img/3. Background/Layers/2. Floor/D1.png', 0),
+        new BackgroundObject('../img/background/water/1.png', 0),
+        new BackgroundObject('../img/background/layer_1/1.png', 0),
+        new BackgroundObject('../img/background/layer_2/2.png', 0),
+        new BackgroundObject('../img/background/floor/1.png', 0),
 
-        new BackgroundObject('../img/3. Background/Layers/5. Water/D2.png', 1920),
-        new BackgroundObject('../img/3. Background/Layers/4.Fondo 2/L2.png', 1920),
-        new BackgroundObject('../img/3. Background/Layers/3.Fondo 1/D2.png', 1920),
-        new BackgroundObject('../img/3. Background/Layers/2. Floor/D2.png', 1920),
+        new BackgroundObject('../img/background/water/2.png', 1920),
+        new BackgroundObject('../img/background/layer_1/2.png', 1920),
+        new BackgroundObject('../img/background/layer_2/1.png', 1920),
+        new BackgroundObject('../img/background/floor/2.png', 1920),
 
-        new BackgroundObject('../img/3. Background/Layers/5. Water/d1.png', 1920 * 2),
-        new BackgroundObject('../img/3. Background/Layers/4.Fondo 2/L1.png', 1920 * 2),
-        new BackgroundObject('../img/3. Background/Layers/3.Fondo 1/D1.png', 1920 * 2),
-        new BackgroundObject('../img/3. Background/Layers/2. Floor/D1.png', 1920 * 2),
+        new BackgroundObject('../img/background/water/1.png', 1920 * 2),
+        new BackgroundObject('../img/background/layer_1/1.png', 1920 * 2),
+        new BackgroundObject('../img/background/layer_2/2.png', 1920 * 2),
+        new BackgroundObject('../img/background/floor/1.png', 1920 * 2),
 
-        new BackgroundObject('../img/3. Background/Layers/5. Water/D2.png', 1920 * 3),
-        new BackgroundObject('../img/3. Background/Layers/4.Fondo 2/L2.png', 1920 * 3),
-        new BackgroundObject('../img/3. Background/Layers/3.Fondo 1/D2.png', 1920 * 3),
-        new BackgroundObject('../img/3. Background/Layers/2. Floor/D2.png', 1920 * 3)
+        new BackgroundObject('../img/background/water/2.png', 1920 * 3),
+        new BackgroundObject('../img/background/layer_1/2.png', 1920 * 3),
+        new BackgroundObject('../img/background/layer_2/1.png', 1920 * 3),
+        new BackgroundObject('../img/background/floor/2.png', 1920 * 3)
     ],
     [
         new Background_Fish(),

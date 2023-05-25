@@ -4,11 +4,11 @@ class Enemy_1 extends MovableObject {  // Pufferfish
     height = 170;
     width = 170;
     SWIMMING_IMG = [
-        '../img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png',
-        '../img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim2.png',
-        '../img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim3.png',
-        '../img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.png',
-        '../img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png'
+        '../img/enemies/puffer_fish_red/swim/(1).png',
+        '../img/enemies/puffer_fish_red/swim/(2).png',
+        '../img/enemies/puffer_fish_red/swim/(3).png',
+        '../img/enemies/puffer_fish_red/swim/(4).png',
+        '../img/enemies/puffer_fish_red/swim/(5).png'
 
     ];
     constructor() {
