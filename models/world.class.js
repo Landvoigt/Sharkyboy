@@ -1,7 +1,11 @@
 class World {
     character = new Character();
     level = level_1;
-    statusBar = new StatusBar();
+    statusBar = [
+        new StatusBar(HP_BAR_IMG, -10, 'hp'),
+        new StatusBar(COINS_BAR_IMG, 70, 'poison'),
+        new StatusBar(POISON_BAR_IMG, 150, 'coin')
+    ];
     canvas;
     ctx;
     keyboard;
@@ -24,9 +28,14 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.backgroundObjects);
-        this.addToMap(this.statusBar);
+
+        this.ctx.translate(-this.camera_x, 0); // back
+
+        // space for fixed objects
+        this.addObjectsToMap(this.statusBar);
+        this.ctx.translate(this.camera_x, 0); // forward again
+
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.backgroundFishes);
         this.addObjectsToMap(this.level.enemies);
@@ -45,7 +54,7 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
-                    // console.log(`${this.character.hp}`);
+                    this.statusBar.setPercentage(this.character.hp);
                 }
             })
         }, 200)

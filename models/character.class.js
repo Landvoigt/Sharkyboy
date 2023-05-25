@@ -3,6 +3,7 @@ class Character extends MovableObject {
     y = 0;
     height = 500;
     width = 500;
+    hp = 100;
     speed = 10;
     world;
     IDLE_IMG = [
@@ -56,7 +57,7 @@ class Character extends MovableObject {
     constructor() {
         super().loadImage(this.SWIMMING_IMG[0]);
         this.loadImages(this.SWIMMING_IMG);
-        // this.loadImage(this.HURT_FROM_POISON_IMG);
+        this.loadImages(this.HURT_FROM_POISON_IMG);
         this.loadImages(this.DEAD_FROM_POISON_IMG);
         this.applyGravity();
         this.animate();
@@ -85,8 +86,8 @@ class Character extends MovableObject {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.DEAD_FROM_POISON_IMG);
-            // } else if (this.isHurt()) {
-            //     this.playAnimation(this.HURT_FROM_POISON_IMG);
+            } else if (this.isHurt()) {
+                this.playAnimation(this.HURT_FROM_POISON_IMG);
             }
             else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
