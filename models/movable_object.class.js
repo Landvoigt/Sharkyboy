@@ -20,16 +20,6 @@ class MovableObject extends DrawableObject {
         return this.y < 300;
     }
 
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Enemy_1 || this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '2';
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.x, this.y, this.height, this.width);
-            ctx.stroke();
-        }
-    }
-
     moveLeft() {
         this.x -= this.speed;
     }
