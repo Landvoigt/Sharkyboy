@@ -5,7 +5,6 @@ let keyboard = new Keyboard();
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-
     // console.log(world.character, world.enemies);
 }
 
@@ -28,7 +27,7 @@ window.addEventListener("keydown", (event) => {
     if (event.keyCode == 13) {
         keyboard.THROW = true;
     }
-    console.log(event);
+    // console.log(event);
 });
 
 window.addEventListener("keyup", (event) => {
@@ -50,5 +49,5 @@ window.addEventListener("keyup", (event) => {
     if (event.keyCode == 13) {
         keyboard.THROW = false;
     }
-    console.log(event);
+    // console.log(event);
 });
