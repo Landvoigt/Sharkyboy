@@ -24,7 +24,7 @@ window.addEventListener("keydown", (event) => {
     if (event.keyCode == 32) {
         keyboard.JUMP = true;
     }
-    if (event.keyCode == 13) {
+    if (event.keyCode == 13 && event.keyCode == 68) {
         keyboard.THROW = true;
     }
     // console.log(event);
@@ -46,7 +46,7 @@ window.addEventListener("keyup", (event) => {
     if (event.keyCode == 32) {
         keyboard.JUMP = false;
     }
-    if (event.keyCode == 13) {
+    if (event.keyCode == 13 && event.keyCode == 68) {
         keyboard.THROW = false;
     }
     // console.log(event);
