@@ -1,6 +1,4 @@
 class World {
-    gameReady = false;
-    startscreen;
     character = new Character();
     level = level_1;
     statusBar = [
@@ -16,7 +14,9 @@ class World {
         // new ThrowableObject()
     ];
     backgroundMusic = new Audio('../sounds/ambient_background_music.mp3');
-
+    gameReady = false;
+    startscreen;
+    
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
