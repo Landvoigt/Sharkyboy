@@ -1,4 +1,6 @@
 class World {
+    gameReady = false;
+    startscreen;
     character = new Character();
     level = level_1;
     statusBar = [
