@@ -13,6 +13,7 @@ class World {
     throwableObjects = [
         // new ThrowableObject()
     ];
+    backgroundMusic = new Audio('../sounds/ambient_background_music.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -21,6 +22,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        this.playBgMusic();
     }
 
     setWorld() {
@@ -104,5 +106,10 @@ class World {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
         }
+    }
+
+    playBgMusic() {
+        this.backgroundMusic.volume = 0.4;
+        this.backgroundMusic.play();
     }
 }

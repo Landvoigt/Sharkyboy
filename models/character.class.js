@@ -3,6 +3,10 @@ class Character extends MovableObject {
     y = 0;
     height = 500;
     width = 500;
+    frameAdjustment_X = 101;
+    frameAdjustment_Y = +234;
+    frameAdjustment_HEIGHT = -202;
+    frameAdjustment_WIDTH = -358;
     hp = 100;
     speed = 10;
     world;
@@ -48,11 +52,11 @@ class Character extends MovableObject {
     ];
     HURT_FROM_POISON_IMG = [
         '../img/character/hurt/poisoned/(1).png',
-        '../img/character/hurt/poisoned/(2).png',   
+        '../img/character/hurt/poisoned/(2).png',
         '../img/character/hurt/poisoned/(3).png',
         '../img/character/hurt/poisoned/(4).png',
     ];
-    // SWIMMING_SOUND = new Audio('linklinklink');
+    SWIMMING_SOUND = new Audio('../sounds/sharky_swim.mp3');
 
     constructor() {
         super().loadImage(this.SWIMMING_IMG[0]);
@@ -66,16 +70,16 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
-            // this.SWIMMING_SOUND.pause();
+            this.SWIMMING_SOUND.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEnd_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                // this.SWIMMING_SOUND.play();
+                this.SWIMMING_SOUND.play();
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
-                // this.SWIMMING_SOUND.play();
+                this.SWIMMING_SOUND.play();
             }
             if (this.world.keyboard.JUMP && !this.isAboveGround()) {
                 this.jump();

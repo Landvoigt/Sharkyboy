@@ -34,11 +34,20 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Enemy_1 || this instanceof Endboss) {
+        if (this instanceof Character  
+            // this instanceof Endboss
+            ){
             ctx.beginPath();
             ctx.lineWidth = '2';
             ctx.strokeStyle = 'red';
-            ctx.rect(this.x, this.y, this.height, this.width);
+            ctx.rect(this.x + 101, this.y + 234, this.height - 202, this.width - 358);
+            ctx.stroke();
+        }
+        if (this instanceof Enemy_1){
+            ctx.beginPath();
+            ctx.lineWidth = '2';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.x + 8, this.y + 11, this.height - 22, this.width - 55);
             ctx.stroke();
         }
     }
