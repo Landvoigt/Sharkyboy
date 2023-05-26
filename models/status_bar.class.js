@@ -7,7 +7,6 @@ class StatusBar extends DrawableObject {
     hpImages;
     poisonImages;
     coinsImages;
-    currentStatusIsHealth;
 
     constructor(statusImages, y, type) {
         super();
@@ -16,25 +15,20 @@ class StatusBar extends DrawableObject {
         if (type == 'hp') {
             this.hpImages = statusImages;
             this.setPercentage(100);
-            this.currentStatusIsHealth = true;
         } if (type == 'poison') {
             this.poisonImages = statusImages;
-            this.load(100, this.poisonImages);
-            this.currentStatusIsHealth = false;
+            this.load(this.poisonImages);
         } else {
             this.coinsImages = statusImages;
-            this.load(100, this.coinsImages);
-            this.currentStatusIsHealth = false;
+            this.load(this.coinsImages);
         }
     }
 
     // setPercentage(50), 50 hp
     setPercentage(percentage) {
-        if (this.currentStatusIsHealth == true) {
-            this.percentage = percentage;
-            let imagePath = this.hpImages[this.resolveImageIndex(this.percentage)];
-            this.img = this.imageCache[imagePath];
-        }
+        this.percentage = percentage;
+        let imagePath = this.hpImages[this.resolveImageIndex(this.percentage)];
+        this.img = this.imageCache[imagePath];
     }
 
     resolveImageIndex(percentage) {
@@ -53,8 +47,8 @@ class StatusBar extends DrawableObject {
         }
     }
 
-    load(percentage, images) {
-        this.percentage = percentage;
+    load(images) {
+        // this.percentage = percentage;
         let imagePath = images[5];
         this.img = this.imageCache[imagePath];
     }

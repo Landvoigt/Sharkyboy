@@ -2,10 +2,10 @@ class World {
     character = new Character();
     level = level_1;
     statusBar = [
-        new StatusBar(HP_BAR_IMG, -10, 'hp'),
         new StatusBar(COINS_BAR_IMG, 70, 'poison'),
         new StatusBar(POISON_BAR_IMG, 150, 'coin')
     ];
+    statusBarHP = new StatusBar(HP_BAR_IMG, -10, 'hp');
     canvas;
     ctx;
     keyboard;
@@ -34,6 +34,7 @@ class World {
 
         // space for fixed objects
         this.addObjectsToMap(this.statusBar);
+        this.addToMap(this.statusBarHP);
         this.ctx.translate(this.camera_x, 0); // forward again
 
         this.addToMap(this.character);
@@ -54,7 +55,7 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
-                    this.statusBar.setPercentage(this.character.hp);
+                    this.statusBarHP.setPercentage(this.character.hp);
                 }
             })
         }, 200)
