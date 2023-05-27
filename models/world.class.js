@@ -6,7 +6,8 @@ class World {
         new StatusBar(POISON_BAR_IMG, 150, 'coin')
     ];
     statusBarHP = new StatusBar(HP_BAR_IMG, -10, 'hp');
-    startscreen = new Startscreen('../img/startscreen/startscreen_bg.png', 0);
+    startscreen = new Startscreen('../img/startscreen/startscreen_bg.png', 0, -140, 1080, 1920);
+    startButton = new Startscreen('../img/description/Start/2.png', 1030, 630, 170, 500);
     canvas;
     ctx;
     keyboard;
@@ -15,7 +16,8 @@ class World {
         // new ThrowableObject()
     ];
     backgroundMusic = new Audio('../sounds/ambient_background_music.mp3');
-    gameReady = false;
+    gameReady = true;
+    // animation = true;
 
 
     constructor(canvas, keyboard) {
@@ -25,18 +27,18 @@ class World {
         this.checkStatus();
         this.setWorld();
     }
-    
+
     checkStatus() {
         if (this.gameReady) {
             this.draw();
             this.run();
-            this.playBgMusic();
+            // this.playBgMusic();
         }
         if (!this.gameReady) {
-            this.showStartscreen(this.startscreen);
-
+            this.showStartscreen();
         }
     }
+
 
     setWorld() {
         this.character.world = this;
@@ -46,21 +48,31 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.backgroundObjects);
-        this.ctx.translate(-this.camera_x, 0); // back
+        this.addBackground();
+        this.addStaticObjects();
+        this.addInstances();
+        this.ctx.translate(-this.camera_x, 0);
 
+        this.drawLoop();
+    }
+
+    addBackground() {
+        this.addObjectsToMap(this.level.backgroundObjects);
+    }
+
+    addStaticObjects() {
+        this.ctx.translate(-this.camera_x, 0); // back
         // space for fixed objects
         this.addObjectsToMap(this.statusBar);
         this.addToMap(this.statusBarHP);
         this.ctx.translate(this.camera_x, 0); // forward again
+    }
 
+    addInstances() {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.backgroundFishes);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
-
-        this.ctx.translate(-this.camera_x, 0);
-        this.drawLoop();
     }
 
     drawLoop() {
@@ -81,6 +93,7 @@ class World {
     showStartscreen() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.drawImage(this.startscreen.img, this.startscreen.x, this.startscreen.y, this.startscreen.height, this.startscreen.width);
+        this.ctx.drawImage(this.startButton.img, this.startButton.x, this.startButton.y, this.startButton.height, this.startButton.width);
         let self = this;
         requestAnimationFrame(function () {
             self.showStartscreen();

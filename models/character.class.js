@@ -3,13 +3,10 @@ class Character extends MovableObject {
     y = 0;
     height = 500;
     width = 500;
-    frameAdjustment_X = 101;
-    frameAdjustment_Y = +234;
-    frameAdjustment_HEIGHT = -202;
-    frameAdjustment_WIDTH = -358;
     hp = 100;
     speed = 10;
     world;
+    isSwimming = false;
     IDLE_IMG = [
         '../img/1.Sharkie/1.IDLE/1.png',
         '../img/1.Sharkie/1.IDLE/2.png',
@@ -58,6 +55,7 @@ class Character extends MovableObject {
     ];
     SWIMMING_SOUND = new Audio('../sounds/sharky_swim.mp3');
 
+
     constructor() {
         super().loadImage(this.SWIMMING_IMG[0]);
         this.loadImages(this.SWIMMING_IMG);
@@ -73,11 +71,13 @@ class Character extends MovableObject {
             this.SWIMMING_SOUND.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEnd_x) {
                 this.moveRight();
+                this.isSwimming = true;
                 this.otherDirection = false;
                 this.SWIMMING_SOUND.play();
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
+                this.isSwimming = true;
                 this.otherDirection = true;
                 this.SWIMMING_SOUND.play();
             }
@@ -85,13 +85,14 @@ class Character extends MovableObject {
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;
+            this.isSwimming = false;
         }, 1000 / 60);
 
         setInterval(() => {
             if (this.isDead()) {
-                this.playAnimation(this.DEAD_FROM_POISON_IMG);
+                // this.playAnimationOnce(this.DEAD_FROM_POISON_IMG);  
             } else if (this.isHurt()) {
-                this.playAnimation(this.HURT_FROM_POISON_IMG);
+                // this.playAnimationOnce(this.HURT_FROM_POISON_IMG);
             }
             else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {

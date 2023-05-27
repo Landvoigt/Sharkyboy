@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     lastHit = 0;
 
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.fallSpeed > 0) {
@@ -36,6 +37,12 @@ class MovableObject extends DrawableObject {
         // Swim Animation
         let i = this.currentImage % images.length; // infinity loop for elements in array 0,1,2,3,....,0,1,2,3...,0,1,2
         let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
+    playAnimationOnce(images) {
+        let path = images[this.currentImage];
         this.img = this.imageCache[path];
         this.currentImage++;
     }
