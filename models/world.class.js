@@ -6,6 +6,7 @@ class World {
         new StatusBar(POISON_BAR_IMG, 150, 'coin')
     ];
     statusBarHP = new StatusBar(HP_BAR_IMG, -10, 'hp');
+    startscreen = new Startscreen('../img/startscreen/startscreen_bg.png', 0);
     canvas;
     ctx;
     keyboard;
@@ -15,16 +16,26 @@ class World {
     ];
     backgroundMusic = new Audio('../sounds/ambient_background_music.mp3');
     gameReady = false;
-    startscreen;
-    
+
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.draw();
+        this.checkStatus();
         this.setWorld();
-        this.run();
-        this.playBgMusic();
+    }
+    
+    checkStatus() {
+        if (this.gameReady) {
+            this.draw();
+            this.run();
+            this.playBgMusic();
+        }
+        if (!this.gameReady) {
+            this.showStartscreen(this.startscreen);
+
+        }
     }
 
     setWorld() {
@@ -36,7 +47,6 @@ class World {
 
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-
         this.ctx.translate(-this.camera_x, 0); // back
 
         // space for fixed objects
@@ -50,7 +60,10 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
+        this.drawLoop();
+    }
 
+    drawLoop() {
         // draw infinity loop
         let self = this;
         requestAnimationFrame(function () {
@@ -63,6 +76,15 @@ class World {
             this.checkCollisions();
             this.checkThrowObject();
         }, 200);
+    }
+
+    showStartscreen() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(this.startscreen.img, this.startscreen.x, this.startscreen.y, this.startscreen.height, this.startscreen.width);
+        let self = this;
+        requestAnimationFrame(function () {
+            self.showStartscreen();
+        });
     }
 
     addObjectsToMap(objects) {
