@@ -15,7 +15,6 @@ class World {
     throwableObjects = [
         // new ThrowableObject()
     ];
-    backgroundMusic = new Audio('../sounds/ambient_background_music.mp3');
     gameReady = true;
 
     constructor(canvas, keyboard) {
@@ -30,7 +29,7 @@ class World {
         if (this.gameReady) {
             this.draw();
             this.run();
-            // this.playBgMusic();
+            this.playBgMusic();
         }
         if (!this.gameReady) {
             this.showStartscreen();
@@ -144,8 +143,8 @@ class World {
     }
 
     playBgMusic() {
-        this.backgroundMusic.volume = 0.4;
-        this.backgroundMusic.play();
+        GAME_MUSIC.volume = 0.1;
+        GAME_MUSIC.play();
     }
 
 }
