@@ -7,7 +7,6 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     lastHit = 0;
 
-
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.fallSpeed > 0) {
@@ -33,18 +32,11 @@ class MovableObject extends DrawableObject {
         this.x += this.speed;
     }
 
-    playAnimation(images) {
-        // Swim Animation
-        let i = this.currentImage % images.length; // infinity loop for elements in array 0,1,2,3,....,0,1,2,3...,0,1,2
+    playAnimation(images, count) {
+        let i = this.currentImage[count] % images.length; // infinity loop for elements in array
         let path = images[i];
         this.img = this.imageCache[path];
-        this.currentImage++;
-    }
-
-    playAnimationOnce(images) {
-        let path = images[this.currentImage];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+        this.currentImage[count]++;
     }
 
     jump() {
@@ -76,4 +68,10 @@ class MovableObject extends DrawableObject {
     isDead() {
         return this.hp == 0;
     }
+
+     // playAnimationOnce(images, count) {
+    //     let path = images[this.currentImage[count]];
+    //     this.img = this.imageCache[path];
+    //     this.currentImage[count]++;
+    // }
 }

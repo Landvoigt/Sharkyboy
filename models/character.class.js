@@ -6,7 +6,7 @@ class Character extends MovableObject {
     hp = 100;
     speed = 10;
     world;
-    isSwimming = false;
+    // isSwimming = false;
     IDLE_IMG = [
         '../img/1.Sharkie/1.IDLE/1.png',
         '../img/1.Sharkie/1.IDLE/2.png',
@@ -51,7 +51,7 @@ class Character extends MovableObject {
         '../img/character/hurt/poisoned/(1).png',
         '../img/character/hurt/poisoned/(2).png',
         '../img/character/hurt/poisoned/(3).png',
-        '../img/character/hurt/poisoned/(4).png',
+        // '../img/character/hurt/poisoned/(4).png',
     ];
     SWIMMING_SOUND = new Audio('../sounds/sharky_swim.mp3');
 
@@ -71,13 +71,11 @@ class Character extends MovableObject {
             this.SWIMMING_SOUND.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEnd_x) {
                 this.moveRight();
-                this.isSwimming = true;
                 this.otherDirection = false;
                 this.SWIMMING_SOUND.play();
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
-                this.isSwimming = true;
                 this.otherDirection = true;
                 this.SWIMMING_SOUND.play();
             }
@@ -85,21 +83,24 @@ class Character extends MovableObject {
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;
-            this.isSwimming = false;
         }, 1000 / 60);
 
         setInterval(() => {
             if (this.isDead()) {
-                // this.playAnimationOnce(this.DEAD_FROM_POISON_IMG);  
+                this.deadAnimation();
             } else if (this.isHurt()) {
-                // this.playAnimationOnce(this.HURT_FROM_POISON_IMG);
-            }
-            else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.SWIMMING_IMG);
-                }
+                this.playAnimation(this.HURT_FROM_POISON_IMG, 1);
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.playAnimation(this.SWIMMING_IMG, 0);
             }
         }, 90);
+    }
+
+    deadAnimation(){
+        if (this.currentImage[2] <= 10) {
+            console.log(this.currentImage);
+            this.playAnimation(this.DEAD_FROM_POISON_IMG, 2);
+        }
     }
 
     jump() {

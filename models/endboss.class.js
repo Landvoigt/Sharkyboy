@@ -31,7 +31,7 @@ class Endboss extends MovableObject {
         // this.moveLeft();
 
         setInterval(() => {
-            this.playAnimation(this.SWIMMING_IMG);
+            // this.playAnimation(this.SWIMMING_IMG);
         }, 200)
     }
 }
