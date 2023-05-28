@@ -1,6 +1,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let characterAlive = true;
+
 
 function init() {
     canvas = document.getElementById('canvas');

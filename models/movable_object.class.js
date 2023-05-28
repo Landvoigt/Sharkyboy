@@ -6,6 +6,7 @@ class MovableObject extends DrawableObject {
     hp = 100;
     otherDirection = false;
     lastHit = 0;
+    characterCollided = false;
 
     applyGravity() {
         setInterval(() => {
@@ -68,6 +69,7 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
+        this.characterCollided = true;
     }
 
     isHurt() {
@@ -78,6 +80,14 @@ class MovableObject extends DrawableObject {
 
     isDead() {
         return this.hp == 0;
+    }
+
+    checkCharacterHP() {
+        if (this.hp == 0) {
+            this.characterAlive = false;
+        } else {
+            return;
+        }
     }
 
      // playAnimationOnce(images, count) {
