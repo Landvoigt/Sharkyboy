@@ -37,3 +37,5 @@ const level_1 = new Level(
         new Background_Fish()
     ]
 );
+
+let characterPosition;

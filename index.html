@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sharkie</title>
+    <title>Sharkyboy</title>
     <link rel="stylesheet" href="style.css">
+    <script src="../script.js"></script>
     <script src="../models/drawable_object.class.js"></script>
     <script src="../models/status_bar.class.js"></script>
     <script src="../models/movable_object.class.js"></script>
@@ -23,14 +24,21 @@
     <script src="../models/startscreen.class.js"></script>
     <script src="../models/world.class.js"></script>
     <script src="../js/game.js"></script>
+
 </head>
 
-<body onload="init()">
-
-    <canvas id="canvas" width="1920px" height="1080px">
-
-    </canvas>
-
+<body>
+    <div class="content" id="content">
+        <div class="startscreen">
+            <img class="startscreen-bg" src="../img/startscreen/startscreen_bg.png">
+            <div class="menu">
+                <div class="start-button" onclick="startGame()">
+                    <h2>Start</h2>
+                </div>
+            </div>
+        </div>
+        <!-- <canvas id="canvas" width="1920px" height="1080px"></canvas> -->
+    </div>
 
 </body>
 

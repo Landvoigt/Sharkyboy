@@ -1,15 +1,122 @@
+@font-face {
+    font-family: 'dyna';
+    src: url('../fonts/dyna_puff.ttf') format('truetype');
+}
+
 body {
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: hidden;
+    font-family: 'dyna', Arial, sans-serif;
+    font-size: 60px;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
     display: none;
+}
+
+h2 {
+    color: rgb(20, 34, 99);
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aquamarine;
+    /* background-image: url('../img/startscreen/startscreen_bg.png'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+}
+
+.startscreen {
+    display: flex;
+}
+
+.startscreen-bg {
+    height: 100%;
+    width: 100%;
+}
+
+.menu {
+    position: absolute;
+    width: 70%;
+    height: 50%;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.start-button {
+    background-color: yellowgreen;
+    height: 130px;
+    width: 400px;
+    background: rgb(231, 208, 3);
+    border: 6px solid rgb(231, 208, 3);
+    border-radius: 36px;
+    margin: 10px;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    transform: scale(1);
+    animation: pulse 1.5s infinite;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-button:before {
+    content: " ";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 30px;
+    border: 4px solid rgba(21, 30, 92, 0.767);
+  }
+
+.start-button:hover {
+    animation: none;
+    /* transform: scale(1.05); */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(231, 208, 3, 0.6);
+    }
+
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(231, 208, 3, 0.1);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(231, 208, 3, 0);
+    }
 }
 
 canvas {
     background-color: black;
+    display: block;
+}
+
+/* @media only screen and (max-width: 1920px) {
+    canvas {
+        width: 100%;
+    }
+} */
+
+@media only screen and (max-height: 1080px) {
+    canvas {
+        height: 100vh;
+    }
 }

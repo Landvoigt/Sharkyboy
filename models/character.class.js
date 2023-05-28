@@ -1,6 +1,6 @@
 class Character extends MovableObject {
-    x = 100;
-    y = 0;
+    x = 60;
+    y = 500;
     height = 500;
     width = 500;
     hp = 100;
@@ -68,6 +68,7 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
+            this.getPositionOfCharacter();
             this.SWIMMING_SOUND.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEnd_x) {
                 this.moveRight();
@@ -89,21 +90,36 @@ class Character extends MovableObject {
             if (this.isDead()) {
                 this.deadAnimation();
             } else if (this.isHurt()) {
-                this.playAnimation(this.HURT_FROM_POISON_IMG, 1);
+                this.hurtAnimation();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.SWIMMING_IMG, 0);
             }
         }, 90);
     }
 
-    deadAnimation(){
+    deadAnimation() {
         if (this.currentImage[2] <= 10) {
             console.log(this.currentImage);
             this.playAnimation(this.DEAD_FROM_POISON_IMG, 2);
+            // resetImageID();
         }
+    }
+
+    hurtAnimation() {
+        if (this.currentImage[1] < 3) {
+            this.playAnimation(this.HURT_FROM_POISON_IMG, 1);
+        }
+        if (this.currentImage[1] == 3) {
+            // this.playAnimation(this.SWIMMING_IMG, 0);
+        }
+        console.log(this.currentImage);
     }
 
     jump() {
         this.fallSpeed = 30;
+    }
+
+    getPositionOfCharacter() {
+        characterPosition = this.x;
     }
 }

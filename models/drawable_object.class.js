@@ -1,7 +1,7 @@
 class DrawableObject {
     img;
     imageCache = {};
-    currentImage = [0,0,0,0];
+    currentImage = [0,0,0,0,0,0];
     x = 120;
     y = 250;
     height = 150;
@@ -28,8 +28,8 @@ class DrawableObject {
         try {
             ctx.drawImage(this.img, this.x, this.y, this.height, this.width);
         } catch (e) {
-            console.warn('Error loading image', e);
-            console.log('Could not load image', this.img);
+            // console.warn('Error loading image', e);
+            // console.log('Could not load image', this.img);
         }
     }
 
@@ -41,6 +41,7 @@ class DrawableObject {
             ctx.lineWidth = '2';
             ctx.strokeStyle = 'red';
             ctx.rect(this.x + 101, this.y + 234, this.height - 202, this.width - 358);
+            // console.log(201 540 298 142);
             ctx.stroke();
         }
         if (this instanceof Enemy_1){

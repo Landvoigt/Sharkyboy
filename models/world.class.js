@@ -17,8 +17,6 @@ class World {
     ];
     backgroundMusic = new Audio('../sounds/ambient_background_music.mp3');
     gameReady = true;
-    // animation = true;
-
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -149,4 +147,5 @@ class World {
         this.backgroundMusic.volume = 0.4;
         this.backgroundMusic.play();
     }
+
 }

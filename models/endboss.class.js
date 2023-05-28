@@ -1,9 +1,21 @@
 class Endboss extends MovableObject {
-    x = 5500;
-    y = 75;
-    height = 850;
-    width = 850;
-    SWIMMING_IMG = [
+    x = 5000;
+    y = 0;
+    height = 950;
+    width = 950;
+    SPAWNING_IMG = [
+        '../img/enemies/endboss/introduction/(1).png',
+        '../img/enemies/endboss/introduction/(2).png',
+        '../img/enemies/endboss/introduction/(3).png',
+        '../img/enemies/endboss/introduction/(4).png',
+        '../img/enemies/endboss/introduction/(5).png',
+        '../img/enemies/endboss/introduction/(6).png',
+        '../img/enemies/endboss/introduction/(7).png',
+        '../img/enemies/endboss/introduction/(8).png',
+        '../img/enemies/endboss/introduction/(9).png',
+        '../img/enemies/endboss/introduction/(10).png'
+    ];
+    IDLING_IMG = [
         '../img/enemies/endboss/swim/(1).png',
         '../img/enemies/endboss/swim/(2).png',
         '../img/enemies/endboss/swim/(3).png',
@@ -18,20 +30,34 @@ class Endboss extends MovableObject {
         '../img/enemies/endboss/swim/(12).png',
         '../img/enemies/endboss/swim/(13).png'
     ];
+    endbossReached = false;
 
 
     constructor() {
-        super().loadImage(this.SWIMMING_IMG[0]);
-        this.loadImages(this.SWIMMING_IMG);
-
+        super();
+        this.loadImages(this.SPAWNING_IMG);
+        this.loadImages(this.IDLING_IMG);
         this.animate();
     }
 
     animate() {
+        let i = 0;
         // this.moveLeft();
-
         setInterval(() => {
-            // this.playAnimation(this.SWIMMING_IMG);
-        }, 200)
+
+            if (i < 10 && this.endbossReached) {
+                this.playAnimation(this.SPAWNING_IMG, 5);
+            } else if (this.endbossReached) {
+                this.playAnimation(this.IDLING_IMG, 4);
+            }
+            i++;
+            if (characterPosition > 3700 && !this.endbossReached) {
+                i = 0;
+                this.endbossReached = true;
+            }
+        }, 200);
     }
+
+    // unitsBeforeCharacterHasToSpawn = 60 + 1300;
+
 }
