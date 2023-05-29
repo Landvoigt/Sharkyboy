@@ -74,7 +74,7 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
-        this.characterCollided = true;
+        // this.characterCollided = true;
     }
 
     isHurt() {

@@ -55,7 +55,7 @@ class Character extends MovableObject {
                 GAMEOVER_SOUND.play();
             } else if (this.isHurt()) {
                 this.hurtAnimation();
-                this.characterCollided = false;
+                // this.characterCollided = false;
                 HURT_SOUND.play();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT && !this.characterCollided) {
                 this.playAnimation(CHARACTER_SWIMMING_IMG);
