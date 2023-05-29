@@ -42,13 +42,11 @@ class Endboss extends MovableObject {
 
     animate() {
         let i = 0;
-        // this.moveLeft();
         setInterval(() => {
-
             if (i < 10 && this.endbossReached) {
-                this.playAnimation(this.SPAWNING_IMG, 5);
+                this.playAnimation(this.SPAWNING_IMG);
             } else if (this.endbossReached) {
-                this.playAnimation(this.IDLE_IMG, 4);
+                this.playAnimation(this.IDLE_IMG);
             }
             i++;
             if (characterPosition > 3700 && !this.endbossReached) {

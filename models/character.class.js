@@ -6,8 +6,6 @@ class Character extends MovableObject {
     hp = 100;
     speed = 10;
     world;
-    // isSwimming = false;
-    characterIdle = true;
     animationTime = 135;
 
 
@@ -48,47 +46,35 @@ class Character extends MovableObject {
     }
 
     playAnimations() {
-        let i = 0;
+        // let i = 0;
         setInterval(() => {
             this.characterIdle = true;
             if (this.isDead()) {
                 this.deadAnimation();
                 characterAlive = false;
                 GAMEOVER_SOUND.play();
-            } else if (this.isHurt() && i < 3) {
+            } else if (this.isHurt()) {
                 this.hurtAnimation();
                 this.characterCollided = false;
                 HURT_SOUND.play();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT && !this.characterCollided) {
-                this.playAnimation(CHARACTER_SWIMMING_IMG, 0);
-                this.characterIdle = false;
-                this.currentImage[6] = 0;
-            } else if (this.characterIdle) {
-                this.playAnimation(CHARACTER_IDLE_IMG, 6);
+                this.playAnimation(CHARACTER_SWIMMING_IMG);
+            } else {
+                this.playAnimation(CHARACTER_IDLE_IMG);
             }
-            i++;
-            if (this.characterCollided) {
-                i = 0;
-            }
+            // i++;
+            // if (this.characterCollided) {
+            // i = 0;
+            // }
         }, this.animationTime);
     }
 
-    deadAnimation() {
-        if (this.currentImage[2] <= 10) {
-            console.log(this.currentImage);
-            this.playAnimation(CHARACTER_DEAD_FROM_POISON_IMG, 2);
-            // resetImageID();
-        }
+    deadAnimation() {   
+        this.playAnimation(CHARACTER_DEAD_FROM_POISON_IMG);
     }
 
     hurtAnimation() {
-        if (this.currentImage[1] < 3) {
-            this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG, 1);
-        }
-        if (this.currentImage[1] == 3) {
-            // this.playAnimation(CHARACTER_SWIMMING_IMG, 0);
-        }
-        // console.log(this.currentImage);
+        this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
     }
 
     jump() {
