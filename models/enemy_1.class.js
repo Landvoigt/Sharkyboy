@@ -3,6 +3,12 @@ class Enemy_1 extends MovableObject {  // Pufferfish
     y = 750;
     height = 170;
     width = 170;
+    offset = {
+        top: 13,
+        bottom: 58,
+        left: 8,
+        right: 22
+    };
     SWIMMING_IMG = [
         '../img/enemies/puffer_fish_red/swim/(1).png',
         '../img/enemies/puffer_fish_red/swim/(2).png',

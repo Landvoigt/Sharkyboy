@@ -20,7 +20,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.run();
-        this.playBgMusic();
+        // this.playBgMusic();
         this.setWorld();
     }
 
@@ -72,16 +72,6 @@ class World {
             this.checkCollisions();
             this.checkThrowObject();
         }, 200);
-    }
-
-    showStartscreen() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(this.startscreen.img, this.startscreen.x, this.startscreen.y, this.startscreen.height, this.startscreen.width);
-        this.ctx.drawImage(this.startButton.img, this.startButton.x, this.startButton.y, this.startButton.height, this.startButton.width);
-        let self = this;
-        requestAnimationFrame(function () {
-            self.showStartscreen();
-        });
     }
 
     addObjectsToMap(objects) {

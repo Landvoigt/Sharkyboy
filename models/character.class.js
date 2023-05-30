@@ -3,6 +3,12 @@ class Character extends MovableObject {
     y = 500;
     height = 500;
     width = 500;
+    offset = {
+        top: 234,
+        bottom: 358,
+        left: 101,
+        right: 202
+    };
     hp = 100;
     speed = 10;
     world;
@@ -80,7 +86,7 @@ class Character extends MovableObject {
             setTimeout(this.fadeOutMusic, 3200);
         } else if (characterPosition < 3000) {
             setTimeout(this.fadeOutEndgameMusic, 2000);
-            GAME_MUSIC.play();
+            // GAME_MUSIC.play();
         }
     }
 

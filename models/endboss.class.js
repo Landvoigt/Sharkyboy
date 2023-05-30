@@ -3,6 +3,12 @@ class Endboss extends MovableObject {
     y = 0;
     height = 950;
     width = 950;
+    offset = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+    };
     SPAWNING_IMG = [
         '../img/enemies/endboss/introduction/(1).png',
         '../img/enemies/endboss/introduction/(2).png',

@@ -45,21 +45,12 @@ class MovableObject extends DrawableObject {
     }
 
     isColliding(obj) {
-        // debugger
-        // console.log(this.x + this.width);
-        // console.log(obj.x);
-        // console.log(this.x);
-        // console.log(obj.x + obj.width);
-        // console.log(this.y + this.offsetY + this.height);
-        // console.log(obj.y);
-        // console.log(this.y + this.offsetY);
-        // console.log(obj.y + obj.height);
-        return (this.x + 101 + this.width - 358 + 151) >= obj.x && this.x + 101 <= (obj.x + obj.width) &&
-            (this.y + 234 + this.offsetY + this.height - 202) >= obj.y &&
-            (this.y + 234 + this.offsetY) <= (obj.y + obj.height); // &&
+        return  (this.x + this.width - this.offset.right) >= (obj.x + obj.offset.left) &&
+                (this.y + this.height - this.offset.bottom) >= (obj.y + obj.offset.top) &&
+                (this.x + this.offset.left) <= (obj.x + obj.width - obj.offset.right) &&
+                (this.y + this.offset.top) <= (obj.y + obj.height - obj.offset.bottom); // &&
         // mo.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
     }
-    // console.log(201 540 298 142);
     // this.x + 101, this.y + 234, this.height - 202, this.width - 358
 
     hit() {
