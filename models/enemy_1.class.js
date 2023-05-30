@@ -21,15 +21,13 @@ class Enemy_1 extends MovableObject {  // Pufferfish
     }
 
     animate() {
-        // if (characterAlive) {
-            setInterval(() => {
-                this.moveLeft();
-            }, 1000 / 60);
+        setInterval(() => {
+            this.moveLeft();
+        }, 1000 / 60);
 
-            setInterval(() => {
-                this.playAnimation(this.SWIMMING_IMG);
-            }, 200)
-        // }
+        setInterval(() => {
+            this.playAnimation(this.SWIMMING_IMG);
+        }, 200)
     }
 
 }

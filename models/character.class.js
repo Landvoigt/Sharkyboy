@@ -16,10 +16,7 @@ class Character extends MovableObject {
         this.loadImages(CHARACTER_HURT_FROM_POISON_IMG);
         this.loadImages(CHARACTER_DEAD_FROM_POISON_IMG);
         this.applyGravity();
-        // this.checkCharacterHP();
-        // if (characterAlive) {
         this.animate();
-        // }
     }
 
     animate() {
@@ -46,35 +43,30 @@ class Character extends MovableObject {
     }
 
     playAnimations() {
-        // let i = 0;
         setInterval(() => {
-            this.characterIdle = true;
             if (this.isDead()) {
-                this.deadAnimation();
-                characterAlive = false;
-                GAMEOVER_SOUND.play();
+                this.world.gameOver();
             } else if (this.isHurt()) {
-                this.hurtAnimation();
-                // this.characterCollided = false;
-                HURT_SOUND.play();
+                this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT && !this.characterCollided) {
+                this.animationTime = 90;
                 this.playAnimation(CHARACTER_SWIMMING_IMG);
             } else {
                 this.playAnimation(CHARACTER_IDLE_IMG);
             }
-            // i++;
-            // if (this.characterCollided) {
-            // i = 0;
-            // }
         }, this.animationTime);
     }
 
-    deadAnimation() {   
-        this.playAnimation(CHARACTER_DEAD_FROM_POISON_IMG);
-    }
-
-    hurtAnimation() {
-        this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
+    deadAnimation() {
+        if (!characterAlive) {
+            let i = 1;
+            setInterval(() => {
+                if (i <= 10) {
+                    this.playAnimation(CHARACTER_DEAD_FROM_POISON_IMG);
+                }
+                i++;
+            }, 120);
+        }
     }
 
     jump() {

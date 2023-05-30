@@ -6,8 +6,6 @@ class World {
         new StatusBar(POISON_BAR_IMG, 150, 'coin')
     ];
     statusBarHP = new StatusBar(HP_BAR_IMG, -10, 'hp');
-    startscreen = new Startscreen('../img/startscreen/startscreen_bg.png', 0, -140, 1080, 1920);
-    startButton = new Startscreen('../img/description/Start/2.png', 1030, 630, 170, 500);
     canvas;
     ctx;
     keyboard;
@@ -15,27 +13,16 @@ class World {
     throwableObjects = [
         // new ThrowableObject()
     ];
-    gameReady = true;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.checkStatus();
+        this.draw();
+        this.run();
+        this.playBgMusic();
         this.setWorld();
     }
-
-    checkStatus() {
-        if (this.gameReady) {
-            this.draw();
-            this.run();
-            this.playBgMusic();
-        }
-        if (!this.gameReady) {
-            this.showStartscreen();
-        }
-    }
-
 
     setWorld() {
         this.character.world = this;
@@ -145,6 +132,15 @@ class World {
     playBgMusic() {
         GAME_MUSIC.volume = 0.1;
         GAME_MUSIC.play();
+    }
+
+    gameOver() {
+        clearAllIntervals();
+        characterAlive = false;
+        GAME_MUSIC.pause();
+        SWIMMING_SOUND.pause();
+        GAMEOVER_SOUND.play();
+        this.character.deadAnimation();
     }
 
 }

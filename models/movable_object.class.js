@@ -7,7 +7,6 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     lastHit = 0;
     characterCollided = false;
-    characterAlive = true;
 
     applyGravity() {
         setInterval(() => {
@@ -15,14 +14,14 @@ class MovableObject extends DrawableObject {
                 this.y -= this.fallSpeed;
                 this.fallSpeed -= this.acceleration;
             }
-        }, 1000 / 60)
+        }, 1000 / 60);
     }
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true;
         } else {
-            return this.y < 300;
+            return this.y < 500;
         }
     }
 
@@ -64,23 +63,37 @@ class MovableObject extends DrawableObject {
     // this.x + 101, this.y + 234, this.height - 202, this.width - 358
 
     hit() {
-        this.hp -= 5;
+        this.characterCollided = true;
+        this.hp -= 10;
         if (this.hp < 0) {
             if (!this.characterAlive) {
                 this.currentImage = 0;
             }
             this.hp = 0;
-            this.characterAlive = false;
         } else {
             this.lastHit = new Date().getTime();
+            this.characterCollision();
         }
-        // this.characterCollided = true;
+    }
+
+    characterCollision() {
+        let startpoint = this.x;
+        this.speedY = 35;
+        setInterval(() => {
+            if (this.x > startpoint - 250 && this.characterCollided) {
+                this.x -= 15;
+                this.y -= 30;
+            } else {
+                this.characterCollided = false;
+            }
+        }, 20);
+        HURT_SOUND.play();
     }
 
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // difference in ms
         timePassed = timePassed / 1000;
-        return timePassed < 1;
+        return timePassed < 0.6;
     }
 
     isDead() {
