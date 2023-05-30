@@ -45,10 +45,10 @@ class MovableObject extends DrawableObject {
     }
 
     isColliding(obj) {
-        return  (this.x + this.width - this.offset.right) >= (obj.x + obj.offset.left) &&
-                (this.y + this.height - this.offset.bottom) >= (obj.y + obj.offset.top) &&
-                (this.x + this.offset.left) <= (obj.x + obj.width - obj.offset.right) &&
-                (this.y + this.offset.top) <= (obj.y + obj.height - obj.offset.bottom); // &&
+        return (this.x + this.width - this.offset.right) >= (obj.x + obj.offset.left) &&
+            (this.y + this.height - this.offset.bottom) >= (obj.y + obj.offset.top) &&
+            (this.x + this.offset.left) <= (obj.x + obj.width - obj.offset.right) &&
+            (this.y + this.offset.top) <= (obj.y + obj.height - obj.offset.bottom); // &&
         // mo.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
     }
     // this.x + 101, this.y + 234, this.height - 202, this.width - 358
@@ -75,6 +75,7 @@ class MovableObject extends DrawableObject {
                 this.x -= 15;
                 this.y -= 30;
             } else {
+                this.y = 500;
                 this.characterCollided = false;
             }
         }, 20);
