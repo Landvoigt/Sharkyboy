@@ -26,15 +26,26 @@ h3 {
     font-size: 3.5em;
 }
 
+span {
+    cursor: default;
+}
+
 .content {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
+    background-image: url('../img/description/beach-1110498.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     width: 100vw;
     height: 100vh;
+}
+
+canvas {
+    background-color: black;
+    display: block;
 }
 
 .startscreen {
@@ -63,7 +74,6 @@ h3 {
 }
 
 .start-button {
-    background-color: yellowgreen;
     height: 180px;
     width: 450px;
     background: rgb(231, 208, 3);
@@ -83,7 +93,8 @@ h3 {
 
 .start-button:before,
 .settings-button:before,
-.navigation-button:before {
+.navigation-button:before,
+.settings-text:before {
     content: " ";
     position: absolute;
     z-index: -1;
@@ -102,7 +113,6 @@ h3 {
 
 .settings-button,
 .navigation-button {
-    background-color: yellowgreen;
     height: 150px;
     width: 360px;
     background: rgb(64, 238, 215);
@@ -119,8 +129,101 @@ h3 {
 }
 
 .settings-button:hover,
-.navigation-button:hover {
+.navigation-button:hover,
+.setting-circle-btn:hover,
+.back-btn:hover {
     transform: scale(1.15);
+}
+
+.setting-circle-btn {
+    height: 110px;
+    width: 110px;
+    background: rgb(64, 238, 215);
+    border: 6px solid rgb(64, 238, 215);
+    border-radius: 50%;
+    margin: 25px;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    transform: scale(1);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-btn {
+    position: fixed;
+    top: 35px;
+    right: 35px;
+    height: 65px;
+    width: 65px;
+    background: rgb(64, 238, 215);
+    border: 6px solid rgb(64, 238, 215);
+    border-radius: 50%;
+    /* margin: 10px; */
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    transform: scale(1);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.setting-circle-btn:before,
+.back-btn:before {
+    content: " ";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    border: 5px solid rgba(21, 30, 92, 0.767);
+}
+
+.setting-icon {
+    height: 65px;
+    width: 65px;
+    margin-left: 5px;
+}
+
+.back-icon {
+    height: 50px;
+    width: 50px;
+}
+
+.change-display {
+    flex-direction: column;
+    gap: 25px;
+}
+
+.sound-container,
+.difficulty-container {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.settings-text {
+    width: 300px;
+    height: 120px;
+    font-size: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(64, 238, 215);
+    border: 6px solid rgb(64, 238, 215);
+    border-radius: 36px;
+    margin: 10px;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    transform: scale(1);
+    margin-right: 50px;
+}
+
+.difficulty-icon {
+    height: 70px;
+    width: 70px;
 }
 
 @keyframes pulse {
@@ -140,10 +243,6 @@ h3 {
     }
 }
 
-canvas {
-    background-color: black;
-    display: block;
-}
 
 /* @media only screen and (max-width: 1920px) {
     canvas {

@@ -1,10 +1,13 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let characterPosition;
 let characterAlive = true;
 let pauseGame = false;
+let sound = true;
 
-function init() {
+function initWorld() {
+    initLevel_1();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
