@@ -64,7 +64,6 @@ class World {
     drawLoop() {
         // draw infinity loop
         let self = this;
-        this.checkIfGamePaused();
         if (!pauseGame) {
             requestAnimationFrame(function () {
                 self.draw();
@@ -140,11 +139,18 @@ class World {
         this.character.deadAnimation();
     }
 
-    checkIfGamePaused() {
-        if (this.keyboard.MENU) {   /////   beim weiterführen drückt er erneut und hält an
-            this.stopAllMovement();
-            pauseGame = true;
-        }
+    pauseGame() {
+        // if (this.keyboard.MENU) {   /////   beim weiterführen drückt er erneut und hält an
+            if (!pauseGame) {
+                this.stopAllMovement();
+                pauseGame = true;
+                return;
+            }
+            if (pauseGame) {
+                pauseGame = false;
+                this.continueGame();
+            }
+        // }
     }
 
     stopAllMovement() {
@@ -163,7 +169,6 @@ class World {
     }
 
     continueGame() {
-        pauseGame = false;
         this.draw();
         this.continueAllMovement();
     }

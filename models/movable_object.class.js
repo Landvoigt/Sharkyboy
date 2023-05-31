@@ -1,5 +1,4 @@
 class MovableObject extends DrawableObject {
-    offsetY = 0;
     speed = 0.5;
     fallSpeed = 0;
     acceleration = 2;
@@ -7,7 +6,6 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     lastHit = 0;
     characterCollided = false;
-    currentRuntime = 0;
 
     applyGravity() {
         setInterval(() => {
@@ -52,7 +50,6 @@ class MovableObject extends DrawableObject {
             (this.y + this.offset.top) <= (obj.y + obj.height - obj.offset.bottom); // &&
         // mo.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
     }
-    // this.x + 101, this.y + 234, this.height - 202, this.width - 358
 
     hit() {
         this.characterCollided = true;
@@ -70,38 +67,19 @@ class MovableObject extends DrawableObject {
 
     characterCollision() {
         let startpoint = this.x;
-        this.speedY = 35;
-        this.currentRuntime++;
+        this.fallSpeed = 0;
         let fallBackInterval = setInterval(() => {
             if (this.x > startpoint - 250 && this.characterCollided) {
                 this.x -= 15;
                 this.y -= 30;
             } else {
                 clearInterval(fallBackInterval);
-                this.y = 500;
+                this.y = this.y_default;
                 this.characterCollided = false;
             }
         }, 20);
         HURT_SOUND.play();
     }
-
-    // characterCollision() {
-    //     let startpoint = this.x;
-    //     this.speedY = 35;
-    //     setInterval(() => {
-    //         if (this.x > startpoint - 250 && this.characterCollided) {
-    //             this.x -= 15;
-    //             this.y -= 30;
-    //         } else {
-    //             this.y = 500;
-    //             this.characterCollided = false;
-    //             // setTimeout(() => {
-    //             //     this.collisionEnded();
-    //             // }, 1000);
-    //         }
-    //     }, 20);
-    //     HURT_SOUND.play();
-    // }
 
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // difference in ms

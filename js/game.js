@@ -4,11 +4,9 @@ let keyboard = new Keyboard();
 let characterAlive = true;
 let pauseGame = false;
 
-
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    // console.log(world.character, world.enemies);
 }
 
 function clearAllIntervals() {
@@ -36,11 +34,8 @@ window.addEventListener("keydown", (event) => {
     }
     if (event.keyCode == 27) {
         keyboard.MENU = true;
-        if (pauseGame) {
-            world.continueGame();
-        }
+        world.pauseGame();
     }
-    console.log(event);
 });
 
 window.addEventListener("keyup", (event) => {
@@ -63,7 +58,6 @@ window.addEventListener("keyup", (event) => {
         keyboard.THROW = false;
     }
     if (event.keyCode == 27) {
-        keyboard.MENU = true;
+        keyboard.MENU = false;
     }
-    // console.log(event);
 });
