@@ -30,12 +30,12 @@ class Character extends MovableObject {
         setInterval(() => {
             this.getPositionOfCharacter();
             SWIMMING_SOUND.pause();
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEnd_x) {
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEnd_x && !this.characterCollided) {
                 this.moveRight();
                 this.otherDirection = false;
                 SWIMMING_SOUND.play();
             }
-            if (this.world.keyboard.LEFT && this.x > 0) {
+            if (this.world.keyboard.LEFT && this.x > 0 && !this.characterCollided) {
                 this.moveLeft();
                 this.otherDirection = true;
                 SWIMMING_SOUND.play();
@@ -54,7 +54,7 @@ class Character extends MovableObject {
                 this.world.gameOver();
             } else if (this.isHurt()) {
                 this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT && !this.characterCollided) {
+            } else if (this.world.keyboard.RIGHT && !this.characterCollided || this.world.keyboard.LEFT && !this.characterCollided) {
                 this.animationTime = 90;
                 this.playAnimation(CHARACTER_SWIMMING_IMG);
             } else {

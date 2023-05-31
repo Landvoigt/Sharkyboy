@@ -77,6 +77,9 @@ class MovableObject extends DrawableObject {
             } else {
                 this.y = 500;
                 this.characterCollided = false;
+                // setTimeout(() => {
+                //     this.collisionEnded();
+                // }, 1000);
             }
         }, 20);
         HURT_SOUND.play();
@@ -90,5 +93,9 @@ class MovableObject extends DrawableObject {
 
     isDead() {
         return this.hp == 0;
+    }
+
+    collisionEnded() {
+        this.characterCollided = false;
     }
 }
