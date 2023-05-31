@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     lastHit = 0;
     characterCollided = false;
+    currentRuntime = 0;
 
     applyGravity() {
         setInterval(() => {
@@ -70,20 +71,37 @@ class MovableObject extends DrawableObject {
     characterCollision() {
         let startpoint = this.x;
         this.speedY = 35;
-        setInterval(() => {
+        this.currentRuntime++;
+        let fallBackInterval = setInterval(() => {
             if (this.x > startpoint - 250 && this.characterCollided) {
                 this.x -= 15;
                 this.y -= 30;
             } else {
+                clearInterval(fallBackInterval);
                 this.y = 500;
                 this.characterCollided = false;
-                // setTimeout(() => {
-                //     this.collisionEnded();
-                // }, 1000);
             }
         }, 20);
         HURT_SOUND.play();
     }
+
+    // characterCollision() {
+    //     let startpoint = this.x;
+    //     this.speedY = 35;
+    //     setInterval(() => {
+    //         if (this.x > startpoint - 250 && this.characterCollided) {
+    //             this.x -= 15;
+    //             this.y -= 30;
+    //         } else {
+    //             this.y = 500;
+    //             this.characterCollided = false;
+    //             // setTimeout(() => {
+    //             //     this.collisionEnded();
+    //             // }, 1000);
+    //         }
+    //     }, 20);
+    //     HURT_SOUND.play();
+    // }
 
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // difference in ms
