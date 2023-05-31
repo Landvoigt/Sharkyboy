@@ -13,6 +13,8 @@ class World {
     throwableObjects = [
         // new ThrowableObject()
     ];
+    movementCache = [];
+    currentSpeedParam;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -62,9 +64,14 @@ class World {
     drawLoop() {
         // draw infinity loop
         let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
+        this.checkIfGamePaused();
+        if (!pauseGame) {
+            requestAnimationFrame(function () {
+                self.draw();
+            });
+        } else {
+            return
+        }
     }
 
     run() {
@@ -131,6 +138,49 @@ class World {
         SWIMMING_SOUND.pause();
         GAMEOVER_SOUND.play();
         this.character.deadAnimation();
+    }
+
+    checkIfGamePaused() {
+        if (this.keyboard.MENU) {   /////   beim weiterführen drückt er erneut und hält an
+            this.stopAllMovement();
+            pauseGame = true;
+        }
+    }
+
+    stopAllMovement() {
+        this.level.enemies.forEach(e => {
+            this.stopMovement(e);
+        });
+        this.level.backgroundFishes.forEach(e => {
+            this.stopMovement(e);
+        });
+    }
+
+    stopMovement(obj) {
+        let currentSpeed = obj.speed;
+        this.movementCache.push(currentSpeed);
+        obj.speed = 0;
+    }
+
+    continueGame() {
+        pauseGame = false;
+        this.draw();
+        this.continueAllMovement();
+    }
+
+    continueAllMovement() {
+        this.level.enemies.forEach(e => {
+            this.continueMovement(e);
+        });
+        this.level.backgroundFishes.forEach(e => {
+            this.continueMovement(e);
+        });
+    }
+
+    continueMovement(obj) {
+        this.currentSpeedParam = 0;
+        obj.speed = this.movementCache[this.currentSpeedParam];
+        this.currentSpeedParam++;
     }
 
 }

@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let characterAlive = true;
+let pauseGame = false;
 
 
 function init() {
@@ -33,7 +34,13 @@ window.addEventListener("keydown", (event) => {
     if (event.keyCode == 13 && event.keyCode == 68) {
         keyboard.THROW = true;
     }
-    // console.log(event);
+    if (event.keyCode == 27) {
+        keyboard.MENU = true;
+        if (pauseGame) {
+            world.continueGame();
+        }
+    }
+    console.log(event);
 });
 
 window.addEventListener("keyup", (event) => {
@@ -54,6 +61,9 @@ window.addEventListener("keyup", (event) => {
     }
     if (event.keyCode == 13 && event.keyCode == 68) {
         keyboard.THROW = false;
+    }
+    if (event.keyCode == 27) {
+        keyboard.MENU = true;
     }
     // console.log(event);
 });
