@@ -16,6 +16,14 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+h1 {
+    margin-top: 0;
+    margin-bottom: -20px;
+    font-size: 178px;
+    color: rgb(250, 245, 216);
+    letter-spacing: 7px;
+}
+
 h2 {
     color: rgb(20, 34, 99);
     font-size: 5.3em;
@@ -26,6 +34,38 @@ h3 {
     font-size: 3.5em;
 }
 
+h4 {
+    width: 420px;
+    margin: 0;
+    font-size: 90px;
+    color: rgb(250, 245, 216);
+    letter-spacing: 3px;
+}
+
+h1,
+h4 {
+    text-shadow:
+        -1px -1px 0 #4e4e4e,
+        1px -1px 0 #383838,
+        -1px 1px 0 #535353,
+        1px 1px 0 #505050,
+        1px 0px 1px #CCCCCC,
+        0px 1px 1px #EEEEEE,
+        2px 1px 1px #646464,
+        1px 2px 1px #EEEEEE,
+        3px 2px 1px #9c9c9c,
+        2px 3px 1px #EEEEEE,
+        4px 3px 1px #CCCCCC,
+        3px 4px 1px #EEEEEE,
+        5px 4px 1px #979797,
+        4px 5px 1px #EEEEEE,
+        6px 5px 1px #6b6b6b,
+        5px 6px 1px #EEEEEE,
+        7px 6px 1px #aaaaaa,
+        2px 2px 2px #000000,
+        7px 6px 1px #aaaaaa;
+}
+
 span {
     cursor: default;
 }
@@ -34,7 +74,6 @@ span {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: aquamarine; */
     background-image: url('../img/description/beach-1110498.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -55,28 +94,14 @@ canvas {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('../img/startscreen/startscreen_bg.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-
-.menu {
-    z-index: 100;
-    height: 100%;
-    width: 100vw;
-    bottom: 0;
-    right: 0;
-    padding-top: 25%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    flex-direction: column;
+    gap: 40px;
 }
 
 .start-button {
     height: 180px;
     width: 450px;
-    background: rgb(231, 208, 3);
+    background-color: rgb(231, 208, 3);
     border: 6px solid rgb(231, 208, 3);
     border-radius: 36px;
     margin: 10px;
@@ -115,7 +140,7 @@ canvas {
 .navigation-button {
     height: 150px;
     width: 360px;
-    background: rgb(64, 238, 215);
+    background-color: rgb(64, 238, 215);
     border: 6px solid rgb(64, 238, 215);
     border-radius: 36px;
     margin: 10px;
@@ -130,15 +155,17 @@ canvas {
 
 .settings-button:hover,
 .navigation-button:hover,
-.setting-circle-btn:hover,
+.difficulty-circle-btn:hover,
+.sound-circle-btn:hover,
 .back-btn:hover {
     transform: scale(1.15);
 }
 
-.setting-circle-btn {
+.difficulty-circle-btn,
+.sound-circle-btn {
     height: 110px;
     width: 110px;
-    background: rgb(64, 238, 215);
+    background-color: rgb(64, 238, 215);
     border: 6px solid rgb(64, 238, 215);
     border-radius: 50%;
     margin: 25px;
@@ -156,7 +183,7 @@ canvas {
     right: 35px;
     height: 65px;
     width: 65px;
-    background: rgb(64, 238, 215);
+    background-color: rgb(64, 238, 215);
     border: 6px solid rgb(64, 238, 215);
     border-radius: 50%;
     /* margin: 10px; */
@@ -168,7 +195,8 @@ canvas {
     align-items: center;
 }
 
-.setting-circle-btn:before,
+.difficulty-circle-btn:before,
+.sound-circle-btn:before,
 .back-btn:before {
     content: " ";
     position: absolute;
@@ -224,6 +252,12 @@ canvas {
 .difficulty-icon {
     height: 70px;
     width: 70px;
+}
+
+.yellow-highlight {
+    background-color: rgb(231, 208, 3) !important;
+    border: 6px solid rgb(231, 208, 3) !important;
+    border-radius: 50%;
 }
 
 @keyframes pulse {
