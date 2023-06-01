@@ -260,6 +260,24 @@ canvas {
     border-radius: 50%;
 }
 
+.selection-text-container {
+    position: absolute;
+    top: 35px;
+    font-size: 35px;
+    color: rgb(250, 245, 216);
+    letter-spacing: 1px;
+    text-shadow:
+        -1px -1px 0 #4e4e4e,
+        1px -1px 0 #383838,
+        -1px 1px 0 #535353,
+        1px 1px 0 #505050;
+    opacity: 0.95;
+}
+
+.d-none {
+    display: none;
+}
+
 @keyframes pulse {
     0% {
         transform: scale(1);

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sharkyboy</title>
-    <link rel="icon" type="image/png" href="../img/character/swim/(4).png">
+    <link rel="icon" type="image/png" href="../img/icons/sharkyboy_favicon.png">
     <link rel="stylesheet" href="style.css">
     <script src="../script.js"></script>
     <script src="../models/keyboard.class.js"></script>
@@ -26,27 +26,21 @@
     <script src="../load/character.js"></script>
     <script src="../load/sounds.js"></script>
     <script src="../models/world.class.js"></script>
-
 </head>
 
 <body>
+    <audio src="../sounds/menu_sound.mp3" id="menuSound" loop="loop"></audio>
     <div class="content" id="content">
         <div class="startscreen" id="startscreen">
-            <h1>Skarkyboy</h1>
-            <div class="start-button" onclick="playSound(START_SOUND); startGame()">
-                <h2>Start</h2>
-            </div>
-            <div class="settings-button" onclick="playSound(CLICK_SOUND); showSettings()">
-                <h3>Settings</h3>
-            </div>
-            <div class="navigation-button" onclick="playSound(CLICK_SOUND); showNavigation()">
-                <h3>Navigation</h3>
-            </div>
         </div>
     </div>
-    
-    <!-- <div class="menu"> -->
-    <!-- </div> -->
 </body>
+
+<script type="text/javascript">
+    window.onload = function () {
+        initialize();
+        document.getElementById('menuSound').play();
+    }
+</script>
 
 </html>

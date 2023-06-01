@@ -1,3 +1,9 @@
+function initialize(){
+    showStartpage();
+    pushAudios();
+}
+
+
 function startGame() {
     document.getElementById('content').innerHTML = `
     <canvas id="canvas" width="1920px" height="1080px"></canvas>
@@ -7,7 +13,6 @@ function startGame() {
 
 
 function showSettings() {
-    pushAudios();
     let startscreen = document.getElementById('startscreen');
     startscreen.classList.add('change-display');
     startscreen.innerHTML = `
@@ -16,30 +21,30 @@ function showSettings() {
     </div>
     <div class="sound-container">
         <h4>Sound</h4>
-        <div class="sound-circle-btn" id="soundIcon1" onclick="highlightSoundSelection(1); showSelectedOption('Sound muted')">
-            <img src="../img/sound_mute.png" id="muteButton" class="setting-icon" onclick="playSound(CLICK_SOUND); muteSound()">
+        <div class="sound-circle-btn" id="soundIcon1" onclick="highlightSoundSelection(1); showSelectedOption('Muted')">
+            <img src="../img/icons/sound_mute.png" id="muteButton" class="setting-icon" onclick="playSound(CLICK_SOUND); muteSound()">
         </div>
-        <div class="sound-circle-btn" id="soundIcon2" onclick="highlightSoundSelection(2); showSelectedOption('Sound enabled')">
-            <img src="../img/sound_on.png" id="unmuteButton" class="setting-icon" onclick="playSound(CLICK_SOUND); unmuteSound()">
+        <div class="sound-circle-btn" id="soundIcon2" onclick="highlightSoundSelection(2); showSelectedOption('Enabled')">
+            <img src="../img/icons/sound_on.png" id="unmuteButton" class="setting-icon" onclick="playSound(CLICK_SOUND); unmuteSound()">
         </div>
     </div>
     <div class="difficulty-container">
         <h4>Difficulty</h4>
-        <div class="difficulty-circle-btn" id="difficultyIcon1" onclick="highlightDifficultySelection(1); showSelectedOption('Difficulty - easy peasy')">
+        <div class="difficulty-circle-btn" id="difficultyIcon1" onclick="highlightDifficultySelection(1); showSelectedOption('Easy Peasy')">
             <img src="../img/description/fisch (1).png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
-        <div class="difficulty-circle-btn" id="difficultyIcon2" onclick="highlightDifficultySelection(2); showSelectedOption('Difficulty - medium')">
+        <div class="difficulty-circle-btn" id="difficultyIcon2" onclick="highlightDifficultySelection(2); showSelectedOption('Medium')">
             <img src="../img/description/fisch.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
-        <div class="difficulty-circle-btn" id="difficultyIcon3" onclick="highlightDifficultySelection(3); showSelectedOption('Difficulty - hardmode')">
+        <div class="difficulty-circle-btn" id="difficultyIcon3" onclick="highlightDifficultySelection(3); showSelectedOption('Hardmode')">
             <img src="../img/description/delfin.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
-        <div class="difficulty-circle-btn" id="difficultyIcon4" onclick="highlightDifficultySelection(4); showSelectedOption('Difficulty - armageddon')">
+        <div class="difficulty-circle-btn" id="difficultyIcon4" onclick="highlightDifficultySelection(4); showSelectedOption('Armageddon')">
             <img src="../img/description/hai.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
     </div>
     <div class="back-btn">
-        <img src="../img/go-back.png" class="back-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
+        <img src="../img/icons/go-back.png" class="back-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
     </div>
     `;
 }
@@ -68,7 +73,12 @@ function showSelectedOption(text) {
     let selectedOption = document.getElementById('selectedOption');
     selectedOption.innerHTML = `${text}`;
     selectedOption.classList.remove('d-none');
+    setTimeout(hideSelectedOption, 1250);
+}
 
+function hideSelectedOption() {
+    let selectedOption = document.getElementById('selectedOption');
+    selectedOption.classList.add('d-none');
 }
 
 function showStartpage() {
