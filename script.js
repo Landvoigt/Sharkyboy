@@ -16,10 +16,10 @@ function showSettings() {
             <span>Sound</span>
         </div>
         <div class="setting-circle-btn">
-            <img src="../img/sound_mute.png" id="muteButton" class="setting-icon" onclick="muteSound(); playSound(CLICK_SOUND)">
+            <img src="../img/sound_mute.png" id="muteButton" class="setting-icon" onclick="playSound(CLICK_SOUND); muteSound()">
         </div>
         <div class="setting-circle-btn">
-            <img src="../img/sound_on.png" id="unmuteButton" class="setting-icon" onclick="unmuteSound(); playSound(CLICK_SOUND)">
+            <img src="../img/sound_on.png" id="unmuteButton" class="setting-icon" onclick="playSound(CLICK_SOUND); unmuteSound()">
         </div>
     </div>
     <div class="difficulty-container">
@@ -40,7 +40,7 @@ function showSettings() {
         </div>
     </div>
     <div class="back-btn">
-        <img src="../img/go-back.png" class="back-icon" onclick="showStartpage(); playSound(CLICK_SOUND)">
+        <img src="../img/go-back.png" class="back-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
     </div>
     `;
 }

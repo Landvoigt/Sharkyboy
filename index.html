@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sharkyboy</title>
+    <link rel="icon" type="image/png" href="../img/character/swim/(4).png">
     <link rel="stylesheet" href="style.css">
     <script src="../script.js"></script>
     <script src="../models/keyboard.class.js"></script>
@@ -28,17 +29,17 @@
 
 </head>
 
-    <body>
+<body>
     <div class="content" id="content">
         <div class="startscreen" id="startscreen">
             <div class="menu">
-                <div class="settings-button" onclick="showSettings(); playSound(CLICK_SOUND)">
+                <div class="settings-button" onclick="playSound(CLICK_SOUND); showSettings()">
                     <h3>Settings</h3>
                 </div>
-                <div class="start-button" onclick="startGame(); playSound(START_SOUND)">
+                <div class="start-button" onclick="playSound(START_SOUND); startGame()">
                     <h2>Start</h2>
                 </div>
-                <div class="navigation-button" onclick="showNavigation(); playSound(CLICK_SOUND)">
+                <div class="navigation-button" onclick="playSound(CLICK_SOUND); showNavigation()">
                     <h3>Navigation</h3>
                 </div>
             </div>
