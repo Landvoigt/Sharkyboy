@@ -7,6 +7,8 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     characterCollided = false;
     inMovement = false;
+    isIdling = true;
+    lastMovementTime = 0;
 
     applyGravity() {
         if (!this.inMovement) {
@@ -31,18 +33,26 @@ class MovableObject extends DrawableObject {
 
     moveLeft() {
         this.x -= this.speed;
+        this.isIdling = false;
+        this.lastMovementTime = new Date().getTime() / 1000;
     }
 
     moveRight() {
         this.x += this.speed;
+        this.isIdling = false;
+        this.lastMovementTime = new Date().getTime() / 1000;
     }
 
     moveUp() {
         this.y -= this.speed;
+        this.isIdling = false;
+        this.lastMovementTime = new Date().getTime() / 1000;
     }
 
     moveDown() {
         this.y += this.speed;
+        this.isIdling = false;
+        this.lastMovementTime = new Date().getTime() / 1000;
     }
 
     playAnimation(images) {

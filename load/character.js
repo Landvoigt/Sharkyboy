@@ -19,6 +19,7 @@ const CHARACTER_IDLE_IMG = [
     '../img/character/idle/(17).png',
     '../img/character/idle/(18).png'
 ];
+
 const CHARACTER_SWIMMING_IMG = [
     '../img/character/swim/(1).png',
     '../img/character/swim/(2).png',
@@ -27,6 +28,7 @@ const CHARACTER_SWIMMING_IMG = [
     '../img/character/swim/(5).png',
     '../img/character/swim/(6).png'
 ];
+
 const CHARACTER_DEAD_FROM_POISON_IMG = [
     '../img/character/dead/poisoned/(1).png',
     '../img/character/dead/poisoned/(2).png',
@@ -39,9 +41,27 @@ const CHARACTER_DEAD_FROM_POISON_IMG = [
     '../img/character/dead/poisoned/(9).png',
     '../img/character/dead/poisoned/(10).png'
 ];
+
 const CHARACTER_HURT_FROM_POISON_IMG = [
     '../img/character/hurt/poisoned/(1).png',
     '../img/character/hurt/poisoned/(2).png',
     '../img/character/hurt/poisoned/(3).png',
     // '../img/character/hurt/poisoned/(4).png',
+];
+
+const CHARACTER_LONG_IDLE_IMG = [
+    '../img/character/long_idle/(1).png',
+    '../img/character/long_idle/(2).png',
+    '../img/character/long_idle/(3).png',
+    '../img/character/long_idle/(4).png',
+    '../img/character/long_idle/(5).png',
+    '../img/character/long_idle/(6).png',
+    '../img/character/long_idle/(7).png',
+    '../img/character/long_idle/(8).png',
+    '../img/character/long_idle/(9).png',
+    '../img/character/long_idle/(10).png',
+    '../img/character/long_idle/(11).png',
+    '../img/character/long_idle/(12).png',
+    '../img/character/long_idle/(13).png',
+    '../img/character/long_idle/(14).png'
 ];
