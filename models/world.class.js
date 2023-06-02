@@ -44,6 +44,7 @@ class World {
 
     addBackground() {
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.backgroundFishes);
     }
 
     addStaticObjects() {
@@ -56,7 +57,6 @@ class World {
 
     addInstances() {
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.backgroundFishes);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
     }
@@ -87,14 +87,24 @@ class World {
     }
 
     addToMap(mo) {
-        if (mo.otherDirection) {
-            this.flipImage(mo);
+        if (this instanceof Background_Fish) {
+            debugger;
+            if (this.level.backgroundFishes.direction == 1) {
+                this.flipImage(mo);
+            }
+            mo.draw(this.ctx);
+            // mo.drawFrame(this.ctx);
         }
-        mo.draw(this.ctx);
-        if (mo.otherDirection) {
-            this.flipImageBack(mo);
+        else {
+            if (mo.otherDirection) {
+                this.flipImage(mo);
+            }
+            mo.draw(this.ctx);
+            if (mo.otherDirection) {
+                this.flipImageBack(mo);
+            }
+            mo.drawFrame(this.ctx);
         }
-        mo.drawFrame(this.ctx);
     }
 
     flipImage(mo) {
@@ -112,6 +122,7 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
+                // debugger;
                 this.character.hit();
                 this.statusBarHP.setPercentage(this.character.hp);
             }
@@ -141,15 +152,15 @@ class World {
 
     pauseGame() {
         // if (this.keyboard.MENU) {   /////   beim weiterführen drückt er erneut und hält an
-            if (!pauseGame) {
-                this.stopAllMovement();
-                pauseGame = true;
-                return;
-            }
-            if (pauseGame) {
-                pauseGame = false;
-                this.continueGame();
-            }
+        if (!pauseGame) {
+            this.stopAllMovement();
+            pauseGame = true;
+            return;
+        }
+        if (pauseGame) {
+            pauseGame = false;
+            this.continueGame();
+        }
         // }
     }
 
