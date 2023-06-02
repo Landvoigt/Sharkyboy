@@ -81,6 +81,7 @@ class Character extends MovableObject {
         } else if (this.isHurt()) {
             this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
         } else if (this.world.keyboard.JUMP) {
+            SLAP_SOUND.play();
             this.animationTime = 30;
             this.playAnimation(CHARACTER_FIN_SLAP_ATTACK_IMG);
             this.lastMovementTime = new Date().getTime() / 1000;
