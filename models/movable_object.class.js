@@ -6,21 +6,26 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     lastHit = 0;
     characterCollided = false;
+    inMovement = false;
 
     applyGravity() {
-        setInterval(() => {
-            if (this.isAboveGround() || this.fallSpeed > 0) {
-                this.y -= this.fallSpeed;
-                this.fallSpeed -= this.acceleration;
-            }
-        }, 1000 / 60);
+        if (!this.inMovement) {
+            setInterval(() => {
+                if (this.isAboveGround() || this.fallSpeed > 0) {
+                    this.y -= this.fallSpeed;
+                    this.fallSpeed -= this.acceleration;
+                }
+            }, 1000 / 60);
+        } else {
+            return
+        }
     }
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true;
         } else {
-            return this.y < 500;
+            return this.y < this.y_default;
         }
     }
 
@@ -30,6 +35,14 @@ class MovableObject extends DrawableObject {
 
     moveRight() {
         this.x += this.speed;
+    }
+
+    moveUp() {
+        this.y -= this.speed;
+    }
+
+    moveDown() {
+        this.y += this.speed;
     }
 
     playAnimation(images) {
@@ -52,6 +65,7 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
+        this.inMovement = false;
         this.characterCollided = true;
         this.hp -= 10;
         if (this.hp < 0) {
@@ -69,15 +83,19 @@ class MovableObject extends DrawableObject {
         let startpoint = this.x;
         this.fallSpeed = 0;
         let fallBackInterval = setInterval(() => {
-            if (this.x > startpoint - 250 && this.characterCollided) {
-                this.x -= 15;
-                this.y -= 30;
+            if (this.x > startpoint - 260 && this.characterCollided) {
+                this.x -= 12;
+                this.y -= 27;
+                if (this.isAboveGround()) {
+                    this.y -= this.fallSpeed;
+                    this.fallSpeed -= this.acceleration;
+                }
             } else {
                 clearInterval(fallBackInterval);
                 this.y = this.y_default;
                 this.characterCollided = false;
             }
-        }, 20);
+        }, 16);
         HURT_SOUND.play();
     }
 

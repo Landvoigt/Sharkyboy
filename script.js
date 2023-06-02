@@ -13,6 +13,7 @@ function startGame() {
 
 
 function showSettings() {
+    playSound(MENU_SOUND);
     let startscreen = document.getElementById('startscreen');
     startscreen.classList.add('change-display');
     startscreen.innerHTML = `

@@ -22,7 +22,7 @@ class Character extends MovableObject {
         this.loadImages(CHARACTER_SWIMMING_IMG);
         this.loadImages(CHARACTER_HURT_FROM_POISON_IMG);
         this.loadImages(CHARACTER_DEAD_FROM_POISON_IMG);
-        this.applyGravity();
+        // this.applyGravity();
         this.animate();
     }
 
@@ -41,9 +41,21 @@ class Character extends MovableObject {
                 this.otherDirection = true;
                 SWIMMING_SOUND.play();
             }
-            if (this.world.keyboard.JUMP && !this.isAboveGround()) {
-                this.jump();
+            if (this.world.keyboard.UP && this.y > 160 && !this.characterCollided) {
+                this.inMovement = true;
+                this.moveUp();
+                this.y_default = this.y;
+                SWIMMING_SOUND.play();
             }
+            if (this.world.keyboard.DOWN && this.y < 660 && !this.characterCollided) {
+                this.inMovement = true;
+                this.moveDown();
+                this.y_default = this.y;
+                SWIMMING_SOUND.play();
+            }
+            // if (this.world.keyboard.JUMP && !this.isAboveGround()) {
+            //     this.jump();
+            // }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
         this.playAnimations();
@@ -55,7 +67,12 @@ class Character extends MovableObject {
                 this.world.gameOver();
             } else if (this.isHurt()) {
                 this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
-            } else if (this.world.keyboard.RIGHT && !this.characterCollided || this.world.keyboard.LEFT && !this.characterCollided) {
+            } else if
+                (this.world.keyboard.RIGHT && !this.characterCollided ||
+                this.world.keyboard.LEFT && !this.characterCollided ||
+                this.world.keyboard.UP && !this.characterCollided ||
+                this.world.keyboard.DOWN && !this.characterCollided) {
+
                 this.animationTime = 90;
                 this.playAnimation(CHARACTER_SWIMMING_IMG);
             } else {
