@@ -28,7 +28,7 @@ class Enemy_1 extends MovableObject {  // Pufferfish
 
         this.x = 750 + Math.random() * 1000;  // Number between 200 and 700
         this.speed = 0.2 + Math.random() * 0.5;
-        this.animate();
+        // this.animate();
     }
 
     animate() {
