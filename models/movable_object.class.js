@@ -56,28 +56,30 @@ class MovableObject extends DrawableObject {
         this.fallSpeed = 35;
     }
 
-    isColliding(obj) {
-        return (this.x + this.width - this.offset.right) > (obj.x + obj.offset.left) &&
-            (this.y + this.height - this.offset.bottom) > (obj.y + obj.offset.top) &&
-            (this.x + this.offset.left) < (obj.x + obj.width - obj.offset.right) &&
-            (this.y + this.offset.top) < (obj.y + obj.height - obj.offset.bottom); 
-            // &&
-        // mo.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-    }
-
-    // isNotColliding(obj) {
-    //     return  ((this.y + this.height - this.offset.bottom) < (obj.y + obj.offset.top) ||
-    //             (this.y + this.offset.top) > (obj.y + obj.height - obj.offset.bottom)) ||
-    //             ((this.x + this.width - this.offset.right) < (obj.x + obj.offset.left) ||
-    //             (this.x + this.offset.left) > (obj.x + obj.width - obj.offset.right));
+    // isColliding(obj) {
+    //     return (this.x + this.width - this.offset.right) > (obj.x + obj.offset.left) &&
+    //         (this.y + this.height - this.offset.bottom) > (obj.y + obj.offset.top) &&
+    //         (this.x + this.offset.left) < (obj.x + obj.width - obj.offset.right) &&
+    //         (this.y + this.offset.top) < (obj.y + obj.height - obj.offset.bottom); 
+    //         // &&
+    //     // mo.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
     // }
 
-    //  return (
-    //     this.x + this.width - this.offset.right > obj.x + obj.offset.left &&
-    //     this.y + this.height - this.offset.bottom > obj.y + obj.offset.top &&
-    //     this.x + this.offset.left < obj.x + obj.width - obj.offset.right &&
-    //     this.y + this.offset.top < obj.y + obj.height - obj.offset.bottom
-    //   );
+    isNotColliding(obj) {
+        console.log('1. this.y + this.height - this.offset.bottom',(this.y + this.height - this.offset.bottom));
+        console.log('2. obj.y + obj.offset.top',(obj.y + obj.offset.top));
+        console.log('3. this.y + this.offset.top',(this.y + this.offset.top));
+        console.log('4. obj.y + obj.height - obj.offset.bottom',(obj.y + obj.height - obj.offset.bottom));
+        console.log('5. this.x + this.width - this.offset.right',(this.x + this.width - this.offset.right));
+        console.log('6. obj.x + obj.offset.left',(obj.x + obj.offset.left));
+        console.log('7. this.x + this.offset.left',(this.x + this.offset.left));
+        console.log('8. obj.x + obj.width - obj.offset.right',(obj.x + obj.width - obj.offset.right));
+
+        return  ((this.y + this.height - this.offset.bottom) < (obj.y + obj.offset.top) ||
+                (this.y + this.offset.top) > (obj.y + obj.height - obj.offset.bottom)) ||
+                ((this.x + this.width - this.offset.right) < (obj.x + obj.offset.left) ||
+                (this.x + this.offset.left) > (obj.x + obj.width - obj.offset.right));
+    }
 
     hit() {
         this.inMovement = false;

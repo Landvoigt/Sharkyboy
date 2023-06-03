@@ -124,7 +124,8 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character instanceof Character && this.character.isColliding(enemy)) {
+            if (!this.character.isNotColliding(enemy)) {
+                debugger;
                 this.character.hit();
                 this.statusBarHP.setPercentage(this.character.hp);
             }
