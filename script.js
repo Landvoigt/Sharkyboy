@@ -1,8 +1,7 @@
-function initialize(){
+function initialize() {
     showStartpage();
     pushAudios();
 }
-
 
 function startGame() {
     document.getElementById('content').innerHTML = `
@@ -11,7 +10,6 @@ function startGame() {
     initWorld();
 }
 
-
 function showSettings() {
     playSound(MENU_SOUND);
     let startscreen = document.getElementById('startscreen');
@@ -19,6 +17,15 @@ function showSettings() {
     startscreen.innerHTML = `
     <div class="selection-text-container">
         <span id="selectedOption" class="d-none">Hier könnte ihre Werbung stehen</span>
+    </div>
+    <div class="sound-container">
+        <h4>Fullscreen</h4>
+        <div class="sound-circle-btn" id="fullscreenIcon1" onclick="highlightSoundSelection(1); showSelectedOption('Off')">
+            <img src="../img/icons/fullscreen_off.png" id="fullscreenOff" class="fullscreen-icon" onclick="playSound(CLICK_SOUND)">
+        </div>
+        <div class="sound-circle-btn" id="fullscreenIcon2" onclick="highlightSoundSelection(2); showSelectedOption('On')">
+            <img src="../img/icons/fullscreen_on.png" id="fullscreenOn" class="fullscreen-icon" onclick="playSound(CLICK_SOUND)">
+        </div>
     </div>
     <div class="sound-container">
         <h4>Sound</h4>
@@ -55,7 +62,7 @@ function highlightDifficultySelection(cnt) {
     let clickedIcon = document.getElementById(`difficultyIcon${cnt}`);
     for (let i = 0; i < difficultyIcons.length; i++) {
         icon = difficultyIcons[i];
-        icon.classList.remove('yellow-highlight');
+        removeHighlight(icon);
     }
     clickedIcon.classList.add('yellow-highlight');
 }
@@ -65,9 +72,13 @@ function highlightSoundSelection(cnt) {
     let clickedIcon = document.getElementById(`soundIcon${cnt}`);
     for (let i = 0; i < soundIcons.length; i++) {
         icon = soundIcons[i];
-        icon.classList.remove('yellow-highlight');
+        removeHighlight(icon);
     }
     clickedIcon.classList.add('yellow-highlight');
+}
+
+function removeHighlight(element) {
+    element.classList.remove('yellow-highlight');
 }
 
 function showSelectedOption(text) {
@@ -100,7 +111,14 @@ function showStartpage() {
 }
 
 function showNavigation() {
-
+    let startscreen = document.getElementById('startscreen');
+    startscreen.classList.add('change-display');
+    startscreen.innerHTML = `
+    <img src="../img/description/Instructions 2.png" class="instructions">
+    <div class="back-btn">
+        <img src="../img/icons/go-back.png" class="back-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
+    </div>
+    `;
 }
 
 function playSound(audioFile) {

@@ -16,6 +16,10 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+.d-none {
+    display: none;
+}
+
 h1 {
     margin-top: 0;
     margin-bottom: -20px;
@@ -35,7 +39,7 @@ h3 {
 }
 
 h4 {
-    width: 420px;
+    width: 440px;
     margin: 0;
     font-size: 90px;
     color: rgb(250, 245, 216);
@@ -210,9 +214,14 @@ canvas {
 }
 
 .setting-icon {
-    height: 65px;
-    width: 65px;
+    height: 57px;
+    width: 57px;
     margin-left: 5px;
+}
+
+.fullscreen-icon{
+    height: 57px;
+    width: 57px;
 }
 
 .back-icon {
@@ -274,8 +283,10 @@ canvas {
     opacity: 0.95;
 }
 
-.d-none {
-    display: none;
+.instructions {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
 }
 
 @keyframes pulse {

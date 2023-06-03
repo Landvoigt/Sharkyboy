@@ -38,7 +38,7 @@ class Enemy_1 extends MovableObject {  // Pufferfish
 
         setInterval(() => {
             this.playAnimation(this.SWIMMING_IMG);
-        }, 200)
+        }, 200);
     }
 
 }
