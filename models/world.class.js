@@ -15,15 +15,17 @@ class World {
     ];
     movementCache = [];
     currentSpeedParam;
+    SwimmingDirectionBGFishes;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.SwimmingDirectionBGFishes = Math.round(Math.random() * 1);
         this.draw();
         this.run();
-        // this.playBgMusic();
         this.setWorld();
+        // this.playBgMusic();
     }
 
     setWorld() {
@@ -87,24 +89,15 @@ class World {
     }
 
     addToMap(mo) {
-        if (this instanceof Background_Fish) {
-            debugger;
-            if (this.level.backgroundFishes.direction == 1) {
-                this.flipImage(mo);
-            }
-            mo.draw(this.ctx);
-            // mo.drawFrame(this.ctx);
+        if (mo.otherDirection) {
+            this.flipImage(mo);
         }
-        else {
-            if (mo.otherDirection) {
-                this.flipImage(mo);
-            }
-            mo.draw(this.ctx);
-            if (mo.otherDirection) {
-                this.flipImageBack(mo);
-            }
-            mo.drawFrame(this.ctx);
+        mo.draw(this.ctx);
+        if (mo.otherDirection) {
+            this.flipImageBack(mo);
         }
+        mo.drawFrame(this.ctx);
+
     }
 
     flipImage(mo) {
@@ -119,10 +112,19 @@ class World {
         this.ctx.restore();
     }
 
+    // checkCollisions() {
+    //     this.level.enemies.forEach((enemy) => {
+    //         if (!this.character.isNotColliding(enemy)) {
+    //             this.character.hit();
+    //             this.statusBarHP.setPercentage(this.character.hp);
+    //         }
+    //     });
+    // }
+
+
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
-                // debugger;
+            if (this.character instanceof Character && this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBarHP.setPercentage(this.character.hp);
             }
@@ -151,7 +153,6 @@ class World {
     }
 
     pauseGame() {
-        // if (this.keyboard.MENU) {   /////   beim weiterführen drückt er erneut und hält an
         if (!pauseGame) {
             this.stopAllMovement();
             pauseGame = true;
@@ -161,7 +162,6 @@ class World {
             pauseGame = false;
             this.continueGame();
         }
-        // }
     }
 
     stopAllMovement() {
@@ -198,5 +198,4 @@ class World {
         obj.speed = this.movementCache[this.currentSpeedParam];
         this.currentSpeedParam++;
     }
-
 }

@@ -45,6 +45,7 @@ function initLevel_1() {
             new Background_Fish(),
             new Background_Fish(),
             new Background_Fish(),
+            new Background_Fish(),
             new Background_Fish()
         ]
     );

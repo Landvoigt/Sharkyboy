@@ -11,7 +11,16 @@ class Background_Fish extends MovableObject {
         this.x = Math.random() * 1920;
         this.speed = Math.random() * 15;
         this.direction = Math.round(Math.random() * 1);
+        this.setMovementDirection();
         this.animate();
+    }
+
+    setMovementDirection() {
+        if (this.direction == 0) {
+            this.otherDirection = false;
+        } else {
+            this.otherDirection = true;
+        }
     }
 
     animate() {

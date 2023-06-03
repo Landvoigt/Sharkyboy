@@ -8,18 +8,18 @@ class MovableObject extends DrawableObject {
     characterCollided = false;
     inMovement = false;
 
-    applyGravity() {
-        if (!this.inMovement) {
-            setInterval(() => {
-                if (this.isAboveGround() || this.fallSpeed > 0) {
-                    this.y -= this.fallSpeed;
-                    this.fallSpeed -= this.acceleration;
-                }
-            }, 1000 / 60);
-        } else {
-            return
-        }
-    }
+    // applyGravity() {
+    //     if (!this.inMovement) {
+    //         setInterval(() => {
+    //             if (this.isAboveGround() || this.fallSpeed > 0) {
+    //                 this.y -= this.fallSpeed;
+    //                 this.fallSpeed -= this.acceleration;
+    //             }
+    //         }, 1000 / 60);
+    //     } else {
+    //         return
+    //     }
+    // }
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
@@ -64,6 +64,20 @@ class MovableObject extends DrawableObject {
             // &&
         // mo.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
     }
+
+    // isNotColliding(obj) {
+    //     return  ((this.y + this.height - this.offset.bottom) < (obj.y + obj.offset.top) ||
+    //             (this.y + this.offset.top) > (obj.y + obj.height - obj.offset.bottom)) ||
+    //             ((this.x + this.width - this.offset.right) < (obj.x + obj.offset.left) ||
+    //             (this.x + this.offset.left) > (obj.x + obj.width - obj.offset.right));
+    // }
+
+    //  return (
+    //     this.x + this.width - this.offset.right > obj.x + obj.offset.left &&
+    //     this.y + this.height - this.offset.bottom > obj.y + obj.offset.top &&
+    //     this.x + this.offset.left < obj.x + obj.width - obj.offset.right &&
+    //     this.y + this.offset.top < obj.y + obj.height - obj.offset.bottom
+    //   );
 
     hit() {
         this.inMovement = false;
