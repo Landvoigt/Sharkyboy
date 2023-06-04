@@ -20,8 +20,8 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.draw();
         this.run();
+        this.draw();
         this.setWorld();
         // this.playBgMusic();
     }
@@ -45,6 +45,8 @@ class World {
     addBackground() {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.backgroundFishes);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.collectibles);
     }
 
     addStaticObjects() {
@@ -76,7 +78,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            this.checkThrowObject();
+            // this.checkThrowObject();
         }, 200);
     }
 
@@ -95,7 +97,6 @@ class World {
             this.flipImageBack(mo);
         }
         mo.drawFrame(this.ctx);
-
     }
 
     flipImage(mo) {
@@ -110,25 +111,27 @@ class World {
         this.ctx.restore();
     }
 
-    // checkCollisions() {
-    //     this.level.enemies.forEach((enemy) => {
-    //         if (this.character.isColliding(enemy)) {
-    //             this.character.hit();
-    //             this.statusBarHP.setPercentage(this.character.hp);
-    //         }
-    //     });
-    // }
-
-
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (!this.character.isNotColliding(enemy)) {
-                debugger;
+            if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBarHP.setPercentage(this.character.hp);
+            } else {
+                console.log('not colliding');
             }
         });
     }
+
+    // checkCollisions() {
+    //     this.level.enemies.forEach((e) => {
+    //         if (!this.character.isNotColliding(e)) {
+    //             this.character.hit();
+    //             this.statusBarHP.setPercentage(this.character.hp);
+    //         } else {
+    //             console.log('not colliding');
+    //         }
+    //     });
+    // }
 
     checkThrowObject() {
         if (this.keyboard.THROW) {

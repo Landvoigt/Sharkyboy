@@ -10,10 +10,15 @@ class Character extends MovableObject {
         // left: 202,
         // right: 101,
 
-        top: 234,
-        bottom: 358,
-        left: 101,
-        right: 202,
+        // top: 234,
+        // bottom: 358,
+        // left: 101,
+        // right: 202,
+        
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
     };
     hp = 100;
     speed = 10;
@@ -63,7 +68,7 @@ class Character extends MovableObject {
             this.setMovementAttributes();
             this.otherDirection = true;
         }
-        if (this.world.keyboard.UP && this.y > 160 && !this.characterCollided) {
+        if (this.world.keyboard.UP && this.y > -160 && !this.characterCollided) {
             this.moveUp();
             this.setMovementAttributes();
             this.y_default = this.y;

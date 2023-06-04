@@ -9,7 +9,7 @@ class Background_Fish extends MovableObject {
     imgsToLoad = [];
 
     constructor() {
-        super();
+        super().loadImage(BG_GREEN_FISH_IMG_SWIM[0]);
         this.load();
         this.randomiseObjects();
         this.setMovementDirection();

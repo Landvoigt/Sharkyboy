@@ -213,13 +213,18 @@ canvas {
     border: 5px solid rgba(21, 30, 92, 0.767);
 }
 
+.back-btn:hover {
+    background-color: rgb(231, 208, 3);
+    border: 6px solid rgb(231, 208, 3);
+}
+
 .setting-icon {
     height: 57px;
     width: 57px;
     margin-left: 5px;
 }
 
-.fullscreen-icon{
+.fullscreen-icon {
     height: 57px;
     width: 57px;
 }

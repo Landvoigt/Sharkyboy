@@ -4,6 +4,7 @@ function initialize() {
 }
 
 function startGame() {
+    stopSound(MENU_SOUND);
     document.getElementById('content').innerHTML = `
     <canvas id="canvas" width="1920px" height="1080px"></canvas>
     `;
@@ -14,7 +15,11 @@ function showSettings() {
     playSound(MENU_SOUND);
     let startscreen = document.getElementById('startscreen');
     startscreen.classList.add('change-display');
-    startscreen.innerHTML = `
+    startscreen.innerHTML = getSettingsHTML();
+}
+
+function getSettingsHTML() {
+    return `
     <div class="selection-text-container">
         <span id="selectedOption" class="d-none">Hier könnte ihre Werbung stehen</span>
     </div>
@@ -96,7 +101,11 @@ function hideSelectedOption() {
 function showStartpage() {
     let startscreen = document.getElementById('startscreen');
     startscreen.classList.remove('change-display');
-    startscreen.innerHTML = `
+    startscreen.innerHTML = getStartpageHMTL();
+}
+
+function getStartpageHMTL() {
+    return `
     <h1>Skarkyboy</h1>
     <div class="start-button" onclick="playSound(START_SOUND); startGame()">
         <h2>Start</h2>
@@ -113,7 +122,11 @@ function showStartpage() {
 function showNavigation() {
     let startscreen = document.getElementById('startscreen');
     startscreen.classList.add('change-display');
-    startscreen.innerHTML = `
+    startscreen.innerHTML = getNavigationHTML();
+}
+
+function getNavigationHTML() {
+    return `
     <img src="../img/description/Instructions 2.png" class="instructions">
     <div class="back-btn">
         <img src="../img/icons/go-back.png" class="back-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
@@ -123,6 +136,10 @@ function showNavigation() {
 
 function playSound(audioFile) {
     audioFile.play();
+}
+
+function stopSound(audioFile) {
+    audioFile.pause();
 }
 
 function muteSound() {

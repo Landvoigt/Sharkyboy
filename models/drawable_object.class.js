@@ -25,12 +25,12 @@ class DrawableObject {
     }
 
     draw(ctx) {
-        try {
+        // try {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-        } catch (e) {
+        // } catch (e) {
             // console.warn('Error loading image', e);
             // console.log('Could not load image', this.img);
-        }
+        // }
     }
 
     drawFrame(ctx) {
@@ -39,6 +39,7 @@ class DrawableObject {
             ctx.lineWidth = '2';
             ctx.strokeStyle = 'red';
             // ctx.rect(this.x + this.offset.right, this.y + this.offset.bottom, this.width - this.offset.left, this.height - this.offset.top);
+            // ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
             ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
             ctx.stroke();
         }
@@ -46,8 +47,9 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '2';
             ctx.strokeStyle = 'red';
-            ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
+            // ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
             // ctx.rect(this.x + this.offset.right, this.y + this.offset.bottom, this.width - this.offset.left, this.height - this.offset.top);
+            ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
     }
