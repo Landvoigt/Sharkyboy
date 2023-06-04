@@ -15,13 +15,11 @@ class World {
     ];
     movementCache = [];
     currentSpeedParam;
-    SwimmingDirectionBGFishes;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.SwimmingDirectionBGFishes = Math.round(Math.random() * 1);
         this.draw();
         this.run();
         this.setWorld();
@@ -114,7 +112,7 @@ class World {
 
     // checkCollisions() {
     //     this.level.enemies.forEach((enemy) => {
-    //         if (!this.character.isNotColliding(enemy)) {
+    //         if (this.character.isColliding(enemy)) {
     //             this.character.hit();
     //             this.statusBarHP.setPercentage(this.character.hp);
     //         }

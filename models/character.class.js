@@ -2,8 +2,8 @@ class Character extends MovableObject {
     x = 60;
     y = 500;
     y_default = 500;
-    height = 500;
     width = 500;
+    height = 500;
     offset = {
         // top: 358,
         // bottom: 234,

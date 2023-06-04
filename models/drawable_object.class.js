@@ -4,8 +4,8 @@ class DrawableObject {
     currentImage = 0;
     x = 120;
     y = 250;
-    height = 150;
     width = 150;
+    height = 150;
 
     loadImage(path) {
         this.img = new Image();
@@ -26,7 +26,7 @@ class DrawableObject {
 
     draw(ctx) {
         try {
-            ctx.drawImage(this.img, this.x, this.y, this.height, this.width);
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         } catch (e) {
             // console.warn('Error loading image', e);
             // console.log('Could not load image', this.img);
