@@ -25,10 +25,10 @@ function getSettingsHTML() {
     </div>
     <div class="sound-container">
         <h4>Fullscreen</h4>
-        <div class="sound-circle-btn" id="fullscreenIcon1" onclick="highlightSoundSelection(1); showSelectedOption('Off')">
+        <div class="fullscreen-circle-btn" id="fullscreenIcon1" onclick="highlightFullscreenSelection(1); showSelectedOption('Off')">
             <img src="../img/icons/fullscreen_off.png" id="fullscreenOff" class="fullscreen-icon" onclick="playSound(CLICK_SOUND)">
         </div>
-        <div class="sound-circle-btn" id="fullscreenIcon2" onclick="highlightSoundSelection(2); showSelectedOption('On')">
+        <div class="fullscreen-circle-btn" id="fullscreenIcon2" onclick="highlightFullscreenSelection(2); showSelectedOption('On')">
             <img src="../img/icons/fullscreen_on.png" id="fullscreenOn" class="fullscreen-icon" onclick="playSound(CLICK_SOUND)">
         </div>
     </div>
@@ -77,6 +77,16 @@ function highlightSoundSelection(cnt) {
     let clickedIcon = document.getElementById(`soundIcon${cnt}`);
     for (let i = 0; i < soundIcons.length; i++) {
         icon = soundIcons[i];
+        removeHighlight(icon);
+    }
+    clickedIcon.classList.add('yellow-highlight');
+}
+
+function highlightFullscreenSelection(cnt){
+    let fullscreenIcons = document.getElementsByClassName('fullscreen-circle-btn');
+    let clickedIcon = document.getElementById(`fullscreenIcon${cnt}`);
+    for (let i = 0; i < fullscreenIcons.length; i++) {
+        icon = fullscreenIcons[i];
         removeHighlight(icon);
     }
     clickedIcon.classList.add('yellow-highlight');

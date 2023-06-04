@@ -137,7 +137,6 @@ canvas {
 
 .start-button:hover {
     animation: none;
-    /* transform: scale(1.05); */
 }
 
 .settings-button,
@@ -150,7 +149,6 @@ canvas {
     margin: 10px;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
     transform: scale(1);
-    /* animation: pulse 1.5s infinite; */
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -161,12 +159,14 @@ canvas {
 .navigation-button:hover,
 .difficulty-circle-btn:hover,
 .sound-circle-btn:hover,
+.fullscreen-circle-btn:hover,
 .back-btn:hover {
     transform: scale(1.15);
 }
 
 .difficulty-circle-btn,
-.sound-circle-btn {
+.sound-circle-btn,
+.fullscreen-circle-btn {
     height: 110px;
     width: 110px;
     background-color: rgb(64, 238, 215);
@@ -190,7 +190,6 @@ canvas {
     background-color: rgb(64, 238, 215);
     border: 6px solid rgb(64, 238, 215);
     border-radius: 50%;
-    /* margin: 10px; */
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
     transform: scale(1);
     cursor: pointer;
@@ -201,6 +200,7 @@ canvas {
 
 .difficulty-circle-btn:before,
 .sound-circle-btn:before,
+.fullscreen-circle-btn:before,
 .back-btn:before {
     content: " ";
     position: absolute;
