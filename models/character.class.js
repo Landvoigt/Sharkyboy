@@ -16,6 +16,7 @@ class Character extends MovableObject {
     animationTime = 135;
     isIdling = true;
     lastMovementTime = 0;
+    isSlapping = false;
 
     constructor() {
         super().loadImage(CHARACTER_SWIMMING_IMG[0]);
@@ -75,11 +76,14 @@ class Character extends MovableObject {
             this.world.gameOver();
         } else if (this.isHurt()) {
             this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
-        } else if (this.world.keyboard.JUMP) {
+        } else if (this.world.keyboard.JUMP && !this.isSlapping) {
+            this.isSlapping = true;
             SLAP_SOUND.play();
             this.animationTime = 30;
             this.playAnimation(CHARACTER_FIN_SLAP_ATTACK_IMG);
             this.lastMovementTime = new Date().getTime() / 1000;
+            console.log(this.isSlapping);
+            this.isSlapping = false;
         } else if (this.isSwimming()) {
             this.animationTime = 90;
             this.playAnimation(CHARACTER_SWIMMING_IMG);
@@ -91,6 +95,7 @@ class Character extends MovableObject {
                 this.playAnimation(CHARACTER_IDLE_IMG);
             }
         }
+        console.log(this.isSlapping);
     }
 
     checkIdleTime() {

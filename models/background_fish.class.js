@@ -20,6 +20,7 @@ class Background_Fish extends MovableObject {
     load() {
         this.loadImages(BG_GREEN_FISH_IMG_SWIM);
         this.loadImages(BG_RED_FISH_IMG_SWIM);
+        this.loadImages(BG_ORANGE_FISH_IMG_SWIM);
     }
 
     randomiseObjects() {
@@ -49,9 +50,7 @@ class Background_Fish extends MovableObject {
             this.imgsToLoad = BG_RED_FISH_IMG_SWIM;
         }
         if (this.randomType == 2) {
-            this.imgsToLoad = BG_GREEN_FISH_IMG_SWIM;
-            // this.imgsToLoad = BG_YELLOW_FISH_IMG_SWIM;
-            return
+            this.imgsToLoad = BG_ORANGE_FISH_IMG_SWIM;
         }
     }
 

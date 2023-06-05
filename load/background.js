@@ -7,15 +7,19 @@ const BG_RED_FISH_IMG_SWIM = [
 ];
 
 const BG_GREEN_FISH_IMG_SWIM = [
-    '../img/background/fishes/puffer_fish_green/swim/swim(1).png',
-    '../img/background/fishes/puffer_fish_green/swim/swim(2).png',
-    '../img/background/fishes/puffer_fish_green/swim/swim(3).png',
-    '../img/background/fishes/puffer_fish_green/swim/swim(4).png',
-    '../img/background/fishes/puffer_fish_green/swim/swim(5).png'
+    '../img/background/fishes/puffer_fish_green/swim/(1).png',
+    '../img/background/fishes/puffer_fish_green/swim/(2).png',
+    '../img/background/fishes/puffer_fish_green/swim/(3).png',
+    '../img/background/fishes/puffer_fish_green/swim/(4).png',
+    '../img/background/fishes/puffer_fish_green/swim/(5).png'
 ];
 
-const BG_YELLOW_FISH_IMG_SWIM = [
-
+const BG_ORANGE_FISH_IMG_SWIM = [
+    '../img/background/fishes/puffer_fish_orange/swim/(1).png',
+    '../img/background/fishes/puffer_fish_orange/swim/(2).png',
+    '../img/background/fishes/puffer_fish_orange/swim/(3).png',
+    '../img/background/fishes/puffer_fish_orange/swim/(4).png',
+    '../img/background/fishes/puffer_fish_orange/swim/(5).png'
 ];
 
 const BG_SQUID_IMG_SWIM = [

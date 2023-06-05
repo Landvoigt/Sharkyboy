@@ -1,7 +1,7 @@
 class Enemy_1 extends MovableObject {  // Pufferfish
     x = 900;
     y = 450;
-    width = 170;
+    width = 200;
     height = 170;
     offset = {
         x: 6,

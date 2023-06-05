@@ -8,17 +8,15 @@ const HP_BAR_IMG = [
 ];
 
 const POISON_BAR_IMG = [
-    '../img/status/poison/bar/poison_0.png',
-    '../img/status/poison/bar/poison_20.png',
-    '../img/status/poison/bar/poison_40.png',
-    '../img/status/poison/bar/poison_60.png',
-    '../img/status/poison/bar/poison_80.png',
-    '../img/status/poison/bar/poison_100.png'
+    '../img/status/poison/poison_0.png',
+    '../img/status/poison/poison_20.png',
+    '../img/status/poison/poison_40.png',
+    '../img/status/poison/poison_60.png',
+    '../img/status/poison/poison_80.png',
+    '../img/status/poison/poison_100.png'
 ];
 
 const COINS_BAR_IMG = [
-    // '../100_ copia 6.png',
-    // '../100_ copia 6.png',
     // '../img/status/coins/coin_0.png',
     // '../img/status/coins/coin_20.png',
     // '../img/status/coins/coin_40.png',

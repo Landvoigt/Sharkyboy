@@ -25,7 +25,7 @@ function getSettingsHTML() {
     </div>
     <div class="sound-container">
         <h4>Fullscreen</h4>
-        <div class="fullscreen-circle-btn" id="fullscreenIcon1" onclick="highlightFullscreenSelection(1); showSelectedOption('Off')">
+        <div class="fullscreen-circle-btn yellow-highlight" id="fullscreenIcon1" onclick="highlightFullscreenSelection(1); showSelectedOption('Off')">
             <img src="../img/icons/fullscreen_off.png" id="fullscreenOff" class="fullscreen-icon" onclick="playSound(CLICK_SOUND)">
         </div>
         <div class="fullscreen-circle-btn" id="fullscreenIcon2" onclick="highlightFullscreenSelection(2); showSelectedOption('On')">
@@ -34,16 +34,16 @@ function getSettingsHTML() {
     </div>
     <div class="sound-container">
         <h4>Sound</h4>
-        <div class="sound-circle-btn" id="soundIcon1" onclick="highlightSoundSelection(1); showSelectedOption('Muted')">
-            <img src="../img/icons/sound_mute.png" id="muteButton" class="setting-icon" onclick="playSound(CLICK_SOUND); muteSound()">
-        </div>
-        <div class="sound-circle-btn" id="soundIcon2" onclick="highlightSoundSelection(2); showSelectedOption('Enabled')">
+        <div class="sound-circle-btn yellow-highlight" id="soundIcon1" onclick="highlightSoundSelection(1); showSelectedOption('Enabled')">
             <img src="../img/icons/sound_on.png" id="unmuteButton" class="setting-icon" onclick="playSound(CLICK_SOUND); unmuteSound()">
+        </div>
+        <div class="sound-circle-btn" id="soundIcon2" onclick="highlightSoundSelection(2); showSelectedOption('Muted')">
+            <img src="../img/icons/sound_mute.png" id="muteButton" class="setting-icon" onclick="playSound(CLICK_SOUND); muteSound()">
         </div>
     </div>
     <div class="difficulty-container">
         <h4>Difficulty</h4>
-        <div class="difficulty-circle-btn" id="difficultyIcon1" onclick="highlightDifficultySelection(1); showSelectedOption('Easy Peasy')">
+        <div class="difficulty-circle-btn yellow-highlight" id="difficultyIcon1" onclick="highlightDifficultySelection(1); showSelectedOption('Easy Peasy')">
             <img src="../img/description/fisch (1).png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
         <div class="difficulty-circle-btn" id="difficultyIcon2" onclick="highlightDifficultySelection(2); showSelectedOption('Medium')">

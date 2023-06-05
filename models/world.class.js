@@ -2,8 +2,8 @@ class World {
     character = new Character();
     level = level_1;
     statusBarHP = new StatusBar(HP_BAR_IMG, 25, -5, 'hp');
-    statusBarCoin = new StatusBar(POISON_BAR_IMG, 1510, -5, 'poison');
-    statusBarPoison = new StatusBar(COINS_BAR_IMG, 840, 20, 'coin');
+    statusBarPoison = new StatusBar(POISON_BAR_IMG, 1510, -5, 'poison');
+    statusBarCoin = new StatusBar(COINS_BAR_IMG, 840, 20, 'coin');
     statusBarPoisonAnimation = new PoisonBottle(1825, -12);
     canvas;
     ctx;
@@ -118,10 +118,14 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && !this.character.isSlapping) {
                 this.character.hit();
-                this.statusBarHP.setHpPercentage(this.character.hp);
-            } else {
+                this.statusBarHP.setPercentage(this.character.hp);
+            }
+            if (this.character.isColliding(enemy) && this.character.isSlapping) {
+                
+            }
+            else {
                 return // console.log('not colliding');
             }
         });
@@ -146,7 +150,7 @@ class World {
             poisonIndex++;
             if (this.character.isColliding(poison) && collectedPoison < 5) {
                 collectedPoison++;
-                this.statusBarHP.setPoisonPercentage(collectedPoison * 20);
+                this.statusBarPoison.setPercentage(collectedPoison * 20);
                 this.level.collectibles.splice(poisonIndex, 1);
             } else {
                 return
