@@ -5,20 +5,10 @@ class Character extends MovableObject {
     width = 500;
     height = 500;
     offset = {
-        // top: 358,
-        // bottom: 234,
-        // left: 202,
-        // right: 101,
-
-        // top: 234,
-        // bottom: 358,
-        // left: 101,
-        // right: 202,
-        
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
+        x: 101,
+        height: 118,
+        y: 234,
+        width: 102,
     };
     hp = 100;
     speed = 10;

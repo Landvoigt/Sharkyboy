@@ -122,17 +122,6 @@ class World {
         });
     }
 
-    // checkCollisions() {
-    //     this.level.enemies.forEach((e) => {
-    //         if (!this.character.isNotColliding(e)) {
-    //             this.character.hit();
-    //             this.statusBarHP.setPercentage(this.character.hp);
-    //         } else {
-    //             console.log('not colliding');
-    //         }
-    //     });
-    // }
-
     checkThrowObject() {
         if (this.keyboard.THROW) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
