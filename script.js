@@ -82,7 +82,7 @@ function highlightSoundSelection(cnt) {
     clickedIcon.classList.add('yellow-highlight');
 }
 
-function highlightFullscreenSelection(cnt){
+function highlightFullscreenSelection(cnt) {
     let fullscreenIcons = document.getElementsByClassName('fullscreen-circle-btn');
     let clickedIcon = document.getElementById(`fullscreenIcon${cnt}`);
     for (let i = 0; i < fullscreenIcons.length; i++) {
@@ -164,4 +164,19 @@ function unmuteSound() {
     allAudioFiles.forEach(function (audio) {
         audio.muted = false;
     });
+}
+
+function addCoinsCountContainer() {
+    let startscreen = document.getElementById('content');
+    startscreen.innerHTML += `
+    <div class="coins-count-container" id="coinsCountContainer">
+    </div>
+    `;
+}
+
+function addCoins(cnt) {
+    let coinsContainer = document.getElementById('coinsCountContainer');
+    coinsContainer.innerHTML = `
+    <h5>${cnt}</h5>
+    `;
 }

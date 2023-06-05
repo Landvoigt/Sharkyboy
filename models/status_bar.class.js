@@ -1,33 +1,52 @@
 class StatusBar extends DrawableObject {
     x = 5;
     y = -20;
-    width = 320;
-    height = 90;
+    width = 400;
+    height = 115;
     percentage = 100;
-    hpImages;
-    poisonImages;
-    coinsImages;
+    type;
+    images;
+    coinSizeAdjustment = {
+        width: 0,
+        height: 0,
+    };
+    
+    heartSizeAdjustment = {
+        width: 0,
+        height: 0,
+    };
 
-    constructor(statusImages, y, type) {
+    constructor(statusImages, x, y, type) {
         super();
+        this.images = statusImages;
+        this.x = x;
         this.y = y;
+        this.type = type
         this.loadImages(statusImages);
-        if (type == 'hp') {
-            this.hpImages = statusImages;
-            this.setPercentage(100);
-        } if (type == 'poison') {
-            this.poisonImages = statusImages;
-            this.load(this.poisonImages);
-        } else {
-            this.coinsImages = statusImages;
-            this.load(this.coinsImages);
-        }
+        this.checkType();
     }
+
+    checkType() {
+        if (this.type == 'hp') {
+            this.setPercentage(100);
+        }
+        if (this.type == 'poison') {
+            // this.width = 470;
+            this.otherDirection = true;
+            // this.height = 115;
+            this.load();
+        }
+        if (this.type == 'coin') {
+            this.width = 115 + this.coinSizeAdjustment.width;
+            this.height = 115 + this.coinSizeAdjustment.height;
+            this.loadImage('../100_ copia 6.png');
+        }
+}
 
     // setPercentage(50), 50 hp
     setPercentage(percentage) {
         this.percentage = percentage;
-        let imagePath = this.hpImages[this.resolveImageIndex(this.percentage)];
+        let imagePath = this.images[this.resolveImageIndex(this.percentage)];
         this.img = this.imageCache[imagePath];
     }
 
@@ -47,9 +66,9 @@ class StatusBar extends DrawableObject {
         }
     }
 
-    load(images) {
+    load() {
         // this.percentage = percentage;
-        let imagePath = images[5];
+        let imagePath = this.images[0];
         this.img = this.imageCache[imagePath];
     }
 }

@@ -7,6 +7,8 @@ let pauseGame = false;
 let sound = true;
 
 function initWorld() {
+    addCoinsCountContainer();
+    addCoins(0);
     initLevel_1();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);

@@ -17,10 +17,12 @@ const POISON_BAR_IMG = [
 ];
 
 const COINS_BAR_IMG = [
-    '../img/status/coins/coin_0.png',
-    '../img/status/coins/coin_20.png',
-    '../img/status/coins/coin_40.png',
-    '../img/status/coins/coin_60.png',
-    '../img/status/coins/coin_80.png',
-    '../img/status/coins/coin_100.png'
+    // '../100_ copia 6.png',
+    // '../100_ copia 6.png',
+    // '../img/status/coins/coin_0.png',
+    // '../img/status/coins/coin_20.png',
+    // '../img/status/coins/coin_40.png',
+    // '../img/status/coins/coin_60.png',
+    // '../img/status/coins/coin_80.png',
+    // '../img/status/coins/coin_100.png'
 ];

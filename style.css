@@ -46,8 +46,18 @@ h4 {
     letter-spacing: 3px;
 }
 
+h5{
+    width: 150px;
+    text-align: end;
+    margin: 0;
+    font-size: 75px;
+    color: rgb(250, 245, 216);
+    letter-spacing: 3px;
+}
+
 h1,
-h4 {
+h4,
+h5 {
     text-shadow:
         -1px -1px 0 #4e4e4e,
         1px -1px 0 #383838,
@@ -84,6 +94,7 @@ span {
     background-position: center;
     width: 100vw;
     height: 100vh;
+    position: relative;
 }
 
 canvas {
@@ -292,6 +303,15 @@ canvas {
     height: 100%;
     width: 100%;
     object-fit: contain;
+}
+
+.coins-count-container{
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 18px;
 }
 
 @keyframes pulse {

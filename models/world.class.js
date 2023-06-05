@@ -1,11 +1,10 @@
 class World {
     character = new Character();
     level = level_1;
-    statusBar = [
-        new StatusBar(COINS_BAR_IMG, 70, 'poison'),
-        new StatusBar(POISON_BAR_IMG, 150, 'coin')
-    ];
-    statusBarHP = new StatusBar(HP_BAR_IMG, -10, 'hp');
+    statusBarHP = new StatusBar(HP_BAR_IMG, 25, -5, 'hp');
+    statusBarCoin = new StatusBar(POISON_BAR_IMG, 1510, -5, 'poison');
+    statusBarPoison = new StatusBar(COINS_BAR_IMG, 840, 20, 'coin');
+    statusBarPoisonAnimation = new PoisonBottle(1825, -12);
     canvas;
     ctx;
     keyboard;
@@ -15,6 +14,8 @@ class World {
     ];
     movementCache = [];
     currentSpeedParam;
+    coinsCount = 0;
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -52,8 +53,10 @@ class World {
     addStaticObjects() {
         this.ctx.translate(-this.camera_x, 0); // back
         // space for fixed objects
-        this.addObjectsToMap(this.statusBar);
         this.addToMap(this.statusBarHP);
+        this.addToMap(this.statusBarPoison);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarPoisonAnimation);
         this.ctx.translate(this.camera_x, 0); // forward again
     }
 
@@ -78,6 +81,8 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkForCollectedCoins();
+            addCoins(this.coinsCount);
             // this.checkThrowObject();
         }, 200);
     }
@@ -117,7 +122,20 @@ class World {
                 this.character.hit();
                 this.statusBarHP.setPercentage(this.character.hp);
             } else {
-                console.log('not colliding');
+                return // console.log('not colliding');
+            }
+        });
+    }
+
+    checkForCollectedCoins() {
+        let coinsIndex = -1;
+        this.level.coins.forEach((coin) => {
+            coinsIndex++;
+            if (this.character.isColliding(coin)) {
+                this.coinsCount += 5;
+                this.level.coins.splice(coinsIndex, 1);
+            } else {
+                return
             }
         });
     }
