@@ -16,7 +16,6 @@ class World {
     currentSpeedParam;
     coinsCount = 0;
 
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -82,6 +81,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkForCollectedCoins();
+            this.checkForCollectedPoison();
             addCoins(this.coinsCount);
             // this.checkThrowObject();
         }, 200);
@@ -120,7 +120,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-                this.statusBarHP.setPercentage(this.character.hp);
+                this.statusBarHP.setHpPercentage(this.character.hp);
             } else {
                 return // console.log('not colliding');
             }
@@ -134,6 +134,20 @@ class World {
             if (this.character.isColliding(coin)) {
                 this.coinsCount += 5;
                 this.level.coins.splice(coinsIndex, 1);
+            } else {
+                return
+            }
+        });
+    }
+
+    checkForCollectedPoison() {
+        let poisonIndex = -1;
+        this.level.collectibles.forEach((poison) => {
+            poisonIndex++;
+            if (this.character.isColliding(poison) && collectedPoison < 5) {
+                collectedPoison++;
+                this.statusBarHP.setPoisonPercentage(collectedPoison * 20);
+                this.level.collectibles.splice(poisonIndex, 1);
             } else {
                 return
             }

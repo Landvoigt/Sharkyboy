@@ -5,6 +5,7 @@ let characterPosition;
 let characterAlive = true;
 let pauseGame = false;
 let sound = true;
+let collectedPoison = 0;
 
 function initWorld() {
     addCoinsCountContainer();

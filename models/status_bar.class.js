@@ -10,7 +10,7 @@ class StatusBar extends DrawableObject {
         width: 0,
         height: 0,
     };
-    
+
     heartSizeAdjustment = {
         width: 0,
         height: 0,
@@ -28,47 +28,59 @@ class StatusBar extends DrawableObject {
 
     checkType() {
         if (this.type == 'hp') {
-            this.setPercentage(100);
+            this.setHpPercentage(100);
         }
         if (this.type == 'poison') {
-            // this.width = 470;
             this.otherDirection = true;
-            // this.height = 115;
-            this.load();
+            this.setPoisonPercentage(collectedPoison * 20);
         }
         if (this.type == 'coin') {
             this.width = 115 + this.coinSizeAdjustment.width;
             this.height = 115 + this.coinSizeAdjustment.height;
             this.loadImage('../100_ copia 6.png');
         }
-}
+    }
 
-    // setPercentage(50), 50 hp
-    setPercentage(percentage) {
+    setHpPercentage(percentage) {
         this.percentage = percentage;
-        let imagePath = this.images[this.resolveImageIndex(this.percentage)];
+        let imagePath = this.images[this.resolveImageIndexHp(this.percentage)];
         this.img = this.imageCache[imagePath];
     }
 
-    resolveImageIndex(percentage) {
+    setPoisonPercentage(percentage) {
+        let imagePath = this.images[this.resolveImageIndexPoison(percentage)];
+        this.img = this.imageCache[imagePath];
+    }
+
+    resolveImageIndexHp(percentage) {
         if (percentage == 100) {
             return 5;
-        } else if (percentage > 80) {
+        } else if (percentage >= 80) {
             return 4;
-        } else if (percentage > 60) {
+        } else if (percentage >= 60) {
             return 3;
-        } else if (percentage > 40) {
+        } else if (percentage >= 40) {
             return 2;
-        } else if (percentage > 20) {
+        } else if (percentage >= 20) {
             return 1;
         } else {
             return 0;
         }
     }
-
-    load() {
-        // this.percentage = percentage;
-        let imagePath = this.images[0];
-        this.img = this.imageCache[imagePath];
+    
+    resolveImageIndexPoison(percentage) {
+        if (percentage == 100) {
+            return 5;
+        } else if (percentage >= 80) {
+            return 4;
+        } else if (percentage >= 60) {
+            return 3;
+        } else if (percentage >= 40) {
+            return 2;
+        } else if (percentage >= 20) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

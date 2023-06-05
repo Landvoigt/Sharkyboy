@@ -1,7 +1,12 @@
 class PoisonBottle extends MovableObject {
     width = 90;
     height = 120;
-    direction;
+    offset = {
+        x: 0,
+        height: 0,
+        y: 0,
+        width: 0,
+    };
     IMG = [
         '../img/collectibles/poison/1.png',
         '../img/collectibles/poison/2.png',
@@ -16,7 +21,6 @@ class PoisonBottle extends MovableObject {
     constructor(x, y) {
         super();
         this.loadImage('../img/collectibles/poison/1.png');
-        this.direction = Math.round(Math.random() * 1);
         // this.decideDirection();
         this.loadImages(this.IMG);
         this.x = x;
