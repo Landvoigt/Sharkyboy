@@ -17,6 +17,7 @@ class Character extends MovableObject {
     isIdling = true;
     lastMovementTime = 0;
     isSlapping = false;
+    slappingInterval = 0;
 
     constructor() {
         super().loadImage(CHARACTER_SWIMMING_IMG[0]);
@@ -35,6 +36,7 @@ class Character extends MovableObject {
     }
 
     animate() {
+        // let i = 0;
         setInterval(() => {
             SWIMMING_SOUND.pause();
             this.getPositionOfCharacter();
@@ -76,14 +78,9 @@ class Character extends MovableObject {
             this.world.gameOver();
         } else if (this.isHurt()) {
             this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
-        } else if (this.world.keyboard.JUMP && !this.isSlapping) {
-            this.isSlapping = true;
-            SLAP_SOUND.play();
-            this.animationTime = 30;
-            this.playAnimation(CHARACTER_FIN_SLAP_ATTACK_IMG);
-            this.lastMovementTime = new Date().getTime() / 1000;
-            console.log(this.isSlapping);
-            this.isSlapping = false;
+        } else if (this.world.keyboard.JUMP) {
+            this.world.keyboard.JUMP = false;
+            this.slapAnimation();
         } else if (this.isSwimming()) {
             this.animationTime = 90;
             this.playAnimation(CHARACTER_SWIMMING_IMG);
@@ -95,7 +92,8 @@ class Character extends MovableObject {
                 this.playAnimation(CHARACTER_IDLE_IMG);
             }
         }
-        console.log(this.isSlapping);
+        // i++;
+        // console.log(this.isSlapping);
     }
 
     checkIdleTime() {
@@ -118,6 +116,16 @@ class Character extends MovableObject {
         }
     }
 
+    slapAnimation() {
+        // debugger;
+        // this.isSlapping = true;
+        SLAP_SOUND.play();
+        this.animationTime = 300;
+        this.playAnimation(CHARACTER_FIN_SLAP_ATTACK_IMG);
+        this.lastMovementTime = new Date().getTime() / 1000;
+        // console.log(this.isSlapping);
+    }
+
     jump() {
         this.fallSpeed = 30;
     }
@@ -125,11 +133,13 @@ class Character extends MovableObject {
     getPositionOfCharacter() {
         characterPosition = this.x;
         if (characterPosition > 3000) {
-            ENDGAME_MUSIC.play();
-            setTimeout(this.fadeOutMusic, 3200);
-        } else if (characterPosition < 3000) {
-            setTimeout(this.fadeOutEndgameMusic, 2000);
-            // GAME_MUSIC.play();
+            playSound(ENDGAME_MUSIC);
+            setTimeout(stopSound, 3200, GAME_MUSIC);
+        }
+        else if (characterPosition < 3000 && this.endbossReached) {
+            playSound(GAME_MUSIC);
+            setTimeout(stopSound, 2000, ENDGAME_MUSIC);
+            // ENDGAME_MUSIC.pause();
         }
     }
 
@@ -151,20 +161,4 @@ class Character extends MovableObject {
         let timePassed = (new Date().getTime() / 1000) - this.lastMovementTime;
         return timePassed > 2.5;
     }
-
-    fadeOutMusic() {
-        GAME_MUSIC.pause();
-    }
-
-    fadeInMusic() {
-        GAME_MUSIC.play();
-    }
-
-    fadeOutEndgameMusic() {
-        ENDGAME_MUSIC.pause();
-    }
 }
-
-          // if (this.world.keyboard.JUMP && !this.isAboveGround()) {
-            //     this.jump();
-            // }

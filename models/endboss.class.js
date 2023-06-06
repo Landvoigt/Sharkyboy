@@ -1,5 +1,5 @@
 class Endboss extends MovableObject {
-    x = 3000;
+    x = 5000;
     y = 0;
     width = 950;
     height = 950;
@@ -36,11 +36,9 @@ class Endboss extends MovableObject {
         '../img/enemies/endboss/swim/(12).png',
         '../img/enemies/endboss/swim/(13).png'
     ];
-    endbossReached = false;
-
 
     constructor() {
-        super();
+        super().loadImage(this.SPAWNING_IMG[0]);
         this.loadImages(this.SPAWNING_IMG);
         this.loadImages(this.IDLE_IMG);
         this.animate();
@@ -49,19 +47,20 @@ class Endboss extends MovableObject {
     animate() {
         let i = 0;
         setInterval(() => {
+            if (!this.endbossReached && characterPosition > 3700) {
+                i = 0;
+                this.endbossReached = true;
+            }
             if (i < 10 && this.endbossReached) {
                 this.playAnimation(this.SPAWNING_IMG);
             } else if (this.endbossReached) {
                 this.playAnimation(this.IDLE_IMG);
             }
             i++;
-            if (characterPosition > 3700 && !this.endbossReached) {
-                i = 0;
-                this.endbossReached = true;
-            }
+            console.log(this.endbossReached);
+            console.log(characterPosition);
         }, 200);
     }
 
     // unitsBeforeCharacterHasToSpawn = 60 + 1300;
-
 }

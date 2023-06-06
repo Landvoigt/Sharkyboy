@@ -6,8 +6,8 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     lastHit = 0;
     characterCollided = false;
-    // coinCollision = false;
     inMovement = false;
+    endbossReached = false;
 
     // applyGravity() {
     //     if (!this.inMovement) {
