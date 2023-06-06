@@ -57,8 +57,8 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IDLE_IMG);
             }
             i++;
-            console.log(this.endbossReached);
-            console.log(characterPosition);
+            // console.log(this.endbossReached);
+            // console.log(characterPosition);
         }, 200);
     }
 

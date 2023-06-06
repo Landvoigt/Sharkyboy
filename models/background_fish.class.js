@@ -11,10 +11,12 @@ class Background_Fish extends MovableObject {
     constructor() {
         super().loadImage(BG_GREEN_FISH_IMG_SWIM[0]);
         this.load();
-        this.randomiseObjects();
+        this.randomDirection = Math.round(Math.random() * 1);
         this.setMovementDirection();
+        this.randomiseObjects();
         this.randomiseTypeOfObject();
         this.animate();
+        // this.respawnFishesOnLevelProgress();
     }
 
     load() {
@@ -25,13 +27,16 @@ class Background_Fish extends MovableObject {
 
     randomiseObjects() {
         this.y = Math.random() * 360;
-        this.x = Math.random() * 1920;
         this.randomSize = Math.floor(Math.random() * (110 - 30)) + 30;
         this.width = this.randomSize;
         this.height = this.randomSize;
         this.speed = Math.random() * 12;
-        this.randomDirection = Math.round(Math.random() * 1);
         this.randomType = Math.floor(Math.random() * 3);
+        if (this.otherDirection) {
+            this.x = Math.floor(Math.random() * ((characterPosition - 100) - (characterPosition - 600))) + (characterPosition - 600);
+        } else {
+            this.x = Math.floor(Math.random() * ((characterPosition + 1900) - (characterPosition + 2500))) + (characterPosition + 2500);
+        }
     }
 
     setMovementDirection() {
@@ -67,4 +72,17 @@ class Background_Fish extends MovableObject {
             this.playAnimation(this.imgsToLoad);
         }, 200);
     }
+
+    // respawnFishesOnLevelProgress(){
+    //     let variable = characterPosition;
+    //     setInterval(() => {
+    //         for (let i = 1; i <= 10000; i++) {
+    //           variable++;
+    //           if (i % 200 === 0) {
+    //             console.log("Funktion wird alle 100 Erhöhungen ausgeführt");
+    //           }
+    //         }
+
+    //     }, 200);
+    // }
 }

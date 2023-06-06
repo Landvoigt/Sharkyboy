@@ -1,11 +1,13 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let characterPosition;
+let characterPosition = 0;
 let characterAlive = true;
 let pauseGame = false;
 let sound = true;
 let collectedPoison = 0;
+let startAttackTimer = 0;
+let stopAttackTimer = 0;
 
 function initWorld() {
     addCoinsCountContainer();
@@ -33,13 +35,14 @@ window.addEventListener("keydown", (event) => {
         keyboard.DOWN = true;
     }
     if (event.keyCode == 32) {
-        keyboard.JUMP = true;
+        keyboard.SPACEBAR = true;
+        startAttackTimer = new Date().getTime();
     }
     if (event.keyCode == 13 && event.keyCode == 68) {
         keyboard.THROW = true;
     }
     if (event.keyCode == 27) {
-        keyboard.MENU = true;
+        keyboard.ESC = true;
         world.pauseGame();
     }
 });
@@ -58,12 +61,13 @@ window.addEventListener("keyup", (event) => {
         keyboard.DOWN = false;
     }
     if (event.keyCode == 32) {
-        keyboard.JUMP = false;
+        keyboard.SPACEBAR = false;
+        stopAttackTimer = new Date().getTime();
     }
     if (event.keyCode == 13 && event.keyCode == 68) {
         keyboard.THROW = false;
     }
     if (event.keyCode == 27) {
-        keyboard.MENU = false;
+        keyboard.ESC = false;
     }
 });

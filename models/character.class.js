@@ -1,7 +1,6 @@
 class Character extends MovableObject {
     x = 60;
     y = 500;
-    y_default = 500;
     width = 500;
     height = 500;
     offset = {
@@ -10,6 +9,10 @@ class Character extends MovableObject {
         y: 234,
         width: 102,
     };
+    x_default = 60;
+    y_default = 500;
+    y_min = -100;
+    y_max = 660;
     hp = 100;
     speed = 10;
     world;
@@ -17,12 +20,13 @@ class Character extends MovableObject {
     isIdling = true;
     lastMovementTime = 0;
     isSlapping = false;
-    slappingInterval = 0;
+    currentAttackCount = 0;
+    attackingInterval = stopAttackTimer - startAttackTimer;
+    lastAttackTime = 0;
 
     constructor() {
         super().loadImage(CHARACTER_SWIMMING_IMG[0]);
         this.load();
-        // this.applyGravity();
         this.animate();
     }
 
@@ -36,7 +40,6 @@ class Character extends MovableObject {
     }
 
     animate() {
-        // let i = 0;
         setInterval(() => {
             SWIMMING_SOUND.pause();
             this.getPositionOfCharacter();
@@ -61,26 +64,26 @@ class Character extends MovableObject {
             this.setMovementAttributes();
             this.otherDirection = true;
         }
-        if (this.world.keyboard.UP && this.y > -160 && !this.characterCollided) {
+        if (this.world.keyboard.UP && this.y > this.y_min && !this.characterCollided) {
             this.moveUp();
             this.setMovementAttributes();
             this.y_default = this.y;
         }
-        if (this.world.keyboard.DOWN && this.y < 660 && !this.characterCollided) {
+        if (this.world.keyboard.DOWN && this.y < this.y_max && !this.characterCollided) {
             this.moveDown();
             this.setMovementAttributes();
             this.y_default = this.y;
         }
     }
 
-    playCharacterAnimations() {
+    playCharacterAnimations(i) {
         if (this.isDead()) {
             this.world.gameOver();
         } else if (this.isHurt()) {
             this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
-        } else if (this.world.keyboard.JUMP) {
-            this.world.keyboard.JUMP = false;
+        } else if (this.isAttacking()) {
             this.slapAnimation();
+            this.lastMovementTime = new Date().getTime() / 1000;
         } else if (this.isSwimming()) {
             this.animationTime = 90;
             this.playAnimation(CHARACTER_SWIMMING_IMG);
@@ -92,8 +95,6 @@ class Character extends MovableObject {
                 this.playAnimation(CHARACTER_IDLE_IMG);
             }
         }
-        // i++;
-        // console.log(this.isSlapping);
     }
 
     checkIdleTime() {
@@ -116,18 +117,21 @@ class Character extends MovableObject {
         }
     }
 
-    slapAnimation() {
-        // debugger;
-        // this.isSlapping = true;
-        SLAP_SOUND.play();
-        this.animationTime = 300;
-        this.playAnimation(CHARACTER_FIN_SLAP_ATTACK_IMG);
-        this.lastMovementTime = new Date().getTime() / 1000;
-        // console.log(this.isSlapping);
+    isAttacking() {
+        return this.world.keyboard.SPACEBAR && this.attackingInterval + (this.currentAttackCount * 80) < 640;
     }
 
-    jump() {
-        this.fallSpeed = 30;
+    slapAnimation() {
+        if (this.currentAttackCount == 0) {
+            this.currentImage = 0;
+        }
+        this.currentAttackCount++;
+        this.animationTime = 80;
+        this.playAnimation(CHARACTER_FIN_SLAP_ATTACK_IMG);
+        if (this.currentAttackCount == CHARACTER_FIN_SLAP_ATTACK_IMG.length) {
+            setTimeout(this.resetAttackCount, 500);
+        }
+        // SLAP_SOUND.play();
     }
 
     getPositionOfCharacter() {
@@ -160,5 +164,9 @@ class Character extends MovableObject {
     isntMoving() {
         let timePassed = (new Date().getTime() / 1000) - this.lastMovementTime;
         return timePassed > 2.5;
+    }
+
+    resetAttackCount() {
+        this.currentAttackCount = 0;
     }
 }

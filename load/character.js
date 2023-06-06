@@ -50,14 +50,14 @@ const CHARACTER_HURT_FROM_POISON_IMG = [
 ];
 
 const CHARACTER_FIN_SLAP_ATTACK_IMG = [
-    // '../img/character/attack/fin_slap/(1).png',
+    '../img/character/attack/fin_slap/(1).png',
     '../img/character/attack/fin_slap/(2).png',
     '../img/character/attack/fin_slap/(3).png',
     '../img/character/attack/fin_slap/(4).png',
     '../img/character/attack/fin_slap/(5).png',
     '../img/character/attack/fin_slap/(6).png',
     '../img/character/attack/fin_slap/(7).png',
-    // '../img/character/attack/fin_slap/(8).png'
+    '../img/character/attack/fin_slap/(8).png'
 ];
 
 const CHARACTER_LONG_IDLE_IMG = [

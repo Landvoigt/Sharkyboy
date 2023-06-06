@@ -3,7 +3,7 @@ class Keyboard {
     RIGHT = false;
     UP = false;
     DOWN = false;
-    JUMP = false;
+    SPACEBAR = false;
     THROW = false;
-    MENU = false;
+    ESC = false;
 }
