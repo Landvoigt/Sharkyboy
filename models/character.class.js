@@ -15,14 +15,14 @@ class Character extends MovableObject {
     y_max = 660;
     hp = 100;
     speed = 10;
-    world;
-    animationTime = 135;
-    isIdling = true;
+    animationTime = 130;
     lastMovementTime = 0;
-    isSlapping = false;
-    currentAttackCount = 0;
-    attackingInterval = stopAttackTimer - startAttackTimer;
-    lastAttackTime = 0;
+    attackAnimationCount = 0;
+    deadAnimationCount = 0;
+    world;
+    animationTimeout = null;
+    isIdling = true;
+    isAttacking = false;
 
     constructor() {
         super().loadImage(CHARACTER_SWIMMING_IMG[0]);
@@ -47,10 +47,17 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-        setInterval(() => {
-            this.playCharacterAnimations();
-        }, this.animationTime);
         this.checkIdleTime();
+        this.startAnimationTimer();
+    }
+
+    startAnimationTimer() {
+        if (characterAlive) {
+            this.animationTimeout = setTimeout(() => {
+                this.playCharacterAnimations();
+                this.startAnimationTimer(); // renew timer
+            }, this.animationTime);
+        }
     }
 
     moveCharacterInAllDirections() {
@@ -76,18 +83,21 @@ class Character extends MovableObject {
         }
     }
 
-    playCharacterAnimations(i) {
+    playCharacterAnimations() {
         if (this.isDead()) {
             this.world.gameOver();
         } else if (this.isHurt()) {
+            this.changeAnimationTime(130);
             this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
-        } else if (this.isAttacking()) {
+        } else if (this.canAttack()) {
+            this.changeAnimationTime(70);
             this.slapAnimation();
             this.lastMovementTime = new Date().getTime() / 1000;
         } else if (this.isSwimming()) {
-            this.animationTime = 90;
+            this.changeAnimationTime(90);
             this.playAnimation(CHARACTER_SWIMMING_IMG);
         } else {
+            this.changeAnimationTime(130);
             if (this.isntMoving() && this.isIdling) {
                 this.playAnimation(CHARACTER_LONG_IDLE_IMG);
             } else {
@@ -106,32 +116,33 @@ class Character extends MovableObject {
     }
 
     deadAnimation() {
-        if (!characterAlive) {
-            let i = 1;
-            setInterval(() => {
-                if (i <= 10) {
-                    this.playAnimation(CHARACTER_DEAD_FROM_POISON_IMG);
-                }
-                i++;
-            }, 120);
-        }
+        setInterval(() => {
+            if (this.deadAnimationCount <= 9) {
+                this.playAnimation(CHARACTER_DEAD_FROM_POISON_IMG);
+            }
+            this.deadAnimationCount++;
+        }, 120);
     }
 
-    isAttacking() {
-        return this.world.keyboard.SPACEBAR && this.attackingInterval + (this.currentAttackCount * 80) < 640;
+    canAttack() {
+        return this.world.keyboard.SPACEBAR && startAttackTimer > stopAttackTimer && this.attackAnimationCount <= 7;
     }
 
     slapAnimation() {
-        if (this.currentAttackCount == 0) {
+        if (this.attackAnimationCount == 0) {
             this.currentImage = 0;
         }
-        this.currentAttackCount++;
-        this.animationTime = 80;
-        this.playAnimation(CHARACTER_FIN_SLAP_ATTACK_IMG);
-        if (this.currentAttackCount == CHARACTER_FIN_SLAP_ATTACK_IMG.length) {
-            setTimeout(this.resetAttackCount, 500);
+        if (this.attackAnimationCount == 2) {
+            this.isAttacking = true;
         }
-        // SLAP_SOUND.play();
+        if (this.attackAnimationCount == 4) {
+            SLAP_SOUND.play();
+        }
+        if (this.attackAnimationCount == 6) {
+            this.isAttacking = false;
+        }
+        this.attackAnimationCount++;
+        this.playAnimation(CHARACTER_FIN_SLAP_ATTACK_IMG);
     }
 
     getPositionOfCharacter() {
@@ -156,7 +167,6 @@ class Character extends MovableObject {
 
     setMovementAttributes() {
         SWIMMING_SOUND.play();
-        this.inMovement = true;
         this.isIdling = false;
         this.lastMovementTime = new Date().getTime() / 1000;
     }
@@ -167,6 +177,10 @@ class Character extends MovableObject {
     }
 
     resetAttackCount() {
-        this.currentAttackCount = 0;
+        this.attackAnimationCount = 0;
+    }
+
+    changeAnimationTime(ms) {
+        this.animationTime = ms;
     }
 }

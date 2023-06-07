@@ -1,4 +1,4 @@
-class Background_Fish extends MovableObject {
+class BackgroundFish extends MovableObject {
     x = 100;
     y = 150;
     width = 120;
@@ -73,16 +73,14 @@ class Background_Fish extends MovableObject {
         }, 200);
     }
 
-    // respawnFishesOnLevelProgress(){
-    //     let variable = characterPosition;
-    //     setInterval(() => {
-    //         for (let i = 1; i <= 10000; i++) {
-    //           variable++;
-    //           if (i % 200 === 0) {
-    //             console.log("Funktion wird alle 100 Erhöhungen ausgeführt");
-    //           }
-    //         }
+    // spawnNewFishes() {
+    //     this.character.world.backgroundFishes.push(new BackgroundFish());
+    // }
 
-    //     }, 200);
+    // respawnFishesOnLevelProgress() {
+    //     setInterval(() => {
+    //         characterPosition += 100;
+    //         this.spawnNewFishes();
+    //     }, 1000);
     // }
 }

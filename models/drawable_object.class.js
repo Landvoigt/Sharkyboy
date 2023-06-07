@@ -48,6 +48,13 @@ class DrawableObject {
             ctx.rect(this.x + this.offset.x, this.y + this.offset.y, (this.x + this.width - this.offset.width) - (this.x + this.offset.x), (this.y + this.height - this.offset.height) - (this.y + this.offset.y));
             ctx.stroke();
         }
+        if (this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '2';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.x + this.offset.x, this.y + this.offset.y, (this.x + this.width - this.offset.width) - (this.x + this.offset.x), (this.y + this.height - this.offset.height) - (this.y + this.offset.y));
+            ctx.stroke();
+        }
         if (this instanceof Coin) {
             ctx.beginPath();
             ctx.lineWidth = '3';

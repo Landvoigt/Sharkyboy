@@ -40,18 +40,18 @@ function initLevel_1() {
             new BackgroundObject('../img/background/light/1.png', 1920 * 3),
         ],
         [
-            new Background_Fish(),
-            new Background_Fish(),
-            new Background_Fish(),
-            new Background_Fish(),
-            new Background_Fish()
-            // new Background_Fish(),
-            // new Background_Fish(),
-            // new Background_Fish(),
-            // new Background_Fish(),
-            // new Background_Fish(),
-            // new Background_Fish(),
-            // new Background_Fish()
+            new BackgroundFish(),
+            new BackgroundFish(),
+            new BackgroundFish(),
+            new BackgroundFish(),
+            new BackgroundFish()
+            // new BackgroundFish(),
+            // new BackgroundFish(),
+            // new BackgroundFish(),
+            // new BackgroundFish(),
+            // new BackgroundFish(),
+            // new BackgroundFish(),
+            // new BackgroundFish()
         ],
         [
             new Coin(1200, 900),

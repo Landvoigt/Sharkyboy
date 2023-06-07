@@ -118,12 +118,12 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && !this.character.isSlapping) {
+            if (this.character.isColliding(enemy) && !this.character.isAttacking) {
                 this.character.hit();
                 this.statusBarHP.setPercentage(this.character.hp);
             }
-            if (this.character.isColliding(enemy) && this.character.isSlapping) {
-                
+            if (this.character.isColliding(enemy) && this.character.isAttacking) {
+                console.log('Enemy_1 dead');
             }
             else {
                 return // console.log('not colliding');
@@ -171,10 +171,10 @@ class World {
     }
 
     gameOver() {
-        clearAllIntervals();
         characterAlive = false;
-        GAME_MUSIC.pause();
+        clearAllIntervals();
         SWIMMING_SOUND.pause();
+        GAME_MUSIC.pause();
         GAMEOVER_SOUND.play();
         this.character.deadAnimation();
     }

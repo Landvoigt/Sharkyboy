@@ -6,7 +6,6 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     lastHit = 0;
     characterCollided = false;
-    inMovement = false;
     endbossReached = false;
 
     // applyGravity() {
@@ -102,7 +101,6 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
-        this.inMovement = false;
         this.characterCollided = true;
         this.hp -= 10;
         if (this.hp < 0) {
