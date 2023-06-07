@@ -119,8 +119,10 @@ function returnToStartpage() {
     content.innerHTML = `
     <div class="startscreen" id="startscreen"></div>
     `;
+    stopAllSounds();
     deletePauseScreen();
     showStartpage();
+    playSound(MENU_SOUND);
 }
 
 function getStartpageHMTL() {
@@ -159,6 +161,12 @@ function playSound(audioFile) {
 
 function stopSound(audioFile) {
     audioFile.pause();
+}
+
+function stopAllSounds() {
+    allAudioFiles.forEach((audio) => {
+        audio.pause();
+    });
 }
 
 function muteSound() {
