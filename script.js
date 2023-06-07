@@ -114,6 +114,15 @@ function showStartpage() {
     startscreen.innerHTML = getStartpageHMTL();
 }
 
+function returnToStartpage() {
+    let content = document.getElementById('content');
+    content.innerHTML = `
+    <div class="startscreen" id="startscreen"></div>
+    `;
+    deletePauseScreen();
+    showStartpage();
+}
+
 function getStartpageHMTL() {
     return `
     <h1>Skarkyboy</h1>
