@@ -1,7 +1,7 @@
 class BackgroundFish extends MovableObject {
     x = 100;
     y = 150;
-    width = 120;
+    width = 160;
     height = 120;
     randomDirection;
     randomType;
@@ -16,7 +16,6 @@ class BackgroundFish extends MovableObject {
         this.randomiseObjects();
         this.randomiseTypeOfObject();
         this.animate();
-        // this.respawnFishesOnLevelProgress();
     }
 
     load() {
@@ -27,7 +26,7 @@ class BackgroundFish extends MovableObject {
 
     randomiseObjects() {
         this.y = Math.random() * 360;
-        this.randomSize = Math.floor(Math.random() * (110 - 30)) + 30;
+        this.randomSize = Math.floor(Math.random() * (100 - 30)) + 30;
         this.width = this.randomSize;
         this.height = this.randomSize;
         this.speed = Math.random() * 12;
@@ -70,17 +69,6 @@ class BackgroundFish extends MovableObject {
 
         setInterval(() => {
             this.playAnimation(this.imgsToLoad);
-        }, 200);
+        }, 100);
     }
-
-    // spawnNewFishes() {
-    //     this.character.world.backgroundFishes.push(new BackgroundFish());
-    // }
-
-    // respawnFishesOnLevelProgress() {
-    //     setInterval(() => {
-    //         characterPosition += 100;
-    //         this.spawnNewFishes();
-    //     }, 1000);
-    // }
 }

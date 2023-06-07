@@ -24,6 +24,7 @@ class World {
         this.draw();
         this.setWorld();
         // this.playBgMusic();
+        this.constantlyRespawnFishes();
     }
 
     setWorld() {
@@ -224,5 +225,16 @@ class World {
         this.currentSpeedParam = 0;
         obj.speed = this.movementCache[this.currentSpeedParam];
         this.currentSpeedParam++;
+    }
+
+    constantlyRespawnFishes() {
+        setInterval(() => {
+            this.level.backgroundFishes.push(
+                new BackgroundFish(),
+                new BackgroundFish(),
+                new BackgroundFish(),
+                new BackgroundFish()
+            );
+        }, 5000);
     }
 }

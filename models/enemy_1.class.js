@@ -9,14 +9,16 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         width: 12,
         height: 42,
     };
+    randomSpeed = 0.2 + Math.random() * 0.6;
+    speedMultiplier = 2;
     transitionAnimationCount = 0;
     transitionDone = false;
 
     constructor() {
         super().loadImage(PUFFER_FISH_RED_SWIM_IMG[0]);
         this.load();
-        this.x = 1500 + Math.random() * 1000;  // Number between 200 and 700
-        this.speed = 0.2 + Math.random() * 0.6;
+        this.x = 1600 + Math.random() * 1000;  // Number between 200 and 700
+        this.speed = this.randomSpeed;
         this.animate();
     }
 
@@ -39,6 +41,7 @@ class Enemy_1 extends MovableObject {  // Pufferfish
                 }
                 if (this.transitionEnded()) {
                     this.transitionDone = true;
+                    this.speed = this.speed * this.speedMultiplier;
                 }
                 this.playAnimation(PUFFER_FISH_RED_TRANSITION_IMG);
                 this.transitionAnimationCount++;
@@ -54,7 +57,7 @@ class Enemy_1 extends MovableObject {  // Pufferfish
     }
 
     characterNearby() {
-        return characterPosition + 1000 > this.x;
+        return characterPosition + 900 > this.x;
     }
 
     transitionStarts() {
