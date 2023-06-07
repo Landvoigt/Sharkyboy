@@ -180,3 +180,21 @@ function addCoins(cnt) {
     <h5>${cnt}</h5>
     `;
 }
+
+function showPauseScreen() {
+    let pauseScreen = document.getElementById('pauseScreen');
+    pauseScreen.classList.remove('d-none');
+}
+
+function deletePauseScreen() {
+    let pauseScreen = document.getElementById('pauseScreen');
+    pauseScreen.classList.add('d-none');
+}
+
+function deleteObject(id) {
+    let obj = world.level.enemies[id];
+    let index = world.level.enemies.indexOf(obj);
+    if (index !== -1) {
+        world.level.enemies.splice(index, 1);
+    }
+}

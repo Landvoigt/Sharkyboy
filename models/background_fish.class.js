@@ -27,7 +27,7 @@ class BackgroundFish extends MovableObject {
     randomiseObjects() {
         this.y = Math.random() * 360;
         this.randomSize = Math.floor(Math.random() * (100 - 30)) + 30;
-        this.width = this.randomSize;
+        this.width = this.randomSize + 10;
         this.height = this.randomSize;
         this.speed = Math.random() * 12;
         this.randomType = Math.floor(Math.random() * 3);

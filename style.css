@@ -46,7 +46,7 @@ h4 {
     letter-spacing: 3px;
 }
 
-h5{
+h5 {
     width: 150px;
     text-align: end;
     margin: 0;
@@ -305,13 +305,20 @@ canvas {
     object-fit: contain;
 }
 
-.coins-count-container{
+.coins-count-container {
     height: 100px;
     width: 100%;
     position: absolute;
     display: flex;
     justify-content: center;
     top: 18px;
+}
+
+.pause-screen {
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
 }
 
 @keyframes pulse {

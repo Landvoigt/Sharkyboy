@@ -42,7 +42,7 @@ window.addEventListener("keydown", (event) => {
     if (event.keyCode == 32 && !pauseGame) {
         if (stopAttackTimer > startAttackTimer && !keyboard.SPACEBAR) {
             // allow attack only after 1 sec has passed, prevent spamming of attack keypress
-            if ((new Date().getTime() - startAttackTimer) > 1000) {
+            if ((new Date().getTime() - startAttackTimer) > 800) {
                 startAttackTimer = new Date().getTime();
                 world.character.attackAnimationCount = 0;
             }
@@ -52,7 +52,7 @@ window.addEventListener("keydown", (event) => {
     if (event.keyCode == 13 && event.keyCode == 68 && !pauseGame) {
         keyboard.THROW = true;
     }
-    if (event.keyCode == 27 && !pauseGame) {
+    if (event.keyCode == 27) {
         keyboard.ESC = true;
         world.pauseGame();
     }

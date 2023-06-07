@@ -132,7 +132,7 @@ class Character extends MovableObject {
         if (this.attackAnimationCount == 0) {
             this.currentImage = 0;
         }
-        if (this.attackAnimationCount == 2) {
+        if (this.attackAnimationCount == 1) {
             this.isAttacking = true;
         }
         if (this.attackAnimationCount == 4) {

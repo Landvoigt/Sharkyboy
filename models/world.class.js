@@ -15,6 +15,7 @@ class World {
     movementCache = [];
     currentSpeedParam;
     coinsCount = 0;
+    enemySpawnCounter = 1;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -83,6 +84,7 @@ class World {
             this.checkCollisions();
             this.checkForCollectedCoins();
             this.checkForCollectedPoison();
+            this.respawnEnemies();
             addCoins(this.coinsCount);
             // this.checkThrowObject();
         }, 200);
@@ -125,6 +127,7 @@ class World {
             }
             if (this.character.isColliding(enemy) && this.character.isAttacking) {
                 console.log('Enemy_1 dead');
+                enemy.enemyDead = true;
             }
             else {
                 return // console.log('not colliding');
@@ -184,11 +187,13 @@ class World {
         if (!pauseGame) {
             this.stopAllMovement();
             pauseGame = true;
+            showPauseScreen();
             return;
         }
         if (pauseGame) {
             pauseGame = false;
             this.continueGame();
+            deletePauseScreen();
         }
     }
 
@@ -230,11 +235,17 @@ class World {
     constantlyRespawnFishes() {
         setInterval(() => {
             this.level.backgroundFishes.push(
-                new BackgroundFish(),
-                new BackgroundFish(),
-                new BackgroundFish(),
                 new BackgroundFish()
             );
-        }, 5000);
+        }, 2000);
+    }
+
+    respawnEnemies() {
+        if (characterPosition > this.character.x_default + (500 * this.enemySpawnCounter)) {
+            this.level.enemies.push(
+                new Enemy_1(this.enemySpawnCounter),
+            );
+            this.enemySpawnCounter++;
+        }
     }
 }

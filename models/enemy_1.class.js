@@ -1,4 +1,5 @@
 class Enemy_1 extends MovableObject {  // Pufferfish
+    id;
     x = 900;
     y = 450;
     width = 200;
@@ -7,17 +8,20 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         x: 6,
         y: 10,
         width: 12,
-        height: 42,
+        height: 22,
     };
     randomSpeed = 0.2 + Math.random() * 0.6;
     speedMultiplier = 2;
     transitionAnimationCount = 0;
+    deadAnimationCount = 0;
     transitionDone = false;
+    enemyDead = false;
 
-    constructor() {
+    constructor(id) {
         super().loadImage(PUFFER_FISH_RED_SWIM_IMG[0]);
+        this.id = id;
         this.load();
-        this.x = 1600 + Math.random() * 1000;  // Number between 200 and 700
+        this.x = Math.floor(Math.random() * ((characterPosition + 1700) - (characterPosition + 2000))) + (characterPosition + 2000);
         this.speed = this.randomSpeed;
         this.animate();
     }
@@ -35,7 +39,17 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.characterNearby() && this.transitionInProgress()) {
+            if (this.enemyDead && this.deadAnimationCount <= 2) {
+                if (this.deadAnimationCount == 0) {
+                    this.currentImage = 0;
+                }
+                this.playAnimation(PUFFER_FISH_RED_DEAD_IMG);
+                if (this.deadAnimationCount == 2) {
+                    deleteObject(this.id);
+                }
+                this.deadAnimationCount++;
+            }
+            else if (this.characterNearby() && this.transitionInProgress()) {
                 if (this.transitionStarts()) {
                     this.currentImage = 0;
                 }
@@ -53,7 +67,8 @@ class Enemy_1 extends MovableObject {  // Pufferfish
                     this.playAnimation(PUFFER_FISH_RED_SWIM_IMG);
                 }
             }
-        }, 160);
+            // console.log(this.enemyDead);
+        }, 170);
     }
 
     characterNearby() {
