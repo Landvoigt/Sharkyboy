@@ -1,8 +1,8 @@
 class BackgroundFish extends MovableObject {
-    x = 100;
-    y = 150;
-    width = 160;
-    height = 120;
+    width_adjustment = 10;
+    min_height = 30;
+    max_height = 100;
+    max_speed = 12;
     randomDirection;
     randomType;
     randomSize;
@@ -11,10 +11,8 @@ class BackgroundFish extends MovableObject {
     constructor() {
         super().loadImage(BG_GREEN_FISH_IMG_SWIM[0]);
         this.load();
-        this.randomDirection = Math.round(Math.random() * 1);
         this.setMovementDirection();
         this.randomiseObjects();
-        this.randomiseTypeOfObject();
         this.animate();
     }
 
@@ -25,24 +23,21 @@ class BackgroundFish extends MovableObject {
     }
 
     randomiseObjects() {
-        this.y = Math.random() * 360;
-        this.randomSize = Math.floor(Math.random() * (100 - 30)) + 30;
-        this.width = this.randomSize + 10;
-        this.height = this.randomSize;
-        this.speed = Math.random() * 12;
-        this.randomType = Math.floor(Math.random() * 3);
-        if (this.otherDirection) {
-            this.x = Math.floor(Math.random() * ((characterPosition - 100) - (characterPosition - 600))) + (characterPosition - 600);
-        } else {
-            this.x = Math.floor(Math.random() * ((characterPosition + 1900) - (characterPosition + 2500))) + (characterPosition + 2500);
-        }
+        this.setSize();
+        this.getRandomYSpawnPoint();
+        this.getRandomSpeed();
+        this.getRandomType();
+        this.randomiseTypeOfObject();
     }
 
     setMovementDirection() {
+        this.randomDirection = this.getRandomDirection();
         if (this.randomDirection == 0) {
             this.otherDirection = false;
+            this.x = this.getRandomSpawnPointOnRightSide();
         } else {
             this.otherDirection = true;
+            this.x = this.getRandomSpawnPointOnLeftSide();
         }
     }
 
@@ -70,5 +65,39 @@ class BackgroundFish extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.imgsToLoad);
         }, 100);
+    }
+
+    setSize() {
+        this.randomSize = this.getRandomSize();
+        this.width = this.randomSize + this.width_adjustment;
+        this.height = this.randomSize;
+    }
+
+    getRandomYSpawnPoint() {
+        this.y = Math.random() * 360;
+    }
+
+    getRandomType() {
+        this.randomType = Math.floor(Math.random() * 3);
+    }
+
+    getRandomSpeed() {
+        this.speed = Math.random() * this.max_speed;
+    }
+
+    getRandomDirection() {
+        return Math.round(Math.random() * 1);
+    }
+
+    getRandomSize() {
+        return Math.floor(Math.random() * (this.max_height - this.min_height)) + this.min_height;
+    }
+
+    getRandomSpawnPointOnLeftSide() {
+        return Math.floor(Math.random() * ((characterPosition - 100) - (characterPosition - 600))) + (characterPosition - 600);
+    }
+
+    getRandomSpawnPointOnRightSide() {
+        return Math.floor(Math.random() * ((characterPosition + 1900) - (characterPosition + 2500))) + (characterPosition + 2500);
     }
 }

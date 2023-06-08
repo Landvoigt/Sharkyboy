@@ -114,6 +114,11 @@ function showStartpage() {
     startscreen.innerHTML = getStartpageHMTL();
 }
 
+function playSoundAndReturn() {
+    playSound(CLICK_SOUND);
+    setTimeout(returnToStartpage, 100);
+}
+
 function returnToStartpage() {
     let content = document.getElementById('content');
     content.innerHTML = `
@@ -206,12 +211,4 @@ function showPauseScreen() {
 function deletePauseScreen() {
     let pauseScreen = document.getElementById('pauseScreen');
     pauseScreen.classList.add('d-none');
-}
-
-function deleteObject(id) {
-    let obj = world.level.enemies[id];
-    let index = world.level.enemies.indexOf(obj);
-    if (index !== -1) {
-        world.level.enemies.splice(index, 1);
-    }
 }

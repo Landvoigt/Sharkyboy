@@ -1,6 +1,4 @@
 class StatusBar extends DrawableObject {
-    x = 5;
-    y = -20;
     width = 400;
     height = 115;
     type;
@@ -19,15 +17,9 @@ class StatusBar extends DrawableObject {
     checkType() {
         if (this.type == 'hp') {
             this.setPercentage(100);
-        }
-        if (this.type == 'poison') {
+        } else {
             this.otherDirection = true;
             this.setPercentage(collectedPoison * 20);
-        }
-        if (this.type == 'coin') {
-            this.width = 115;
-            this.height = 115;
-            this.loadImage('../img/status/coins/coin.png');
         }
     }
 

@@ -5,16 +5,16 @@ class Character extends MovableObject {
     height = 500;
     offset = {
         x: 101,
-        height: 118,
-        y: 234,
         width: 102,
+        y: 234,
+        height: 118,
     };
     x_default = 60;
     y_default = 500;
     y_min = -100;
     y_max = 660;
     hp = 100;
-    speed = 10;
+    speed = 9;
     animationTime = 130;
     lastMovementTime = 0;
     attackAnimationCount = 0;
@@ -90,7 +90,7 @@ class Character extends MovableObject {
             this.changeAnimationTime(130);
             this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
         } else if (this.canAttack()) {
-            this.changeAnimationTime(70);
+            this.changeAnimationTime(65);
             this.slapAnimation();
             this.lastMovementTime = new Date().getTime() / 1000;
         } else if (this.isSwimming()) {
@@ -151,7 +151,7 @@ class Character extends MovableObject {
             playSound(ENDGAME_MUSIC);
             setTimeout(stopSound, 3200, GAME_MUSIC);
         }
-        else if (characterPosition < 3000 && this.endbossReached) {
+        else if (characterPosition < 3000 && this.world.endbossReached) {
             playSound(GAME_MUSIC);
             setTimeout(stopSound, 2000, ENDGAME_MUSIC);
             // ENDGAME_MUSIC.pause();

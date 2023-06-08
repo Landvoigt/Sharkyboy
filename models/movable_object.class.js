@@ -6,20 +6,6 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     lastHit = 0;
     characterCollided = false;
-    endbossReached = false;
-
-    // applyGravity() {
-    //     if (!this.inMovement) {
-    //         setInterval(() => {
-    //             if (this.isAboveGround() || this.fallSpeed > 0) {
-    //                 this.y -= this.fallSpeed;
-    //                 this.fallSpeed -= this.acceleration;
-    //             }
-    //         }, 1000 / 60);
-    //     } else {
-    //         return
-    //     }
-    // }
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {

@@ -45,8 +45,7 @@ const CHARACTER_DEAD_FROM_POISON_IMG = [
 const CHARACTER_HURT_FROM_POISON_IMG = [
     '../img/character/hurt/poisoned/(1).png',
     '../img/character/hurt/poisoned/(2).png',
-    '../img/character/hurt/poisoned/(3).png',
-    // '../img/character/hurt/poisoned/(4).png',
+    '../img/character/hurt/poisoned/(3).png'
 ];
 
 const CHARACTER_FIN_SLAP_ATTACK_IMG = [

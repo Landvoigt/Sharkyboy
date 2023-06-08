@@ -3,7 +3,7 @@ class World {
     level = level_1;
     statusBarHP = new StatusBar(HP_BAR_IMG, 25, -5, 'hp');
     statusBarPoison = new StatusBar(POISON_BAR_IMG, 1510, -5, 'poison');
-    statusBarCoin = new StatusBar(COINS_BAR_IMG, 840, 20, 'coin');
+    statusBarCoin = new CoinCounter();
     statusBarPoisonAnimation = new PoisonBottle(1825, -12);
     canvas;
     ctx;
@@ -16,6 +16,9 @@ class World {
     currentSpeedParam;
     coinsCount = 0;
     enemySpawnCounter = 1;
+    enemyRespawnDistance = 500;
+    lastEnemyRespawnBeforeEndboss = 3000;
+    endbossReached = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -67,8 +70,7 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
     }
 
-    drawLoop() {
-        // draw infinity loop
+    drawLoop() {    // draw infinity loop
         let self = this;
         if (!pauseGame) {
             requestAnimationFrame(function () {
@@ -121,16 +123,13 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && !this.character.isAttacking) {
+            if (this.character.isColliding(enemy) && !this.character.isAttacking && !enemy.enemyDead) {
                 this.character.hit();
                 this.statusBarHP.setPercentage(this.character.hp);
             }
             if (this.character.isColliding(enemy) && this.character.isAttacking) {
-                console.log('Enemy_1 dead');
                 enemy.enemyDead = true;
-            }
-            else {
-                return // console.log('not colliding');
+                enemyToKill.push(enemy);
             }
         });
     }
@@ -142,8 +141,6 @@ class World {
             if (this.character.isColliding(coin)) {
                 this.coinsCount += 5;
                 this.level.coins.splice(coinsIndex, 1);
-            } else {
-                return
             }
         });
     }
@@ -156,8 +153,6 @@ class World {
                 collectedPoison++;
                 this.statusBarPoison.setPercentage(collectedPoison * 20);
                 this.level.collectibles.splice(poisonIndex, 1);
-            } else {
-                return
             }
         });
     }
@@ -241,11 +236,22 @@ class World {
     }
 
     respawnEnemies() {
-        if (characterPosition > this.character.x_default + (500 * this.enemySpawnCounter)) {
+        if (this.inRangeToSpawnNewEnemies()) {
             this.level.enemies.push(
-                new Enemy_1(this.enemySpawnCounter),
+                new Enemy_1(),
             );
             this.enemySpawnCounter++;
         }
+    }
+
+    deleteObject(obj) {
+        let index = this.level.enemies.indexOf(obj);
+        if (index !== -1) {
+            this.level.enemies.splice(index, 1);
+        }
+    }
+
+    inRangeToSpawnNewEnemies() {
+        return (characterPosition > this.character.x_default + (this.enemyRespawnDistance * this.enemySpawnCounter)) && !(characterPosition > this.lastEnemyRespawnBeforeEndboss);
     }
 }

@@ -14,7 +14,7 @@ class DrawableObject {
 
     /**
      * 
-     * @param {Array} arr -['blabla.png','blabla.png2',...]
+     * @param {Array} arr -['img_1.png','img_2.png',...]
     */
     loadImages(arr) {
         arr.forEach((path) => {
@@ -25,19 +25,14 @@ class DrawableObject {
     }
 
     draw(ctx) {
-        // try {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-        // } catch (e) {
-        // console.warn('Error loading image', e);
-        // console.log('Could not load image', this.img);
-        // }
     }
 
     drawFrame(ctx) {
         if (this instanceof Character) {
             ctx.beginPath();
             ctx.lineWidth = '2';
-            ctx.strokeStyle = 'red';
+            ctx.strokeStyle = 'blue';
             ctx.rect(this.x + this.offset.x, this.y + this.offset.y, (this.x + this.width - this.offset.width) - (this.x + this.offset.x), (this.y + this.height - this.offset.height) - (this.y + this.offset.y));
             ctx.stroke();
         }

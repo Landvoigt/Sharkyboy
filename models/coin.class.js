@@ -3,20 +3,15 @@ class Coin extends MovableObject {
     height = 80;
     offset = {
         x: 0,
-        height: 0,
-        y: 0,
         width: 0,
+        y: 0,
+        height: 0,
     };
-    IMG = [
-        '../img/collectibles/coins/1.png',
-        '../img/collectibles/coins/2.png',
-        '../img/collectibles/coins/3.png',
-        '../img/collectibles/coins/4.png',
-    ];
+    animationTime = 160;
 
     constructor(x, y) {
-        super().loadImage('../img/collectibles/coins/1.png');
-        this.loadImages(this.IMG);
+        super().loadImage(COLLECTIBLE_COIN_IMG[0]);
+        this.loadImages(COLLECTIBLE_COIN_IMG);
         this.x = x;
         this.y = y;
         this.animate();
@@ -24,7 +19,7 @@ class Coin extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.playAnimation(this.IMG);
-        }, 160);
+            this.playAnimation(COLLECTIBLE_COIN_IMG);
+        }, this.animationTime);
     }
 }

@@ -8,6 +8,7 @@ let sound = true;
 let collectedPoison = 0;
 let startAttackTimer = 0;
 let stopAttackTimer = new Date().getTime();
+let enemyToKill = [];
 
 
 function initWorld() {
