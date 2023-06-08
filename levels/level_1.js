@@ -3,8 +3,8 @@ let level_1;
 function initLevel_1() {
     level_1 = new Level(
         [
-            new Enemy_1(),
-            // new Endboss()
+            // new Enemy_1(),
+            new Endboss()
         ],
         [
             new BackgroundObject('../img/background/water/2.png', -1920),
@@ -35,7 +35,7 @@ function initLevel_1() {
             new BackgroundObject('../img/background/layer_1/2.png', 1920 * 3),
             new BackgroundObject('../img/background/layer_2/1.png', 1920 * 3),
             new BackgroundObject('../img/background/floor/2.png', 1920 * 3),
-            new BackgroundObject('../img/background/light/1.png', 1920 * 3),
+            new BackgroundObject('../img/background/light/1.png', 1920 * 3)
         ],
         [
             new BackgroundFish(),
@@ -43,13 +43,6 @@ function initLevel_1() {
             new BackgroundFish(),
             new BackgroundFish(),
             new BackgroundFish()
-            // new BackgroundFish(),
-            // new BackgroundFish(),
-            // new BackgroundFish(),
-            // new BackgroundFish(),
-            // new BackgroundFish(),
-            // new BackgroundFish(),
-            // new BackgroundFish()
         ],
         [
             new Coin(1200, 900),
@@ -58,8 +51,8 @@ function initLevel_1() {
             new Coin(1500, 900)
         ],
         [
-            new PoisonBottle (1600, 900),
-            new PoisonBottle (1700, 900)
+            new PoisonBottle(1600, 900),
+            new PoisonBottle(1700, 900)
         ]
     );
 }

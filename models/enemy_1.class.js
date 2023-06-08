@@ -11,13 +11,12 @@ class Enemy_1 extends MovableObject {  // Pufferfish
     };
     animationTime = 180;
     speedMultiplier = 2;
+    randomFlyingSpeed_x;
+    randomFlyingSpeed_y;
     transitionAnimationCount = 0;
     deadAnimationCount = 0;
     transitionDone = false;
     enemyDead = false;
-    goUp;
-    randomFlyingSpeed_x;
-    randomFlyingSpeed_y;
 
     constructor() {
         super().loadImage(PUFFER_FISH_RED_SWIM_IMG[0]);

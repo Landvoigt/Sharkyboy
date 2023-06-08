@@ -49,10 +49,10 @@ function getSettingsHTML() {
         <div class="difficulty-circle-btn" id="difficultyIcon2" onclick="highlightDifficultySelection(2); showSelectedOption('Medium')">
             <img src="../img/icons/frogfish.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
-        <div class="difficulty-circle-btn" id="difficultyIcon3" onclick="highlightDifficultySelection(3); showSelectedOption('Hardmode')">
+        <div class="difficulty-circle-btn" id="difficultyIcon3" onclick="highlightDifficultySelection(3); showSelectedOption('Hard')">
             <img src="../img/icons/dolphin.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
-        <div class="difficulty-circle-btn" id="difficultyIcon4" onclick="highlightDifficultySelection(4); showSelectedOption('Armageddon')">
+        <div class="difficulty-circle-btn" id="difficultyIcon4" onclick="highlightDifficultySelection(4); showSelectedOption('Extremly Hard')">
             <img src="../img/icons/shark.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
     </div>
