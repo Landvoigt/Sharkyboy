@@ -15,6 +15,9 @@ class Enemy_1 extends MovableObject {  // Pufferfish
     deadAnimationCount = 0;
     transitionDone = false;
     enemyDead = false;
+    goUp;
+    randomFlyingSpeed_x;
+    randomFlyingSpeed_y;
 
     constructor() {
         super().loadImage(PUFFER_FISH_RED_SWIM_IMG[0]);
@@ -42,7 +45,8 @@ class Enemy_1 extends MovableObject {  // Pufferfish
             }
             else if (this.characterNearby() && this.transitionInProgress()) {
                 this.playTransitionAnimation();
-            } else {
+            }
+            else if (!this.enemyDead) {
                 if (this.transitionDone) {
                     this.playAnimation(PUFFER_FISH_RED_ATTACK_IMG);
                 }
@@ -59,10 +63,22 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         }
         this.playAnimation(PUFFER_FISH_RED_DEAD_IMG);
         if (this.deadAnimationCount == 2) {
-            world.deleteObject(enemyToKill[0]);
-            enemyToKill = [];
+            this.shootEnemyAwayAfterSlap();
+            setTimeout(this.deleteEnemy, 500);
         }
         this.deadAnimationCount++;
+    }
+
+    shootEnemyAwayAfterSlap() {
+        setInterval(() => {
+            this.y -= this.randomFlyingSpeed_x;
+            this.x += this.randomFlyingSpeed_y;
+        }, 1);
+    }
+
+    deleteEnemy() {
+        world.deleteObject(enemyToKill[0]);
+        enemyToKill = [];
     }
 
     playTransitionAnimation() {
@@ -83,6 +99,8 @@ class Enemy_1 extends MovableObject {  // Pufferfish
 
     getRandomSpeed() {
         this.speed = 0.2 + Math.random() * 0.6;
+        this.randomFlyingSpeed_x = 3.5 + Math.random() * 5;
+        this.randomFlyingSpeed_y = 3 + Math.random() * 5;
     }
 
     characterNearby() {
