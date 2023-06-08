@@ -19,19 +19,19 @@ const POISON_BAR_IMG = [
 const COIN_COUNTER_IMG = '../img/status/coins/coin.png';
 
 const COLLECTIBLE_COIN_IMG = [
-    '../img/collectibles/coins/1.png',
-    '../img/collectibles/coins/2.png',
-    '../img/collectibles/coins/3.png',
-    '../img/collectibles/coins/4.png'
+    '../img/collectibles/coins/(1).png',
+    '../img/collectibles/coins/(2).png',
+    '../img/collectibles/coins/(3).png',
+    '../img/collectibles/coins/(4).png'
 ];
 
 const COLLECTIBLE_POISON_IMG = [
-    '../img/collectibles/poison/1.png',
-    '../img/collectibles/poison/2.png',
-    '../img/collectibles/poison/3.png',
-    '../img/collectibles/poison/4.png',
-    '../img/collectibles/poison/5.png',
-    '../img/collectibles/poison/6.png',
-    '../img/collectibles/poison/7.png',
-    '../img/collectibles/poison/8.png'
+    '../img/collectibles/poison/(1).png',
+    '../img/collectibles/poison/(2).png',
+    '../img/collectibles/poison/(3).png',
+    '../img/collectibles/poison/(4).png',
+    '../img/collectibles/poison/(5).png',
+    '../img/collectibles/poison/(6).png',
+    '../img/collectibles/poison/(7).png',
+    '../img/collectibles/poison/(8).png'
 ];

@@ -44,20 +44,20 @@ function getSettingsHTML() {
     <div class="difficulty-container">
         <h4>Difficulty</h4>
         <div class="difficulty-circle-btn yellow-highlight" id="difficultyIcon1" onclick="highlightDifficultySelection(1); showSelectedOption('Easy Peasy')">
-            <img src="../img/description/fisch (1).png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
+            <img src="../img/icons/carp.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
         <div class="difficulty-circle-btn" id="difficultyIcon2" onclick="highlightDifficultySelection(2); showSelectedOption('Medium')">
-            <img src="../img/description/fisch.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
+            <img src="../img/icons/frogfish.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
         <div class="difficulty-circle-btn" id="difficultyIcon3" onclick="highlightDifficultySelection(3); showSelectedOption('Hardmode')">
-            <img src="../img/description/delfin.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
+            <img src="../img/icons/dolphin.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
         <div class="difficulty-circle-btn" id="difficultyIcon4" onclick="highlightDifficultySelection(4); showSelectedOption('Armageddon')">
-            <img src="../img/description/hai.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
+            <img src="../img/icons/shark.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
     </div>
     <div class="back-btn">
-        <img src="../img/icons/go-back.png" class="back-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
+        <img src="../img/icons/go_back.png" class="back-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
     </div>
     `;
 }
@@ -155,7 +155,7 @@ function getNavigationHTML() {
     return `
     <img src="../img/description/Instructions 2.png" class="instructions">
     <div class="back-btn">
-        <img src="../img/icons/go-back.png" class="back-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
+        <img src="../img/icons/go_back.png" class="back-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
     </div>
     `;
 }
