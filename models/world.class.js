@@ -18,7 +18,7 @@ class World {
     enemySpawnCounter = 1;
     enemyRespawnDistance = 500;
     lastEnemyRespawnBeforeEndboss = 3000;
-    endbossReached = false;
+    // endbossReached = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');

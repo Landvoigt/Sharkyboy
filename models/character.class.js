@@ -154,7 +154,7 @@ class Character extends MovableObject {
             playSound(ENDGAME_MUSIC);
             setTimeout(stopSound, 3200, GAME_MUSIC);
         }
-        else if (characterPosition < 3000 && this.world.endbossReached) {
+        else if (characterPosition < 3000 && endbossReached) {
             playSound(GAME_MUSIC);
             setTimeout(stopSound, 2000, ENDGAME_MUSIC);
             // ENDGAME_MUSIC.pause();

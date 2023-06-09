@@ -5,6 +5,7 @@ let characterPosition = 0;
 let characterAlive = true;
 let pauseGame = false;
 let sound = true;
+let endbossReached = true;
 let collectedPoison = 0;
 let startAttackTimer = 0;
 let stopAttackTimer = new Date().getTime();
