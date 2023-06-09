@@ -57,7 +57,7 @@ function getSettingsHTML() {
         </div>
     </div>
     <div class="back-btn">
-        <img src="../img/icons/go_back.png" class="back-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
+        <img src="../img/icons/home.png" class="home-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
     </div>
     `;
 }
@@ -119,6 +119,11 @@ function playSoundAndReturn() {
     setTimeout(returnToStartpage, 100);
 }
 
+function playSoundAndContinue() {
+    playSound(CLICK_SOUND);
+    setTimeout(continueGame, 100);
+}
+
 function returnToStartpage() {
     let content = document.getElementById('content');
     content.innerHTML = `
@@ -155,7 +160,7 @@ function getNavigationHTML() {
     return `
     <img src="../img/description/Instructions 2.png" class="instructions">
     <div class="back-btn">
-        <img src="../img/icons/go_back.png" class="back-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
+        <img src="../img/icons/home.png" class="home-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
     </div>
     `;
 }
@@ -213,7 +218,16 @@ function deletePauseScreen() {
     pauseScreen.classList.add('d-none');
 }
 
-function showLoseScreen(){
+function showLoseScreen() {
     let loseScreen = document.getElementById('loseScreen');
     loseScreen.classList.remove('d-none');
+}
+
+function showWinScreen() {
+    let winScreen = document.getElementById('winScreen');
+    winScreen.classList.remove('d-none');
+}
+
+function continueGame() {
+    world.pauseGame();
 }

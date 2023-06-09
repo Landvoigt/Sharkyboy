@@ -117,6 +117,9 @@ class Character extends MovableObject {
 
     deadAnimation() {
         setInterval(() => {
+            if (this.deadAnimationCount == 0) {
+                this.currentImage = 0;
+            }
             if (this.deadAnimationCount <= 9) {
                 this.playAnimation(CHARACTER_DEAD_FROM_POISON_IMG);
             }

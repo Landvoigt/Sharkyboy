@@ -250,6 +250,7 @@ class World {
         if (index !== -1) {
             this.level.enemies.splice(index, 1);
         }
+        killedPufferFishCounter++;
     }
 
     inRangeToSpawnNewEnemies() {

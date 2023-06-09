@@ -9,6 +9,7 @@ let collectedPoison = 0;
 let startAttackTimer = 0;
 let stopAttackTimer = new Date().getTime();
 let enemyToKill = [];
+let killedPufferFishCounter = 0;
 
 
 function initWorld() {

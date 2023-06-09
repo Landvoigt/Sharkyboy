@@ -11,6 +11,11 @@
     <script src="../script.js"></script>
     <script src="../models/keyboard.class.js"></script>
     <script src="../js/game.js"></script>
+    <script src="../load/sounds.js"></script>
+    <script src="../load/background.js"></script>
+    <script src="../load/status.js"></script>
+    <script src="../load/character.js"></script>
+    <script src="../load/enemies.js"></script>
     <script src="../models/drawable_object.class.js"></script>
     <script src="../models/status_bar.class.js"></script>
     <script src="../models/coin_counter.class.js"></script>
@@ -25,11 +30,6 @@
     <script src="../models/throwable_object.class.js"></script>
     <script src="../models/level.class.js"></script>
     <script src="../levels/level_1.js"></script>
-    <script src="../load/background.js"></script>
-    <script src="../load/status.js"></script>
-    <script src="../load/character.js"></script>
-    <script src="../load/enemies.js"></script>
-    <script src="../load/sounds.js"></script>
     <script src="../models/world.class.js"></script>
 </head>
 
@@ -65,17 +65,35 @@
                     onclick="playSound(CLICK_SOUND); muteSound()">
             </div>
         </div>
+        <div class="sound-container back-btn-container-adjustment mt-50">
+            <h4 class="fs-70 w-750">Return to Game</h4>
+            <div class="w-344 d-flex center">
+                <div class="back-btn pos-unset back-btn-adjustment">
+                    <img src="../img/icons/go_back.png" class="back-icon" onclick="playSoundAndContinue()">
+                </div>
+            </div>
+        </div>
         <div class="sound-container back-btn-container-adjustment">
             <h4 class="fs-70 w-750">Return to Startscreen</h4>
             <div class="w-344 d-flex center">
                 <div class="back-btn pos-unset back-btn-adjustment">
-                    <img src="../img/icons/go_back.png" class="back-icon" onclick="playSoundAndReturn()">
+                    <img src="../img/icons/home.png" class="home-icon home-icon-adjustment" onclick="playSoundAndReturn()">
                 </div>
             </div>
         </div>
     </div>
-    <div id="loseScreen" class="lose-screen d-none">
-        <h6>You lose</h6>
+    <div id="loseScreen" class="lose-screen ">
+        <h6 class="mt-140">¡ You lose !</h6>
+        <div class="resume-container">
+            <div class="resume-box">
+                <img src="../img/status/coins/coin.png" class="coin-img">
+                <h5 class="d-flex-centered">5</h5>
+            </div>
+            <div class="resume-box">
+                <img src="../img/enemies/puffer_fish_red/dead/(1).png" class="pufferfish-img">
+                <h5 class="d-flex-centered">5</h5>
+            </div>
+        </div>
         <div class="sound-container lose-screen-container-adjustment">
             <h4 class="fs-70 w-750">Go again</h4>
             <div class="w-344 d-flex center">
@@ -85,6 +103,25 @@
             </div>
         </div>
         <div class="sound-container lose-screen-container-adjustment">
+            <h4 class="fs-70 w-750">Return to Startscreen</h4>
+            <div class="w-344 d-flex center">
+                <div class="back-btn pos-unset back-btn-adjustment">
+                    <img src="../img/icons/home.png" class="home-icon home-icon-adjustment" onclick="playSoundAndReturn()">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="winScreen" class="win-screen d-none">
+        <h6 class="mt-120">You win</h6>
+        <div class="sound-container win-screen-container-adjustment mt-120">
+            <h4 class="fs-70 w-750">Go again</h4>
+            <div class="w-344 d-flex center">
+                <div class="back-btn pos-unset back-btn-adjustment">
+                    <img src="../img/icons/restart.png" class="restart-icon" onclick="playSoundAndReturn()">
+                </div>
+            </div>
+        </div>
+        <div class="sound-container win-screen-container-adjustment">
             <h4 class="fs-70 w-750">Return to Startscreen</h4>
             <div class="w-344 d-flex center">
                 <div class="back-btn pos-unset back-btn-adjustment">
