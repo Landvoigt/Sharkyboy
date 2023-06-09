@@ -176,6 +176,7 @@ class World {
         GAME_MUSIC.pause();
         GAMEOVER_SOUND.play();
         this.character.deadAnimation();
+        setTimeout(showLoseScreen, 2000);
     }
 
     pauseGame() {

@@ -67,9 +67,18 @@ h5 {
     letter-spacing: 3px;
 }
 
+h6 {
+    margin: 0;
+    margin-bottom: 50px;
+    color: rgb(231, 208, 3);
+    /* color: rgb(250, 245, 216); */
+    font-size: 8em;
+}
+
 h1,
 h4,
-h5 {
+h5,
+h6 {
     text-shadow:
         -1px -1px 0 #4e4e4e,
         1px -1px 0 #383838,
@@ -270,6 +279,12 @@ canvas {
     width: 50px;
 }
 
+.restart-icon {
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+}
+
 .change-display {
     flex-direction: column;
     gap: 25px;
@@ -339,9 +354,10 @@ canvas {
     top: 18px;
 }
 
-.pause-screen {
+.pause-screen,
+.lose-screen {
     position: absolute;
-    background-color: #0000009d;
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 99;
     width: 100%;
     height: 100%;
@@ -353,6 +369,11 @@ canvas {
 
 .back-btn-container-adjustment {
     height: 250px;
+    justify-content: center;
+}
+
+.lose-screen-container-adjustment{
+    height: 200px;
     justify-content: center;
 }
 

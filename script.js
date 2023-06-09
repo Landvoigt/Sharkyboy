@@ -189,8 +189,8 @@ function unmuteSound() {
 }
 
 function addCoinsCountContainer() {
-    let startscreen = document.getElementById('content');
-    startscreen.innerHTML += `
+    let content = document.getElementById('content');
+    content.innerHTML += `
     <div class="coins-count-container" id="coinsCountContainer">
     </div>
     `;
@@ -211,4 +211,9 @@ function showPauseScreen() {
 function deletePauseScreen() {
     let pauseScreen = document.getElementById('pauseScreen');
     pauseScreen.classList.add('d-none');
+}
+
+function showLoseScreen(){
+    let loseScreen = document.getElementById('loseScreen');
+    loseScreen.classList.remove('d-none');
 }
