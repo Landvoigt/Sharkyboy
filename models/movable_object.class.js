@@ -100,6 +100,20 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    bigHit() {
+        this.characterCollided = true;
+        this.hp -= 30;
+        if (this.hp < 0) {
+            if (!this.characterAlive) {
+                this.currentImage = 0;
+            }
+            this.hp = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+            this.characterCollision();
+        }
+    }
+
     characterCollision() {
         let startpoint = this.x;
         this.fallSpeed = 0;

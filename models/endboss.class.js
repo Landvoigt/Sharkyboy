@@ -9,14 +9,14 @@ class Endboss extends MovableObject {
         y: 450,
         height: 175,
     };
+    hp = 250;
     animationTime = 180;
     pointOfSpawnAnimationStarting_unitsBeforeCharacterHasToSpawn = 60 + 1300;
     isAttacking = false;
     attackTimeoutActive = false;
-    timeSet = false;
+    endbossAlive = true;
     attackImageCount = 0;
-    lastHit = 0;
-    currentTime = 0;
+    lastHit;
 
     constructor() {
         super().loadImage(KILLERWHALE_SPAWN_IMG[0]);
@@ -65,7 +65,7 @@ class Endboss extends MovableObject {
     attack() {
         if (this.attackImageCount <= 4) {
             this.x -= 35;
-            this.y += 8;
+            this.y += 3;
             this.playAnimation(KILLERWHALE_ATTACK_IMG);
             this.isAttacking = true;
         }
@@ -79,14 +79,11 @@ class Endboss extends MovableObject {
 
     checkAttackTimeout() {
         setInterval(() => {
-            if (this.attackTimeoutActive && !this.timeSet) {
-                this.timeSet = true;
-                this.currentTime = new Date().getTime();
-            }
-            console.log(this.currentTime - this.lastHit);
-            if ((this.currentTime - this.lastHit) > 3200) {
-                debugger;
-                this.resetAttackTimeout;
+            if (this.attackTimeoutActive) {
+                let time = this.getCurrentTime();
+                if (time - this.lastHit > 3200) {
+                    this.resetAttackTimeout();
+                }
             }
         }, 100);
     }
@@ -94,6 +91,19 @@ class Endboss extends MovableObject {
     resetAttackTimeout() {
         this.attackImageCount = 0;
         this.attackTimeoutActive = false;
-        this.timeSet = false;
+    }
+
+    hit() {
+        this.hp -= 50;
+        if (this.hp < 0) {
+            // if (!this.endbossAlive) {
+            //     this.currentImage = 0;
+            // }
+            this.hp = 0;
+        }
+    }
+
+    getCurrentTime() {
+        return new Date().getTime();
     }
 }

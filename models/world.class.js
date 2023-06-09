@@ -131,6 +131,14 @@ class World {
                 enemy.enemyDead = true;
                 enemyToKill.push(enemy);
             }
+            if (this instanceof Endboss) {
+                if (this.character.isColliding(enemy) && !this.character.isAttacking) {
+                    this.character.bigHit();
+                }
+                if (this.character.isColliding(enemy) && this.character.isAttacking) {
+                    enemy.hit();
+                }
+            }
         });
     }
 
