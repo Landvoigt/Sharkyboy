@@ -3,7 +3,7 @@ let level_1;
 function initLevel_1() {
     level_1 = new Level(
         [
-            new Enemy_1(),
+            // new Enemy_1(),
             // new Endboss(),
         ],
         [
