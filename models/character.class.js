@@ -13,7 +13,7 @@ class Character extends MovableObject {
     y_default = 500;
     y_min = -100;
     y_max = 660;
-    hp = 100;
+    hp = 1000;
     speed = 9;
     animationTime = 130;
     lastMovementTime = 0;
@@ -141,7 +141,7 @@ class Character extends MovableObject {
         if (this.attackAnimationCount == 4) {
             SLAP_SOUND.play();
         }
-        if (this.attackAnimationCount == 6) {
+        if (this.attackAnimationCount == 7) {
             this.isAttacking = false;
         }
         this.attackAnimationCount++;

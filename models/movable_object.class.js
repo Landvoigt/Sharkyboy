@@ -102,7 +102,7 @@ class MovableObject extends DrawableObject {
 
     bigHit() {
         this.characterCollided = true;
-        this.hp -= 30;
+        this.hp -= 25;
         if (this.hp < 0) {
             if (!this.characterAlive) {
                 this.currentImage = 0;
@@ -137,6 +137,7 @@ class MovableObject extends DrawableObject {
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // difference in ms
         timePassed = timePassed / 1000;
+        // console.log(timePassed);
         return timePassed < 0.6;
     }
 

@@ -67,6 +67,7 @@ class World {
     addInstances() {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
     }
 
@@ -131,15 +132,20 @@ class World {
                 enemy.enemyDead = true;
                 enemyToKill.push(enemy);
             }
-            if (this instanceof Endboss) {
-                if (this.character.isColliding(enemy) && !this.character.isAttacking) {
-                    this.character.bigHit();
-                }
-                if (this.character.isColliding(enemy) && this.character.isAttacking) {
-                    enemy.hit();
-                }
-            }
         });
+        let endboss = this.level.endboss[0];
+        if (this.character.isColliding(endboss) && !this.character.isAttacking && endboss.endbossAlive) {
+            this.character.bigHit();
+            this.statusBarHP.setPercentage(this.character.hp);
+        }
+        if (this.character.isColliding(endboss) && this.character.isAttacking) {
+            if (endboss.attackTimeoutActive) {
+                endboss.hit();
+            } else {
+                this.character.bigHit();
+                this.statusBarHP.setPercentage(this.character.hp);
+            }
+        }
     }
 
     checkForCollectedCoins() {
