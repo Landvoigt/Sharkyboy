@@ -218,16 +218,68 @@ function deletePauseScreen() {
     pauseScreen.classList.add('d-none');
 }
 
-function showLoseScreen() {
-    let loseScreen = document.getElementById('loseScreen');
-    loseScreen.classList.remove('d-none');
-}
-
 function showWinScreen() {
+    world.pauseGame();
+    deletePauseScreen();
     let winScreen = document.getElementById('winScreen');
     winScreen.classList.remove('d-none');
 }
 
 function continueGame() {
     world.pauseGame();
+}
+
+function showEndScreen() {
+    let headline;
+    let src;
+    if (!gameWon) {
+        headline = '¡ You lose !';
+        src = '../img/description/losing_screen.png';
+    } else {
+        headline = '¡ You win !';
+        src = '../img/description/winning_screen.png';
+    }
+    let endScreen = document.getElementById('endScreen');
+    endScreen.classList.remove('d-none');
+    endScreen.style = `background-image: url(${src});`;
+    endScreen.innerHTML = getEndscreenHTML(headline);
+}
+
+function getEndscreenHTML(hl) {
+    return `
+        <h6 id="endscreenHeadline" class="mt-140">${hl}</h6>
+        <div class="resume-container">
+            <div class="resume-box">
+                <img src="../img/status/coins/coin.png" class="coin-img">
+                <h5 class="d-flex-centered">${world.coinsCount}</h5>
+            </div>
+            <div class="resume-box">
+                <img src="../img/enemies/puffer_fish_red/dead/(1).png" class="pufferfish-img">
+                <h5 class="d-flex-centered">${killedPufferFishCounter}</h5>
+            </div>
+        </div>
+        <div class="sound-container end-screen-container-adjustment">
+            <h4 class="fs-70 w-750">Go again</h4>
+            <div class="w-344 d-flex center">
+                <div class="back-btn pos-unset back-btn-adjustment">
+                    <img src="../img/icons/restart.png" class="restart-icon" onclick="playAgain()">
+                </div>
+            </div>
+        </div>
+        <div class="sound-container end-screen-container-adjustment">
+            <h4 class="fs-70 w-750">Return to Startscreen</h4>
+            <div class="w-344 d-flex center">
+                <div class="back-btn pos-unset back-btn-adjustment">
+                    <img src="../img/icons/home.png" class="home-icon home-icon-adjustment" onclick="playSoundAndReturn()">
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function playAgain(){
+    let endScreen = document.getElementById('endScreen');
+    endScreen.classList.add('d-none');
+    document.getElementById('content').innerHTML = '';
+    startGame();
 }

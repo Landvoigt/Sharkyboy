@@ -138,9 +138,10 @@ class World {
             this.character.bigHit();
             this.statusBarHP.setPercentage(this.character.hp);
         }
-        if (this.character.isColliding(endboss) && this.character.isAttacking) {
-            if (endboss.attackTimeoutActive) {
+        if (this.character.isColliding(endboss) && this.character.isAttacking && endboss.endbossAlive) {
+            if (endboss.attackTimeoutActive && !endboss.wasHitted) {
                 endboss.hit();
+                endboss.wasHitted = true;
             } else {
                 this.character.bigHit();
                 this.statusBarHP.setPercentage(this.character.hp);
@@ -185,12 +186,13 @@ class World {
 
     gameOver() {
         characterAlive = false;
+        gameWon = false;
         clearAllIntervals();
         SWIMMING_SOUND.pause();
         GAME_MUSIC.pause();
         GAMEOVER_SOUND.play();
         this.character.deadAnimation();
-        setTimeout(showLoseScreen, 2000);
+        setTimeout(showEndScreen, 2000);
     }
 
     pauseGame() {

@@ -9,7 +9,7 @@ class Endboss extends MovableObject {
         y: 450,
         height: 175,
     };
-    hp = 200;
+    hp = 50;
     animationTime = 180;
     pointOfSpawnAnimationStarting_unitsBeforeCharacterHasToSpawn = 60 + 1300;
     isAttacking = false;
@@ -19,6 +19,7 @@ class Endboss extends MovableObject {
     deadAnimationCount = 0;
     lastAttack;
     lastHit = 0;
+    wasHitted = false;
 
     constructor() {
         super().loadImage(KILLERWHALE_SPAWN_IMG[0]);
@@ -46,14 +47,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(KILLERWHALE_SPAWN_IMG);
             }
             if (this.isDead()) {
-                if (this.deadAnimationCount == 0) {
-                    this.currentImage = 0;
-                }
-                if (this.deadAnimationCount <= 4) {
-                    this.playAnimation(KILLERWHALE_DEAD_IMG);
-                    this.endbossAlive = false;
-                }
-                this.deadAnimationCount++
+                this.deadAnimation();
             } else if (this.isHurt()) {
                 this.playAnimation(KILLERWHALE_HURT_IMG);
             } else if (this.canAttack()) {
@@ -61,6 +55,7 @@ class Endboss extends MovableObject {
             } else {
                 if (endbossReached) {
                     this.playAnimation(KILLERWHALE_IDLE_IMG);
+                    this.wasHitted = false;
                 }
             }
             i++;
@@ -107,8 +102,10 @@ class Endboss extends MovableObject {
     }
 
     hit() {
+        playSound(KILLERWHALE_HURT_SOUND);
         this.hp -= 50;
         if (this.hp < 0) {
+            this.endbossAlive = false;
             this.hp = 0;
         } else {
             this.lastHit = new Date().getTime();
@@ -124,6 +121,21 @@ class Endboss extends MovableObject {
 
     isDead() {
         return this.hp == 0;
+    }
+
+    deadAnimation() {
+        if (this.deadAnimationCount == 0) {
+            this.currentImage = 0;
+            gameWon = true;
+        }
+        if (this.deadAnimationCount <= 4) {
+            this.playAnimation(KILLERWHALE_DEAD_IMG);
+        }
+        if (this.deadAnimationCount == 4) {
+            playSound(WINNING_SOUND);
+            showEndScreen();
+        }
+        this.deadAnimationCount++;
     }
 
     getCurrentTime() {
