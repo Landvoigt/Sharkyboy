@@ -188,10 +188,17 @@ class World {
         characterAlive = false;
         gameWon = false;
         clearAllIntervals();
-        SWIMMING_SOUND.pause();
-        GAME_MUSIC.pause();
+        stopAllSounds();
         GAMEOVER_SOUND.play();
         this.character.deadAnimation();
+        setTimeout(showEndScreen, 2500);
+    }
+
+    gameWon() {
+        gameWon = true;
+        clearAllIntervals();
+        stopAllSounds();
+        this.level.endboss[0].deadAnimation();
         setTimeout(showEndScreen, 2000);
     }
 

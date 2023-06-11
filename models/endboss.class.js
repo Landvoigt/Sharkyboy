@@ -47,7 +47,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(KILLERWHALE_SPAWN_IMG);
             }
             if (this.isDead()) {
-                this.deadAnimation();
+                world.gameWon();
             } else if (this.isHurt()) {
                 this.playAnimation(KILLERWHALE_HURT_IMG);
             } else if (this.canAttack()) {
@@ -109,7 +109,6 @@ class Endboss extends MovableObject {
             this.hp = 0;
         } else {
             this.lastHit = new Date().getTime();
-            console.log(this.hp);
         }
     }
 
@@ -124,18 +123,19 @@ class Endboss extends MovableObject {
     }
 
     deadAnimation() {
-        if (this.deadAnimationCount == 0) {
-            this.currentImage = 0;
-            gameWon = true;
-        }
-        if (this.deadAnimationCount <= 4) {
-            this.playAnimation(KILLERWHALE_DEAD_IMG);
-        }
-        if (this.deadAnimationCount == 4) {
-            playSound(WINNING_SOUND);
-            showEndScreen();
-        }
-        this.deadAnimationCount++;
+        setInterval(() => {
+            if (this.deadAnimationCount == 0) {
+                this.currentImage = 0;
+                playSound(KILLERWHALE_HURT_SOUND);
+            }
+            if (this.deadAnimationCount <= 4) {
+                this.playAnimation(KILLERWHALE_DEAD_IMG);
+            }
+            if (this.deadAnimationCount == 4) {
+                playSound(WINNING_SOUND);
+            }
+            this.deadAnimationCount++;
+        }, 120);
     }
 
     getCurrentTime() {
