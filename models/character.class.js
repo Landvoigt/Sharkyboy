@@ -11,8 +11,8 @@ class Character extends MovableObject {
     };
     x_default = 60;
     y_default = 500;
-    y_min = -100;
-    y_max = 660;
+    y_min = 50;
+    y_max = 650;
     hp = 100;
     speed = 9;
     animationTime = 130;
@@ -66,7 +66,7 @@ class Character extends MovableObject {
             this.setMovementAttributes();
             this.otherDirection = false;
         }
-        if (this.world.keyboard.LEFT && this.x > 0 && !this.characterCollided) {
+        if (this.world.keyboard.LEFT && this.x > this.world.level.levelStart_x && !this.characterCollided) {
             this.moveLeft();
             this.setMovementAttributes();
             this.otherDirection = true;
@@ -105,6 +105,7 @@ class Character extends MovableObject {
                 this.playAnimation(CHARACTER_IDLE_IMG);
             }
         }
+        console.log(characterPosition);
     }
 
     checkIdleTime() {
@@ -118,7 +119,7 @@ class Character extends MovableObject {
     deadAnimation() {
         setInterval(() => {
             if (this.deadAnimationCount == 0) {
-                this.currentImage = 0;
+                this.resetCurrentImage();
             }
             if (this.deadAnimationCount <= 9) {
                 this.playAnimation(CHARACTER_DEAD_FROM_POISON_IMG);
@@ -133,7 +134,7 @@ class Character extends MovableObject {
 
     slapAnimation() {
         if (this.attackAnimationCount == 0) {
-            this.currentImage = 0;
+            this.resetCurrentImage();
         }
         if (this.attackAnimationCount == 1) {
             this.isAttacking = true;
@@ -150,11 +151,11 @@ class Character extends MovableObject {
 
     getPositionOfCharacter() {
         characterPosition = this.x;
-        if (characterPosition > 3000) {
+        if (characterPosition > 8000) {
             playSound(ENDGAME_MUSIC);
             setTimeout(stopSound, 3200, GAME_MUSIC);
         }
-        else if (characterPosition < 3000 && endbossReached) {
+        else if (characterPosition < 8000 && endbossReached) {
             // playSound(GAME_MUSIC);
             setTimeout(stopSound, 2000, ENDGAME_MUSIC);
             // ENDGAME_MUSIC.pause();

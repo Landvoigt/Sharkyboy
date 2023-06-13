@@ -17,8 +17,10 @@ class World {
     coinsCount = 0;
     enemySpawnCounter = 1;
     enemyRespawnDistance = 500;
-    lastEnemyRespawnBeforeEndboss = 3000;
-    // endbossReached = false;
+    lastEnemyRespawnBeforeEndboss = 7500;
+    enemyHit = 10;
+    endbossHit = 25;
+    bgFishRespawnInterval = 2000;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -107,7 +109,7 @@ class World {
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx);
     }
 
     flipImage(mo) {
@@ -123,30 +125,40 @@ class World {
     }
 
     checkCollisions() {
+        this.checkEnemyCollision();
+        this.checkEndbossCollision();
+    }
+
+    checkEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !this.character.isAttacking && !enemy.enemyDead) {
-                this.character.hit();
-                this.statusBarHP.setPercentage(this.character.hp);
+                this.characterGetsHitted(this.enemyHit);
             }
             if (this.character.isColliding(enemy) && this.character.isAttacking) {
                 enemy.enemyDead = true;
                 enemyToKill.push(enemy);
             }
         });
+    }
+
+    checkEndbossCollision() {
         let endboss = this.level.endboss[0];
         if (this.character.isColliding(endboss) && !this.character.isAttacking && endboss.endbossAlive) {
-            this.character.bigHit();
-            this.statusBarHP.setPercentage(this.character.hp);
+            this.characterGetsHitted(this.endbossHit);
         }
         if (this.character.isColliding(endboss) && this.character.isAttacking && endboss.endbossAlive) {
             if (endboss.attackTimeoutActive && !endboss.wasHitted) {
                 endboss.hit();
                 endboss.wasHitted = true;
             } else {
-                this.character.bigHit();
-                this.statusBarHP.setPercentage(this.character.hp);
+                this.characterGetsHitted(this.endbossHit);
             }
         }
+    }
+
+    characterGetsHitted(dmg){
+        this.character.hit(dmg);
+        this.statusBarHP.setPercentage(this.character.hp);
     }
 
     checkForCollectedCoins() {
@@ -256,7 +268,7 @@ class World {
             this.level.backgroundFishes.push(
                 new BackgroundFish()
             );
-        }, 2000);
+        }, this.bgFishRespawnInterval);
     }
 
     respawnEnemies() {

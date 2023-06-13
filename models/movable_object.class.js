@@ -38,10 +38,6 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
-    jump() {
-        this.fallSpeed = 35;
-    }
-
     isColliding(obj) {
         return this.isHorizontalIntersection(obj) && this.isVerticalIntersection(obj);
     }
@@ -86,28 +82,10 @@ class MovableObject extends DrawableObject {
         return this.y + this.height - this.offset.height;
     }
 
-    hit() {
-        this.characterCollided = true;
-        this.hp -= 10;
-        if (this.hp < 0) {
-            if (!this.characterAlive) {
-                this.currentImage = 0;
-            }
-            this.hp = 0;
-        } else {
-            this.lastHit = new Date().getTime();
-            this.characterCollision();
-        }
-    }
-
-    bigHit() {
-        this.characterCollided = true;
-        this.hp -= 25;
-        if (this.hp < 0) {
-            if (!this.characterAlive) {
-                this.currentImage = 0;
-            }
-            this.hp = 0;
+    hit(dmg) {
+        this.hitCharacter(dmg);
+        if (this.characterIsDying()) {
+            this.setHealthPointsToZero();
         } else {
             this.lastHit = new Date().getTime();
             this.characterCollision();
@@ -118,26 +96,35 @@ class MovableObject extends DrawableObject {
         let startpoint = this.x;
         this.fallSpeed = 0;
         let fallBackInterval = setInterval(() => {
-            if (this.x > startpoint - 260 && this.characterCollided) {
-                this.x -= 12;
-                this.y -= 27;
-                if (this.isAboveGround()) {
-                    this.y -= this.fallSpeed;
-                    this.fallSpeed -= this.acceleration;
-                }
+            if (this.fallBackPointNotReached(startpoint)) {
+                this.moveCharacterBack();
+                this.applyGravity();
             } else {
-                clearInterval(fallBackInterval);
-                this.y = this.y_default;
-                this.characterCollided = false;
+                this.clearFallBackInterval(fallBackInterval);
             }
         }, 16);
-        HURT_SOUND.play();
+        playSound(HURT_SOUND);
+    }
+
+    hitCharacter(dmg) {
+        this.characterCollided = true;
+        this.hp -= dmg;
+    }
+
+    characterIsDying() {
+        return this.hp < 0;
+    }
+
+    setHealthPointsToZero() {
+        if (!this.characterAlive) {
+            this.resetCurrentImage();
+        }
+        this.hp = 0;
     }
 
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // difference in ms
         timePassed = timePassed / 1000;
-        // console.log(timePassed);
         return timePassed < 0.6;
     }
 
@@ -146,6 +133,32 @@ class MovableObject extends DrawableObject {
     }
 
     collisionEnded() {
+        this.characterCollided = false;
+    }
+
+    resetCurrentImage() {
+        this.currentImage = 0;
+    }
+
+    fallBackPointNotReached(startpoint) {
+        return this.x > startpoint - 260 && this.characterCollided;
+    }
+
+    moveCharacterBack() {
+        this.x -= 12;
+        this.y -= 27;
+    }
+
+    applyGravity() {
+        if (this.isAboveGround()) {
+            this.y -= this.fallSpeed;
+            this.fallSpeed -= this.acceleration;
+        }
+    }
+
+    clearFallBackInterval(fallBackInterval) {
+        clearInterval(fallBackInterval);
+        this.y = this.y_default;
         this.characterCollided = false;
     }
 }

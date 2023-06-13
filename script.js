@@ -216,6 +216,8 @@ function showPauseScreen() {
 function deletePauseScreen() {
     let pauseScreen = document.getElementById('pauseScreen');
     pauseScreen.classList.add('d-none');
+    let endScreen = document.getElementById('endScreen');
+    endScreen.classList.add('d-none');
 }
 
 function showWinScreen() {
@@ -234,10 +236,10 @@ function showEndScreen() {
     let src;
     if (!gameWon) {
         headline = '¡ You lose !';
-        src = '../img/description/losing_screen.png';
+        src = '../img/description/losing_screen_2.png';
     } else {
         headline = '¡ You win !';
-        src = '../img/description/winning_screen.png';
+        src = '../img/description/winning_screen_2.png';
     }
     let endScreen = document.getElementById('endScreen');
     endScreen.classList.remove('d-none');
