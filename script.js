@@ -304,10 +304,10 @@ function showEndScreen() {
     let src;
     if (!gameWon) {
         headline = '¡ You lose !';
-        src = '../img/description/losing_screen_3.png';
+        src = '../img/endscreens/losing_screen.png';
     } else {
         headline = '¡ You win !';
-        src = '../img/description/winning_screen_2.png';
+        src = '../img/endscreens/winning_screen.png';
     }
     let endScreen = document.getElementById('endScreen');
     endScreen.classList.remove('d-none');
