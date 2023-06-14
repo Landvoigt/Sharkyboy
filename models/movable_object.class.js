@@ -8,11 +8,7 @@ class MovableObject extends DrawableObject {
     characterCollided = false;
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) {
-            return true;
-        } else {
-            return this.y < this.y_default;
-        }
+        return this.y < this.y_default;
     }
 
     moveLeft() {

@@ -59,6 +59,17 @@ const CHARACTER_FIN_SLAP_ATTACK_IMG = [
     '../img/character/attack/fin_slap/(8).png'
 ];
 
+const CHARACTER_BUBBLE_ATTACK_IMG = [
+    '../img/character/attack/bubble_trap/poison_bubble/(1).png',
+    '../img/character/attack/bubble_trap/poison_bubble/(2).png',
+    '../img/character/attack/bubble_trap/poison_bubble/(3).png',
+    '../img/character/attack/bubble_trap/poison_bubble/(4).png',
+    '../img/character/attack/bubble_trap/poison_bubble/(5).png',
+    '../img/character/attack/bubble_trap/poison_bubble/(6).png',
+    '../img/character/attack/bubble_trap/poison_bubble/(7).png',
+    '../img/character/attack/bubble_trap/poison_bubble/(8).png'
+];
+
 const CHARACTER_LONG_IDLE_IMG = [
     '../img/character/long_idle/(1).png',
     '../img/character/long_idle/(2).png',

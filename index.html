@@ -27,7 +27,7 @@
     <script src="../models/background_fish.class.js"></script>
     <script src="../models/coin.class.js"></script>
     <script src="../models/poison_bottle.class.js"></script>
-    <script src="../models/throwable_object.class.js"></script>
+    <script src="../models/bubble.class.js"></script>
     <script src="../models/level.class.js"></script>
     <script src="../levels/level_1.js"></script>
     <script src="../models/world.class.js"></script>
@@ -44,12 +44,12 @@
             <div class="fullscreen-circle-btn yellow-highlight" id="fullscreenIcon1"
                 onclick="highlightFullscreenSelection(1); showSelectedOption('Off')">
                 <img src="../img/icons/fullscreen_off.png" id="fullscreenOff" class="fullscreen-icon"
-                    onclick="playSound(CLICK_SOUND)">
+                    onclick="playSound(CLICK_SOUND); closeFullscreen()">
             </div>
             <div class="fullscreen-circle-btn" id="fullscreenIcon2"
                 onclick="highlightFullscreenSelection(2); showSelectedOption('On')">
                 <img src="../img/icons/fullscreen_on.png" id="fullscreenOn" class="fullscreen-icon"
-                    onclick="playSound(CLICK_SOUND)">
+                    onclick="playSound(CLICK_SOUND); openFullscreen()">
             </div>
         </div>
         <div class="sound-container center">

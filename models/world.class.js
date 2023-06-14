@@ -9,9 +9,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    throwableObjects = [
-        // new ThrowableObject()
-    ];
+    movableBubbles = [new Bubble(0, -200)];
     movementCache = [];
     currentSpeedParam;
     coinsCount = 0;
@@ -29,7 +27,7 @@ class World {
         this.run();
         this.draw();
         this.setWorld();
-        // this.playBgMusic();
+        this.playBgMusic();
         this.constantlyRespawnFishes();
     }
 
@@ -54,6 +52,7 @@ class World {
         this.addObjectsToMap(this.level.backgroundFishes);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.collectibles);
+        this.addObjectsToMap(this.movableBubbles);
     }
 
     addStaticObjects() {
@@ -70,7 +69,6 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
-        this.addObjectsToMap(this.throwableObjects);
     }
 
     drawLoop() {    // draw infinity loop
@@ -91,7 +89,6 @@ class World {
             this.checkForCollectedPoison();
             this.respawnEnemies();
             addCoins(this.coinsCount);
-            // this.checkThrowObject();
         }, 200);
     }
 
@@ -109,7 +106,7 @@ class World {
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
-        // mo.drawFrame(this.ctx);
+        mo.drawFrame(this.ctx);
     }
 
     flipImage(mo) {
@@ -127,6 +124,7 @@ class World {
     checkCollisions() {
         this.checkEnemyCollision();
         this.checkEndbossCollision();
+        // this.checkBubbleCollision();
     }
 
     checkEnemyCollision() {
@@ -156,7 +154,31 @@ class World {
         }
     }
 
-    characterGetsHitted(dmg){
+    checkBubbleCollision(bubble) {
+        let bblCollisionInterval = setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (bubble.isColliding(enemy)) {
+                    enemy.enemyDead = true;
+                    enemyToKill.push(enemy);
+                    this.movableBubbles.pop();
+                    clearInterval(bblCollisionInterval);
+                }
+            });
+            let endboss = this.level.endboss[0];
+            if (bubble.isColliding(endboss)) {
+                endboss.hit();
+                endboss.wasHitted = true;
+                this.movableBubbles.pop();
+                clearInterval(bblCollisionInterval);
+            }
+            if (bubble.x > this.character.x + 1700) {
+                this.movableBubbles.pop();
+                clearInterval(bblCollisionInterval);
+            }
+        }, 200);
+    }
+
+    characterGetsHitted(dmg) {
         this.character.hit(dmg);
         this.statusBarHP.setPercentage(this.character.hp);
     }
@@ -184,11 +206,10 @@ class World {
         });
     }
 
-    checkThrowObject() {
-        if (this.keyboard.THROW) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObjects.push(bottle);
-        }
+    createBubble() {
+        let bubble = new Bubble(this.character.x + 380, this.character.y + 260);
+        this.movableBubbles.push(bubble);
+        this.checkBubbleCollision(bubble);
     }
 
     playBgMusic() {
@@ -207,6 +228,7 @@ class World {
     }
 
     gameWon() {
+        killedEndbossCounter++;
         gameWon = true;
         clearAllIntervals();
         stopAllSounds();

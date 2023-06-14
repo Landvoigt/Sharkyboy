@@ -1,6 +1,10 @@
 function initialize() {
     showStartpage();
     pushAudios();
+    // let previousDisplayMode = localStorage.getItem("currentDisplayMode");
+    // if (previousDisplayMode) {
+    //     openFullscreen();
+    // }
 }
 
 function startGame() {
@@ -26,10 +30,10 @@ function getSettingsHTML() {
     <div class="sound-container">
         <h4>Fullscreen</h4>
         <div class="fullscreen-circle-btn yellow-highlight" id="fullscreenIcon1" onclick="highlightFullscreenSelection(1); showSelectedOption('Off')">
-            <img src="../img/icons/fullscreen_off.png" id="fullscreenOff" class="fullscreen-icon" onclick="playSound(CLICK_SOUND)">
+            <img src="../img/icons/fullscreen_off.png" id="fullscreenOff" class="fullscreen-icon" onclick="playSound(CLICK_SOUND); closeFullscreen()">
         </div>
         <div class="fullscreen-circle-btn" id="fullscreenIcon2" onclick="highlightFullscreenSelection(2); showSelectedOption('On')">
-            <img src="../img/icons/fullscreen_on.png" id="fullscreenOn" class="fullscreen-icon" onclick="playSound(CLICK_SOUND)">
+            <img src="../img/icons/fullscreen_on.png" id="fullscreenOn" class="fullscreen-icon" onclick="playSound(CLICK_SOUND); openFullscreen()">
         </div>
     </div>
     <div class="sound-container">
@@ -125,14 +129,10 @@ function playSoundAndContinue() {
 }
 
 function returnToStartpage() {
-    let content = document.getElementById('content');
-    content.innerHTML = `
-    <div class="startscreen" id="startscreen"></div>
-    `;
-    stopAllSounds();
-    deletePauseScreen();
-    showStartpage();
-    playSound(MENU_SOUND);
+    // debugger;
+    // let currentDisplayMode = fullscreen;
+    // localStorage.setItem("currentDisplayMode", currentDisplayMode);
+    window.location.reload();
 }
 
 function getStartpageHMTL() {
@@ -236,7 +236,7 @@ function showEndScreen() {
     let src;
     if (!gameWon) {
         headline = '¡ You lose !';
-        src = '../img/description/losing_screen_2.png';
+        src = '../img/description/losing_screen_3.png';
     } else {
         headline = '¡ You win !';
         src = '../img/description/winning_screen_2.png';
@@ -259,6 +259,10 @@ function getEndscreenHTML(hl) {
                 <img src="../img/enemies/puffer_fish_red/dead/(1).png" class="pufferfish-img">
                 <h5 class="d-flex-centered">${killedPufferFishCounter}</h5>
             </div>
+            <div class="resume-box">
+                <img src="../img/enemies/killerwhale/dead/(5).png" class="killerwhale-img">
+                <h5 class="d-flex-centered">${killedEndbossCounter}</h5>
+            </div>
         </div>
         <div class="sound-container end-screen-container-adjustment">
             <h4 class="fs-70 w-750">Go again</h4>
@@ -279,9 +283,33 @@ function getEndscreenHTML(hl) {
     `;
 }
 
-function playAgain(){
+
+function playAgain() {
     let endScreen = document.getElementById('endScreen');
     endScreen.classList.add('d-none');
     document.getElementById('content').innerHTML = '';
     startGame();
+}
+
+
+function openFullscreen() {
+    fullscreen = true;
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+}
+
+function closeFullscreen() {
+    fullscreen = false;
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
 }

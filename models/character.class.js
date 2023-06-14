@@ -18,6 +18,7 @@ class Character extends MovableObject {
     animationTime = 130;
     lastMovementTime = 0;
     attackAnimationCount = 0;
+    bubbleAnimationCount = 0;
     deadAnimationCount = 0;
     world;
     animationTimeout = null;
@@ -36,6 +37,7 @@ class Character extends MovableObject {
         this.loadImages(CHARACTER_HURT_FROM_POISON_IMG);
         this.loadImages(CHARACTER_DEAD_FROM_POISON_IMG);
         this.loadImages(CHARACTER_FIN_SLAP_ATTACK_IMG);
+        this.loadImages(CHARACTER_BUBBLE_ATTACK_IMG);
         this.loadImages(CHARACTER_LONG_IDLE_IMG);
     }
 
@@ -89,6 +91,9 @@ class Character extends MovableObject {
         } else if (this.isHurt()) {
             this.changeAnimationTime(130);
             this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
+        } else if (this.canDoBubble()) {
+            this.changeAnimationTime(120);
+            this.bubbleAnimation();
         } else if (this.canAttack()) {
             this.changeAnimationTime(65);
             this.slapAnimation();
@@ -102,10 +107,10 @@ class Character extends MovableObject {
                 this.playAnimation(CHARACTER_LONG_IDLE_IMG);
             } else {
                 this.isIdling = true;
+                this.bubbleAnimationCount = 0;
                 this.playAnimation(CHARACTER_IDLE_IMG);
             }
         }
-        console.log(characterPosition);
     }
 
     checkIdleTime() {
@@ -149,6 +154,25 @@ class Character extends MovableObject {
         this.playAnimation(CHARACTER_FIN_SLAP_ATTACK_IMG);
     }
 
+    canDoBubble() {
+        return this.world.keyboard.ALT;
+    }
+
+    bubbleAnimation() {
+        if (this.bubbleAnimationStarted()) {
+            this.resetCurrentImage();
+            collectedPoison--;
+            this.world.statusBarPoison.setPercentage(collectedPoison * 20);
+        }
+        if (this.bubbleAnimationRunning()) {
+            this.playAnimation(CHARACTER_BUBBLE_ATTACK_IMG);
+        }
+        if (this.bubbleAnimationEnded()) {
+            this.world.createBubble();
+        }
+        this.bubbleAnimationCount++;
+    }
+
     getPositionOfCharacter() {
         characterPosition = this.x;
         if (characterPosition > 8000) {
@@ -186,5 +210,17 @@ class Character extends MovableObject {
 
     changeAnimationTime(ms) {
         this.animationTime = ms;
+    }
+
+    bubbleAnimationStarted() {
+        return this.bubbleAnimationCount == 0;
+    }
+
+    bubbleAnimationRunning() {
+        return this.bubbleAnimationCount <= 7;
+    }
+
+    bubbleAnimationEnded() {
+        return this.bubbleAnimationCount == 7;
     }
 }
