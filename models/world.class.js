@@ -106,7 +106,7 @@ class World {
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx);
     }
 
     flipImage(mo) {
@@ -124,7 +124,6 @@ class World {
     checkCollisions() {
         this.checkEnemyCollision();
         this.checkEndbossCollision();
-        // this.checkBubbleCollision();
     }
 
     checkEnemyCollision() {

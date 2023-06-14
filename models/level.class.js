@@ -6,6 +6,7 @@ class Level {
     coins;
     collectibles;
     levelStart_x = -550;
+    levelEndzoneStart_x = 8000;
     levelEnd_x = 11500;
 
     constructor(enemies, endboss, backgroundObjects, backgroundFishes, coins, collectibles) {

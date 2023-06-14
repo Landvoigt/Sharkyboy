@@ -2,10 +2,10 @@ class Bubble extends MovableObject {
     width = 100;
     height = 100;
     offset = {
-        x: 0,
-        width: 0,
-        y: 0,
-        height: 0,
+        x: 10,
+        width: 10,
+        y: 10,
+        height: 10,
     };
 
     constructor(x, y) {

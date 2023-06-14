@@ -54,21 +54,21 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'yellow';
-            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.rect(this.x + this.offset.x, this.y + this.offset.y, (this.x + this.width - this.offset.width) - (this.x + this.offset.x), (this.y + this.height - this.offset.height) - (this.y + this.offset.y));
             ctx.stroke();
         }
         if (this instanceof PoisonBottle) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'yellow';
-            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.rect(this.x + this.offset.x, this.y + this.offset.y, (this.x + this.width - this.offset.width) - (this.x + this.offset.x), (this.y + this.height - this.offset.height) - (this.y + this.offset.y));
             ctx.stroke();
         }
         if (this instanceof Bubble) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'yellow';
-            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.rect(this.x + this.offset.x, this.y + this.offset.y, (this.x + this.width - this.offset.width) - (this.x + this.offset.x), (this.y + this.height - this.offset.height) - (this.y + this.offset.y));
             ctx.stroke();
         }
     }

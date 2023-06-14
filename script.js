@@ -1,18 +1,37 @@
 function initialize() {
     showStartpage();
     pushAudios();
-    // let previousDisplayMode = localStorage.getItem("currentDisplayMode");
-    // if (previousDisplayMode) {
-    //     openFullscreen();
-    // }
 }
 
 function startGame() {
+    let startscreen = document.getElementById('startscreen');
+    startscreen.innerHTML = getNavigationHTML();
+    setTimeout(createCanvas, 2500);
+}
+
+function createCanvas() {
     stopSound(MENU_SOUND);
+    playSound(START_SOUND);
     document.getElementById('content').innerHTML = `
     <canvas id="canvas" width="1920px" height="1080px"></canvas>
     `;
     initWorld();
+}
+
+function countUpNumbers() {
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach((valueDisplay) => {
+        let startValue = 0;
+        let endValue = parseInt(valueDisplay.getAttribute('data-target'));
+        let duration = Math.floor(1000 / endValue);
+        let counter = setInterval(function () {
+            startValue += 1;
+            valueDisplay.textContent = startValue;
+            if (startValue == endValue) {
+                clearInterval(counter);
+            }
+        }, duration);
+    });
 }
 
 function showSettings() {
@@ -129,16 +148,13 @@ function playSoundAndContinue() {
 }
 
 function returnToStartpage() {
-    // debugger;
-    // let currentDisplayMode = fullscreen;
-    // localStorage.setItem("currentDisplayMode", currentDisplayMode);
     window.location.reload();
 }
 
 function getStartpageHMTL() {
     return `
     <h1>Skarkyboy</h1>
-    <div class="start-button" onclick="playSound(START_SOUND); startGame()">
+    <div class="start-button" onclick="startGame()">
         <h2>Start</h2>
     </div>
     <div class="settings-button" onclick="playSound(CLICK_SOUND); showSettings()">
@@ -154,11 +170,63 @@ function showNavigation() {
     let startscreen = document.getElementById('startscreen');
     startscreen.classList.add('change-display');
     startscreen.innerHTML = getNavigationHTML();
+    startscreen.innerHTML += getHomeButtonHTML();
 }
 
 function getNavigationHTML() {
     return `
-    <img src="../img/description/Instructions 2.png" class="instructions">
+    <div class="navigation-bg">
+        <div class="navigation-row navigation-row-adjustment">
+            <h5 class="navigation-text">move shark</h5>
+            <div class="keybindings-movement">
+                <div>
+                    <div class="keybindings-container w-75">
+                        <p>W</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="keybindings-container w-75">
+                        <p>A</p>
+                    </div>
+                    <div class="keybindings-container w-75">
+                        <p>S</p>
+                    </div>
+                    <div class="keybindings-container w-75">
+                        <p>D</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-row">
+            <h5 class="navigation-text">fin slap</h5>
+            <div class="keybindings-section">
+                <div class="keybindings-container">
+                    <p>SPACEBAR</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-row">
+            <h5 class="navigation-text">poison bubble</h5>
+            <div class="keybindings-section">
+                <div class="keybindings-container">
+                    <p>ALT</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-row">
+            <h5 class="navigation-text">pause game</h5>
+            <div class="keybindings-section">
+                <div class="keybindings-container">
+                    <p>TAB</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+}
+
+function getHomeButtonHTML() {
+    return `
     <div class="back-btn">
         <img src="../img/icons/home.png" class="home-icon" onclick="playSound(CLICK_SOUND); showStartpage()">
     </div>
@@ -245,6 +313,7 @@ function showEndScreen() {
     endScreen.classList.remove('d-none');
     endScreen.style = `background-image: url(${src});`;
     endScreen.innerHTML = getEndscreenHTML(headline);
+    countUpNumbers();
 }
 
 function getEndscreenHTML(hl) {
@@ -253,15 +322,15 @@ function getEndscreenHTML(hl) {
         <div class="resume-container">
             <div class="resume-box">
                 <img src="../img/status/coins/coin.png" class="coin-img">
-                <h5 class="d-flex-centered">${world.coinsCount}</h5>
+                <h5 class="d-flex-centered counter" data-target="${world.coinsCount}"></h5>
             </div>
             <div class="resume-box">
                 <img src="../img/enemies/puffer_fish_red/dead/(1).png" class="pufferfish-img">
-                <h5 class="d-flex-centered">${killedPufferFishCounter}</h5>
+                <h5 class="d-flex-centered counter" data-target="${killedPufferFishCounter}"></h5>
             </div>
             <div class="resume-box">
                 <img src="../img/enemies/killerwhale/dead/(5).png" class="killerwhale-img">
-                <h5 class="d-flex-centered">${killedEndbossCounter}</h5>
+                <h5 class="d-flex-centered counter" data-target="${killedEndbossCounter}"></h5>
             </div>
         </div>
         <div class="sound-container end-screen-container-adjustment">
@@ -287,7 +356,9 @@ function getEndscreenHTML(hl) {
 function playAgain() {
     let endScreen = document.getElementById('endScreen');
     endScreen.classList.add('d-none');
-    document.getElementById('content').innerHTML = '';
+    document.getElementById('content').innerHTML = `
+    <div class="startscreen" id="startscreen"></div>
+    `;
     startGame();
 }
 
