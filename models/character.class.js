@@ -92,7 +92,7 @@ class Character extends MovableObject {
             this.changeAnimationTime(130);
             this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
         } else if (this.canDoBubble()) {
-            this.changeAnimationTime(120);
+            this.changeAnimationTime(130);
             this.bubbleAnimation();
         } else if (this.canAttack()) {
             this.changeAnimationTime(65);
@@ -164,11 +164,15 @@ class Character extends MovableObject {
             collectedPoison--;
             this.world.statusBarPoison.setPercentage(collectedPoison * 20);
         }
+        if (this.bubbleAnimationCount == 2) {
+            playSound(BUBBLE_BLOW_SOUND);
+        }
         if (this.bubbleAnimationRunning()) {
             this.playAnimation(CHARACTER_BUBBLE_ATTACK_IMG);
         }
         if (this.bubbleAnimationEnded()) {
             this.world.createBubble();
+            playSound(BUBBLE_POP_SOUND);
         }
         this.bubbleAnimationCount++;
     }
