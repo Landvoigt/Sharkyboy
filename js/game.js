@@ -19,7 +19,7 @@ const elem = document.documentElement;
 
 function initWorld() {
     addCoinsCountContainer();
-    addCoins(0);
+    setTimeout(addCoins, 400, 0);
     initLevel_1();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
@@ -51,7 +51,6 @@ window.addEventListener("keydown", (event) => {
             // allow attack only after 1 sec has passed, prevent spamming of attack keypress
             if ((new Date().getTime() - startAttackTimer) > 800) {
                 startAttackTimer = new Date().getTime();
-                world.character.attackAnimationCount = 0;
             }
             keyboard.SPACEBAR = true;
         }
@@ -60,6 +59,7 @@ window.addEventListener("keydown", (event) => {
         keyboard.ALT = true;
     }
     if (event.keyCode == 9) {
+        event.preventDefault();
         keyboard.TAB = true;
         world.pauseGame();
     }

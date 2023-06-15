@@ -237,9 +237,11 @@ class World {
 
     pauseGame() {
         if (!pauseGame) {
+            this.movementCache = [];
             this.stopAllMovement();
             pauseGame = true;
             showPauseScreen();
+            console.log(this.movementCache.length);
             return;
         }
         if (pauseGame) {
@@ -250,17 +252,20 @@ class World {
     }
 
     stopAllMovement() {
-        this.level.enemies.forEach(e => {
-            this.stopMovement(e);
+        this.level.enemies.forEach(obj => {
+            this.stopMovement(obj);
         });
-        this.level.backgroundFishes.forEach(e => {
-            this.stopMovement(e);
+        this.level.backgroundFishes.forEach(obj => {
+            this.stopMovement(obj);
         });
     }
 
     stopMovement(obj) {
         let currentSpeed = obj.speed;
-        this.movementCache.push(currentSpeed);
+        this.movementCache.push({
+            'position': `${obj.x}`,
+            'speed': `${currentSpeed}`
+        });
         obj.speed = 0;
     }
 
@@ -270,18 +275,22 @@ class World {
     }
 
     continueAllMovement() {
-        this.level.enemies.forEach(e => {
-            this.continueMovement(e);
+        this.level.enemies.forEach(obj => {
+            this.continueMovement(obj);
         });
-        this.level.backgroundFishes.forEach(e => {
-            this.continueMovement(e);
+        this.level.backgroundFishes.forEach(obj => {
+            this.continueMovement(obj);
         });
     }
 
     continueMovement(obj) {
-        this.currentSpeedParam = 0;
-        obj.speed = this.movementCache[this.currentSpeedParam];
-        this.currentSpeedParam++;
+        for (let i = 0; i < this.movementCache.length; i++) {
+            if (obj.x == this.movementCache[i]['position']) {
+                let previousSpeed = this.movementCache[i]['speed'];
+                obj.speed = previousSpeed;
+                console.log('yes');
+            }
+        }
     }
 
     constantlyRespawnFishes() {

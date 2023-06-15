@@ -10,12 +10,12 @@ function startGame() {
 }
 
 function createCanvas() {
-    stopSound(MENU_SOUND);
-    playSound(START_SOUND);
     document.getElementById('content').innerHTML = `
     <canvas id="canvas" width="1920px" height="1080px"></canvas>
     `;
     initWorld();
+    stopSound(MENU_SOUND);
+    playSound(START_SOUND);
 }
 
 function countUpNumbers() {
