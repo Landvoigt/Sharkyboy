@@ -25,6 +25,7 @@ class Character extends MovableObject {
     animationTimeout = null;
     isIdling = true;
     isAttacking = false;
+    bubbleAnimationTimeout = false;
 
     constructor() {
         super().loadImage(CHARACTER_SWIMMING_IMG[0]);
@@ -164,7 +165,6 @@ class Character extends MovableObject {
     bubbleAnimation() {
         if (this.bubbleAnimationStarted()) {
             this.resetCurrentImage();
-            collectedPoison--;
             this.world.statusBarPoison.setPercentage(collectedPoison * 20);
         }
         if (this.bubbleAnimationRunning()) {
@@ -173,9 +173,12 @@ class Character extends MovableObject {
         if (this.bubbleAnimationEnded()) {
             this.world.createBubble();
             playSound(BUBBLE_POP_SOUND);
+            collectedPoison--;
+            this.bubbleAnimationTimeout = true;
         }
-        this.playAnimation(CHARACTER_BUBBLE_ATTACK_IMG);
         this.bubbleAnimationCount++;
+        this.playAnimation(CHARACTER_BUBBLE_ATTACK_IMG);
+        this.lastMovementTime = new Date().getTime() / 1000;
     }
 
     slapAnimation() {
@@ -195,7 +198,6 @@ class Character extends MovableObject {
         this.playAnimation(CHARACTER_FIN_SLAP_ATTACK_IMG);
         this.lastMovementTime = new Date().getTime() / 1000;
     }
-
 
     deadAnimation() {
         setInterval(() => {
@@ -238,7 +240,7 @@ class Character extends MovableObject {
     }
 
     canDoBubble() {
-        return this.world.keyboard.ALT;
+        return this.world.keyboard.ALT && collectedPoison > 0 && !this.bubbleAnimationTimeout;
     }
 
     canAttack() {

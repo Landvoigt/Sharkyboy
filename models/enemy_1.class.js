@@ -36,18 +36,20 @@ class Enemy_1 extends MovableObject {  // Pufferfish
 
     animate() {
         setInterval(() => {
-            if (this.enemyDead && this.deadAnimationCount <= 2) {
-                this.deadAnimation();
-            }
-            else if (this.characterNearby() && this.transitionAnimationRunning()) {
-                this.transitionAnimation();
-            }
-            else if (!this.enemyDead) {
-                if (this.transitionDone) {
-                    this.playAnimation(PUFFER_FISH_RED_ATTACK_IMG);
+            if (!pauseGame) {
+                if (this.enemyDead && this.deadAnimationCount <= 2) {
+                    this.deadAnimation();
                 }
-                else {
-                    this.playAnimation(PUFFER_FISH_RED_SWIM_IMG);
+                else if (this.characterNearby() && this.transitionAnimationRunning()) {
+                    this.transitionAnimation();
+                }
+                else if (!this.enemyDead) {
+                    if (this.transitionDone) {
+                        this.playAnimation(PUFFER_FISH_RED_ATTACK_IMG);
+                    }
+                    else {
+                        this.playAnimation(PUFFER_FISH_RED_SWIM_IMG);
+                    }
                 }
             }
         }, this.animationTime);
@@ -55,7 +57,9 @@ class Enemy_1 extends MovableObject {  // Pufferfish
 
     moveLeft() {
         setInterval(() => {
-            super.moveLeft();
+            if (!pauseGame) {
+                super.moveLeft();
+            }
         }, 1000 / 60);
     }
 

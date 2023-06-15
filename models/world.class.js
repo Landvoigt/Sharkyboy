@@ -9,7 +9,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    movableBubbles = [new Bubble(0, -200)];
+    movableBubbles = [];
     movementCache = [];
     currentSpeedParam;
     coinsCount = 0;
@@ -93,9 +93,11 @@ class World {
     }
 
     addObjectsToMap(objects) {
-        objects.forEach(o => {
-            this.addToMap(o);
-        });
+        if (objects.length > 0) {
+            objects.forEach(o => {
+                this.addToMap(o);
+            });
+        }
     }
 
     addToMap(mo) {
@@ -161,6 +163,7 @@ class World {
                     enemyToKill.push(enemy);
                     this.movableBubbles.pop();
                     clearInterval(bblCollisionInterval);
+                    playSound(ENEMY_DEAD_SOUND);
                 }
             });
             let endboss = this.level.endboss[0];
@@ -194,12 +197,12 @@ class World {
     }
 
     checkForCollectedPoison() {
+        this.statusBarPoison.setPercentage(collectedPoison * 20);
         let poisonIndex = -1;
         this.level.collectibles.forEach((poison) => {
             poisonIndex++;
             if (this.character.isColliding(poison) && collectedPoison < 5) {
                 collectedPoison++;
-                this.statusBarPoison.setPercentage(collectedPoison * 20);
                 this.level.collectibles.splice(poisonIndex, 1);
             }
         });
@@ -237,11 +240,8 @@ class World {
 
     pauseGame() {
         if (!pauseGame) {
-            this.movementCache = [];
-            this.stopAllMovement();
             pauseGame = true;
             showPauseScreen();
-            console.log(this.movementCache.length);
             return;
         }
         if (pauseGame) {
@@ -251,46 +251,8 @@ class World {
         }
     }
 
-    stopAllMovement() {
-        this.level.enemies.forEach(obj => {
-            this.stopMovement(obj);
-        });
-        this.level.backgroundFishes.forEach(obj => {
-            this.stopMovement(obj);
-        });
-    }
-
-    stopMovement(obj) {
-        let currentSpeed = obj.speed;
-        this.movementCache.push({
-            'position': `${obj.x}`,
-            'speed': `${currentSpeed}`
-        });
-        obj.speed = 0;
-    }
-
     continueGame() {
         this.draw();
-        this.continueAllMovement();
-    }
-
-    continueAllMovement() {
-        this.level.enemies.forEach(obj => {
-            this.continueMovement(obj);
-        });
-        this.level.backgroundFishes.forEach(obj => {
-            this.continueMovement(obj);
-        });
-    }
-
-    continueMovement(obj) {
-        for (let i = 0; i < this.movementCache.length; i++) {
-            if (obj.x == this.movementCache[i]['position']) {
-                let previousSpeed = this.movementCache[i]['speed'];
-                obj.speed = previousSpeed;
-                console.log('yes');
-            }
-        }
     }
 
     constantlyRespawnFishes() {

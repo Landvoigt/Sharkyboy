@@ -14,6 +14,7 @@ class BackgroundFish extends MovableObject {
         this.setMovementDirection();
         this.randomiseObjects();
         this.animate();
+        // this.checkPositionForRemoval();
     }
 
     load() {
@@ -55,15 +56,19 @@ class BackgroundFish extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (this.randomDirection == 0) {
-                this.moveLeft();
-            } else {
-                this.moveRight();
+            if (!pauseGame) {
+                if (this.randomDirection == 0) {
+                    this.moveLeft();
+                } else {
+                    this.moveRight();
+                }
             }
         }, 1000 / 60);
 
         setInterval(() => {
-            this.playAnimation(this.imgsToLoad);
+            if (!pauseGame) {
+                this.playAnimation(this.imgsToLoad);
+            }
         }, 100);
     }
 

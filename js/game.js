@@ -51,11 +51,13 @@ window.addEventListener("keydown", (event) => {
             // allow attack only after 1 sec has passed, prevent spamming of attack keypress
             if ((new Date().getTime() - startAttackTimer) > 800) {
                 startAttackTimer = new Date().getTime();
+                world.character.attackAnimationCount = 0;
             }
             keyboard.SPACEBAR = true;
         }
     }
-    if (event.keyCode == 18 && !pauseGame && collectedPoison > 0) {
+    if (event.keyCode == 18 && !pauseGame) {
+        event.preventDefault();
         keyboard.ALT = true;
     }
     if (event.keyCode == 9) {
@@ -85,6 +87,8 @@ window.addEventListener("keyup", (event) => {
     }
     if (event.keyCode == 18) {
         keyboard.ALT = false;
+        world.character.bubbleAnimationTimeout = false;
+        world.character.bubbleAnimationCount = 0;
     }
     if (event.keyCode == 9) {
         keyboard.TAB = false;
