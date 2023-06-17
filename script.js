@@ -1,3 +1,5 @@
+// screen.orientation.lock('landscape');
+
 function initialize() {
     showStartpage();
     pushAudios();
@@ -11,7 +13,10 @@ function startGame() {
 
 function createCanvas() {
     document.getElementById('content').innerHTML = `
-    <canvas id="canvas" width="1920px" height="1080px"></canvas>
+    <div style="height: 100%; width:100%; background-color: #000000;">
+        <canvas id="canvas" width="1920px" height="1080px"></canvas>
+        <div id="overlayContainer" class="overlay-div"></div>
+    </div>
     `;
     initWorld();
     stopSound(MENU_SOUND);
@@ -262,7 +267,7 @@ function unmuteSound() {
 }
 
 function addCoinsCountContainer() {
-    let content = document.getElementById('content');
+    let content = document.getElementById('overlayContainer');
     content.innerHTML += `
     <div class="coins-count-container" id="coinsCountContainer">
     </div>
@@ -272,7 +277,7 @@ function addCoinsCountContainer() {
 function addCoins(cnt) {
     let coinsContainer = document.getElementById('coinsCountContainer');
     coinsContainer.innerHTML = `
-    <h5>${cnt}</h5>
+    <h5 class="coins">${cnt}</h5>
     `;
 }
 
@@ -372,6 +377,9 @@ function openFullscreen() {
     } else if (elem.msRequestFullscreen) { /* IE11 */
         elem.msRequestFullscreen();
     }
+    if (screen.orientation.lock) {
+        screen.orientation.lock('landscape');
+    }
 }
 
 function closeFullscreen() {
@@ -384,3 +392,30 @@ function closeFullscreen() {
         document.msExitFullscreen();
     }
 }
+
+window.addEventListener('DOMContentLoaded', function () {
+    function showFullscreen() {
+        var something = document.documentElement;
+
+        // Check if the browser supports the Fullscreen API
+        if (something.requestFullscreen) {
+            // Open fullscreen mode
+            something.requestFullscreen();
+
+            // Lock the screen orientation to landscape
+            if (screen.orientation.lock) {
+                screen.orientation.lock('landscape');
+            }
+        }
+    }
+
+    function isMobile() {
+        return (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        );
+    }
+
+    if (isMobile() && window.matchMedia('(max-aspect-ratio: 16/9)').matches && window.matchMedia('(any-pointer: coarse)').matches) {
+        showFullscreen();
+    }
+});

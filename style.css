@@ -156,6 +156,26 @@ p {
 
 canvas {
     display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100vh * 16 / 9);
+    height: 100vh;
+    max-width: 100vw;
+    max-height: calc(9 / 16 * 100vw);
+}
+
+.overlay-div {
+    position: absolute;
+    z-index: 200;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100vh * 16 / 9);
+    height: 100vh;
+    max-width: 100vw;
+    max-height: calc(9 / 16 * 100vw);
 }
 
 .startscreen {
@@ -397,7 +417,15 @@ canvas {
     position: absolute;
     display: flex;
     justify-content: center;
-    top: 18px;
+    font-size: 5vw;
+    top: 0.8vh;
+}
+
+.coins {
+    margin-left: 15vw;
+    width: 15vw;
+    font-size: 1em;
+    text-align: start;
 }
 
 .pause-screen {
@@ -520,7 +548,7 @@ canvas {
     }
 }
 
-@media only screen and (max-width: 1920px) {
+/* @media only screen and (max-width: 1920px) {
     canvas {
         width: 100%;
     }
@@ -530,7 +558,7 @@ canvas {
     canvas {
         height: 100vh;
     }
-}
+} */
 
 @media (max-width: 1700px) {
     .start-button {
@@ -567,12 +595,39 @@ canvas {
 }
 
 @media (max-width: 1050px) {
+    h1 {
+        font-size: 7em;
+    }
+
     h2 {
         font-size: 4em;
     }
 
     h3 {
         font-size: 2.5em;
+    }
+
+    h4 {
+        width: 440px;
+        margin: 0;
+        font-size: 90px;
+        color: rgb(250, 245, 216);
+        letter-spacing: 3px;
+    }
+
+    h5 {
+        width: 150px;
+        text-align: end;
+        margin: 0;
+        font-size: 75px;
+        color: rgb(250, 245, 216);
+        letter-spacing: 3px;
+    }
+
+    h6 {
+        margin: 0;
+        color: rgb(231, 208, 3);
+        font-size: 10em;
     }
 
     .start-button {
@@ -601,5 +656,16 @@ canvas {
     .settings-button,
     .navigation-button {
         height: 80px;
+    }
+}
+
+@media (max-width: 900px) {
+    .start-button {
+        width: 230px;
+    }
+
+    .settings-button,
+    .navigation-button {
+        width: 230px;
     }
 }
