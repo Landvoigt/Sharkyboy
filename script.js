@@ -29,13 +29,17 @@ function countUpNumbers() {
         let startValue = 0;
         let endValue = parseInt(valueDisplay.getAttribute('data-target'));
         let duration = Math.floor(1000 / endValue);
-        let counter = setInterval(function () {
-            startValue += 1;
+        if (endValue == 0) {
             valueDisplay.textContent = startValue;
-            if (startValue == endValue) {
-                clearInterval(counter);
-            }
-        }, duration);
+        } else {
+            let counter = setInterval(function () {
+                startValue += 1;
+                valueDisplay.textContent = startValue;
+                if (startValue == endValue) {
+                    clearInterval(counter);
+                }
+            }, duration);
+        }
     });
 }
 
@@ -71,16 +75,16 @@ function getSettingsHTML() {
     </div>
     <div class="difficulty-container">
         <h4>Difficulty</h4>
-        <div class="difficulty-circle-btn yellow-highlight" id="difficultyIcon1" onclick="highlightDifficultySelection(1); showSelectedOption('Easy Peasy')">
+        <div class="difficulty-circle-btn" id="difficultyIcon1" onclick="highlightDifficultySelection(1); showSelectedOption('Easy Peasy'); changeDifficulty(1)">
             <img src="../img/icons/carp.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
-        <div class="difficulty-circle-btn" id="difficultyIcon2" onclick="highlightDifficultySelection(2); showSelectedOption('Medium')">
+        <div class="difficulty-circle-btn yellow-highlight" id="difficultyIcon2" onclick="highlightDifficultySelection(2); showSelectedOption('Medium'); changeDifficulty(2)">
             <img src="../img/icons/frogfish.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
-        <div class="difficulty-circle-btn" id="difficultyIcon3" onclick="highlightDifficultySelection(3); showSelectedOption('Hard')">
+        <div class="difficulty-circle-btn" id="difficultyIcon3" onclick="highlightDifficultySelection(3); showSelectedOption('Hard'); changeDifficulty(3)">
             <img src="../img/icons/dolphin.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
-        <div class="difficulty-circle-btn" id="difficultyIcon4" onclick="highlightDifficultySelection(4); showSelectedOption('Extremly Hard')">
+        <div class="difficulty-circle-btn" id="difficultyIcon4" onclick="highlightDifficultySelection(4); showSelectedOption('Extremly Hard'); changeDifficulty(4)">
             <img src="../img/icons/shark.png" class="difficulty-icon" onclick="playSound(CLICK_SOUND)">
         </div>
     </div>
@@ -377,9 +381,6 @@ function openFullscreen() {
     } else if (elem.msRequestFullscreen) { /* IE11 */
         elem.msRequestFullscreen();
     }
-    if (screen.orientation.lock) {
-        screen.orientation.lock('landscape');
-    }
 }
 
 function closeFullscreen() {
@@ -392,30 +393,3 @@ function closeFullscreen() {
         document.msExitFullscreen();
     }
 }
-
-window.addEventListener('DOMContentLoaded', function () {
-    function showFullscreen() {
-        var something = document.documentElement;
-
-        // Check if the browser supports the Fullscreen API
-        if (something.requestFullscreen) {
-            // Open fullscreen mode
-            something.requestFullscreen();
-
-            // Lock the screen orientation to landscape
-            if (screen.orientation.lock) {
-                screen.orientation.lock('landscape');
-            }
-        }
-    }
-
-    function isMobile() {
-        return (
-            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-        );
-    }
-
-    if (isMobile() && window.matchMedia('(max-aspect-ratio: 16/9)').matches && window.matchMedia('(any-pointer: coarse)').matches) {
-        showFullscreen();
-    }
-});

@@ -94,3 +94,42 @@ window.addEventListener("keyup", (event) => {
         keyboard.TAB = false;
     }
 });
+
+
+endbossHealthPoints = 250;
+characterHitFromCasualEnemy = 10;
+characterHitFromEndboss = 25;
+casualEnemyMinSpeed = 0.2;
+casualEnemyMaxSpeed = 0.6;
+
+
+function changeDifficulty(dfc) {
+    if (dfc == 1) {
+        endbossHealthPoints = 150;
+        characterHitFromCasualEnemy = 5;
+        characterHitFromEndboss = 15;
+        casualEnemyMinSpeed = 0.15;
+        casualEnemyMaxSpeed = 0.4;
+    }
+    if (dfc == 2) {
+        endbossHealthPoints = 250;
+        characterHitFromCasualEnemy = 10;
+        characterHitFromEndboss = 25;
+        casualEnemyMinSpeed = 0.25;
+        casualEnemyMaxSpeed = 0.6;
+    }
+    if (dfc == 3) {
+        endbossHealthPoints = 250;
+        characterHitFromCasualEnemy = 20;
+        characterHitFromEndboss = 35;
+        casualEnemyMinSpeed = 1.6;
+        casualEnemyMaxSpeed = 2;
+    }
+    if (dfc == 4) {
+        endbossHealthPoints = 400;
+        characterHitFromCasualEnemy = 30;
+        characterHitFromEndboss = 35;
+        casualEnemyMinSpeed = 3;
+        casualEnemyMaxSpeed = 4;
+    }
+}

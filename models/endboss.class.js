@@ -10,7 +10,7 @@ class Endboss extends MovableObject {
         height: 175,
     };
     spawnOffset = 1300;
-    hp = 250;
+    // hp = 250;
     attackResetTime = 3400;
     animationTime = 180;
     deadAnimationTime = 120;
@@ -136,10 +136,10 @@ class Endboss extends MovableObject {
 
     hit() {
         playSound(KILLERWHALE_HURT_SOUND);
-        this.hp -= 50;
-        if (this.hp < 0) {
+        endbossHealthPoints -= 50;
+        if (endbossHealthPoints < 0) {
             this.endbossAlive = false;
-            this.hp = 0;
+            endbossHealthPoints = 0;
         } else {
             this.lastHit = new Date().getTime();
         }
@@ -152,7 +152,7 @@ class Endboss extends MovableObject {
     }
 
     isDead() {
-        return this.hp == 0;
+        return endbossHealthPoints == 0;
     }
 
     hurtAnimation() {

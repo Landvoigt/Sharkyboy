@@ -105,13 +105,13 @@ class Enemy_1 extends MovableObject {  // Pufferfish
     }
 
     getRandomSpeed() {
-        this.speed = 0.2 + Math.random() * 0.6;
+        this.speed = casualEnemyMinSpeed + Math.random() * casualEnemyMaxSpeed;
         this.randomFlyingSpeed_x = 3.5 + Math.random() * 5;
         this.randomFlyingSpeed_y = 3 + Math.random() * 5;
     }
 
     characterNearby() {
-        return characterPosition + 900 > this.x;
+        return characterPosition + 1000 > this.x;
     }
 
     transitionAnimationStarted() {

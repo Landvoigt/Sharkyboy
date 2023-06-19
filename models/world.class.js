@@ -16,8 +16,8 @@ class World {
     enemySpawnCounter = 1;
     enemyRespawnDistance = 500;
     lastEnemyRespawnBeforeEndboss = 7500;
-    enemyHit = 10;
-    endbossHit = 25;
+    // enemyHit = 10;
+    // endbossHit = 25;
     bgFishRespawnInterval = 2000;
 
     constructor(canvas, keyboard) {
@@ -131,7 +131,7 @@ class World {
     checkEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !this.character.isAttacking && !enemy.enemyDead) {
-                this.characterGetsHitted(this.enemyHit);
+                this.characterGetsHitted(characterHitFromCasualEnemy);
             }
             if (this.character.isColliding(enemy) && this.character.isAttacking) {
                 enemy.enemyDead = true;
@@ -143,14 +143,14 @@ class World {
     checkEndbossCollision() {
         let endboss = this.level.endboss[0];
         if (this.character.isColliding(endboss) && !this.character.isAttacking && endboss.endbossAlive) {
-            this.characterGetsHitted(this.endbossHit);
+            this.characterGetsHitted(characterHitFromEndboss);
         }
         if (this.character.isColliding(endboss) && this.character.isAttacking && endboss.endbossAlive) {
             if (endboss.attackTimeoutActive && !endboss.wasHitted) {
                 endboss.hit();
                 endboss.wasHitted = true;
             } else {
-                this.characterGetsHitted(this.endbossHit);
+                this.characterGetsHitted(characterHitFromEndboss);
             }
         }
     }
