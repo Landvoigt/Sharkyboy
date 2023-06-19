@@ -177,14 +177,16 @@ function returnToStartpage() {
 function getStartpageHMTL() {
     return `
     <h1>Skarkyboy</h1>
-    <div class="start-button" onclick="startGame()">
-        <h2>Start</h2>
-    </div>
-    <div class="settings-button" onclick="playSound(CLICK_SOUND); showSettings()">
-        <h3>Settings</h3>
-    </div>
-    <div class="navigation-button" onclick="playSound(CLICK_SOUND); showNavigation()">
-        <h3>Navigation</h3>
+    <div class="startscreen-btn-box">
+        <div class="start-button" onclick="startGame()">
+            <h2>Start</h2>
+        </div>
+        <div class="settings-button" onclick="playSound(CLICK_SOUND); showSettings()">
+            <h3>Settings</h3>
+        </div>
+        <div class="navigation-button" onclick="playSound(CLICK_SOUND); showNavigation()">
+            <h3>Navigation</h3>
+        </div>
     </div>
     `;
 }
@@ -232,7 +234,7 @@ function getNavigationHTML() {
             <h5 class="navigation-text">poison bubble</h5>
             <div class="keybindings-section">
                 <div class="keybindings-container">
-                    <p>ALT</p>
+                    <p>Hold ALT</p>
                 </div>
             </div>
         </div>

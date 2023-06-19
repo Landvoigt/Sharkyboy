@@ -45,15 +45,19 @@ function clearAllTimeouts() {
 
 window.addEventListener("keydown", (event) => {
     if (event.keyCode == 39 && !pauseGame || event.keyCode == 68 && !pauseGame) {
+        event.preventDefault();
         keyboard.RIGHT = true;
     }
     if (event.keyCode == 37 && !pauseGame || event.keyCode == 65 && !pauseGame) {
+        event.preventDefault();
         keyboard.LEFT = true;
     }
     if (event.keyCode == 38 && !pauseGame || event.keyCode == 87 && !pauseGame) {
+        event.preventDefault();
         keyboard.UP = true;
     }
     if (event.keyCode == 40 && !pauseGame || event.keyCode == 83 && !pauseGame) {
+        event.preventDefault();
         keyboard.DOWN = true;
     }
     if (event.keyCode == 32 && !pauseGame) {

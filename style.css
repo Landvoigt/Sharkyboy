@@ -4,19 +4,31 @@
 }
 
 @media screen and (orientation:portrait) {
-    html {
-        transform: rotate(-90deg);
-        transform-origin: left top;
-        width: 100%;
-        height: 100%;
-        overflow-x: hidden;
-        position: absolute;
-        top: 100%;
+    .screen-rotate {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        z-index: 999;
+        top: 0;
         left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: #232323;
+    }
+
+    .screen-rotate span {
+        font-size: 2em;
+        color: rgb(250, 245, 216);
+        text-align: center;
     }
 }
 
-/* @media screen and (orientation:landscape) {} */
+@media screen and (orientation:landscape) {
+    .screen-rotate {
+        display: none;
+    }
+}
 
 body {
     margin: 0;
@@ -201,7 +213,18 @@ canvas {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 40px;
+    /* gap: 40px; */
+}
+
+.startscreen-btn-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 65%;
+    width: 100%;
+    gap: 30px;
+    margin-top: 3%;
 }
 
 .start-button {
@@ -615,11 +638,11 @@ canvas {
     }
 
     h2 {
-        font-size: 4em;
+        font-size: 3.7em;
     }
 
     h3 {
-        font-size: 2.5em;
+        font-size: 2.1em;
     }
 
     h4 {
@@ -646,41 +669,60 @@ canvas {
     }
 
     .start-button {
-        height: 120px;
+        height: 110px;
+        width: 250px;
+        order: 2;
     }
 
-    .settings-button,
+    .settings-button {
+        height: 90px;
+        width: 210px;
+        order: 1;
+    }
+
     .navigation-button {
-        height: 100px;
+        height: 90px;
+        width: 210px;
+        order: 2;
+    }
+
+    .startscreen-btn-box {
+        flex-direction: row;
+        height: 30%;
+        margin-top: 7%;
+        gap: 50px;
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
+    h1 {
+        font-size: 6em;
+    }
+
     h2 {
         font-size: 3em;
     }
 
     h3 {
-        font-size: 2em;
+        font-size: 1.7em;
     }
-
     .start-button {
-        height: 100px;
+        height: 95px;
+        width: 200px;
     }
 
-    .settings-button,
+    .settings-button {
+        height: 70px;
+        width: 160px;
+    }
+
     .navigation-button {
-        height: 80px;
-    }
-}
-
-@media (max-width: 900px) {
-    .start-button {
-        width: 230px;
+        height: 70px;
+        width: 160px;
     }
 
-    .settings-button,
-    .navigation-button {
-        width: 230px;
+    .startscreen-btn-box {
+        height: 30%;
+        gap: 25px;
     }
 }
