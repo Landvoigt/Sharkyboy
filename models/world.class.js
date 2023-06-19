@@ -16,8 +16,6 @@ class World {
     enemySpawnCounter = 1;
     enemyRespawnDistance = 500;
     lastEnemyRespawnBeforeEndboss = 7500;
-    // enemyHit = 10;
-    // endbossHit = 25;
     bgFishRespawnInterval = 2000;
 
     constructor(canvas, keyboard) {
@@ -220,6 +218,7 @@ class World {
     }
 
     gameOver() {
+        inGame = false;
         characterAlive = false;
         gameWon = false;
         clearAllIntervals();
@@ -230,6 +229,7 @@ class World {
     }
 
     gameWon() {
+        inGame = false;
         killedEndbossCounter++;
         gameWon = true;
         clearAllIntervals();

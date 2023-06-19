@@ -10,7 +10,6 @@ class Endboss extends MovableObject {
         height: 175,
     };
     spawnOffset = 1300;
-    // hp = 250;
     attackResetTime = 3400;
     animationTime = 180;
     deadAnimationTime = 120;

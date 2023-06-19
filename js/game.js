@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let characterPosition = 0;
+let inGame = false;
 let characterAlive = true;
 let pauseGame = false;
 let sound = true;
@@ -16,13 +17,22 @@ let gameWon;
 let fullscreen;
 const elem = document.documentElement;
 
+let difficulty = 2;
+let endbossHealthPoints = 250;
+let characterHitFromCasualEnemy = 10;
+let characterHitFromEndboss = 25;
+let casualEnemyMinSpeed = 0.2;
+let casualEnemyMaxSpeed = 0.6;
+
 
 function initWorld() {
     addCoinsCountContainer();
+    inGame = true;
     setTimeout(addCoins, 400, 0);
     initLevel_1();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+
 }
 
 function clearAllIntervals() {
@@ -95,15 +105,8 @@ window.addEventListener("keyup", (event) => {
     }
 });
 
-
-endbossHealthPoints = 250;
-characterHitFromCasualEnemy = 10;
-characterHitFromEndboss = 25;
-casualEnemyMinSpeed = 0.2;
-casualEnemyMaxSpeed = 0.6;
-
-
 function changeDifficulty(dfc) {
+    difficulty = dfc;
     if (dfc == 1) {
         endbossHealthPoints = 150;
         characterHitFromCasualEnemy = 5;

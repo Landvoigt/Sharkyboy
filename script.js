@@ -1,5 +1,3 @@
-// screen.orientation.lock('landscape');
-
 function initialize() {
     showStartpage();
     pushAudios();
@@ -157,7 +155,23 @@ function playSoundAndContinue() {
 }
 
 function returnToStartpage() {
-    window.location.reload();
+    deletePauseScreen();
+    stopAllSounds();
+    inGame = false;
+    pauseGame = false;
+    characterAlive = true;
+    endbossReached = false;
+    collectedPoison = 0;
+    killedPufferFishCounter = 0;
+    killedEndbossCounter = 0;
+    gameWon = '';
+    world.level.endboss[0].endbossAlive = true;
+    changeDifficulty(difficulty);
+    document.getElementById('content').innerHTML = `
+    <div class="startscreen" id="startscreen"></div>
+    `;
+    showStartpage();
+    playSound(MENU_SOUND);
 }
 
 function getStartpageHMTL() {
@@ -279,10 +293,12 @@ function addCoinsCountContainer() {
 }
 
 function addCoins(cnt) {
-    let coinsContainer = document.getElementById('coinsCountContainer');
-    coinsContainer.innerHTML = `
-    <h5 class="coins">${cnt}</h5>
-    `;
+    if (inGame) {
+        let coinsContainer = document.getElementById('coinsCountContainer');
+        coinsContainer.innerHTML = `
+        <h5 class="coins">${cnt}</h5>
+        `;
+    }
 }
 
 function showPauseScreen() {
@@ -363,11 +379,7 @@ function getEndscreenHTML(hl) {
 
 
 function playAgain() {
-    let endScreen = document.getElementById('endScreen');
-    endScreen.classList.add('d-none');
-    document.getElementById('content').innerHTML = `
-    <div class="startscreen" id="startscreen"></div>
-    `;
+    returnToStartpage();
     startGame();
 }
 
