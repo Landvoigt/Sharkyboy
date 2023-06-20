@@ -17,18 +17,18 @@ function createCanvas() {
             <div id="mobileMovement" class="mobile-movement-container">
                 <div>
                     <div id="btnUp" class="mobile-movement-box">
-                        <p>W</p>
+                        <img src="../img/icons/arrow.png" class="arrow up">
                     </div>
                 </div>
-                <div class="d-flex">
+                <div class="arrows-box-adjustment">
                     <div id="btnLeft" class="mobile-movement-box">
-                        <p>A</p>
+                        <img src="../img/icons/arrow.png" class="arrow left">
                     </div>
-                    <div id="btnDown" class="mobile-movement-box">
-                        <p>S</p>
+                    <div id="btnDown" class="mobile-movement-box mb-25">
+                        <img src="../img/icons/arrow.png" class="arrow down">
                     </div>
                     <div id="btnRight" class="mobile-movement-box">
-                        <p>D</p>
+                        <img src="../img/icons/arrow.png" class="arrow right">
                     </div>
                 </div>
             </div>
