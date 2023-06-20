@@ -18,7 +18,6 @@
     <script src="../load/enemies.js"></script>
     <script src="../models/drawable_object.class.js"></script>
     <script src="../models/status_bar.class.js"></script>
-    <script src="../models/coin_counter.class.js"></script>
     <script src="../models/movable_object.class.js"></script>
     <script src="../models/background_object.class.js"></script>
     <script src="../models/character.class.js"></script>
@@ -35,7 +34,7 @@
 
 <body onload="initialize()">
     <div class="screen-rotate">
-        <span>please rotate<br> your phone</span>
+        <span>please rotate<br> your device</span>
     </div>
     <div class="content" id="content">
         <div class="startscreen" id="startscreen">
@@ -43,33 +42,33 @@
     </div>
     <div id="pauseScreen" class="pause-screen d-none">
         <div class="sound-container center">
-            <h4 class="w-750">Fullscreen</h4>
+            <h4 class="w-690">Fullscreen</h4>
             <div class="fullscreen-circle-btn yellow-highlight" id="fullscreenIcon1"
-                onclick="highlightFullscreenSelection(1); showSelectedOption('Off')">
+                onclick="highlightFullscreenSelection(1)">
                 <img src="../img/icons/fullscreen_off.png" id="fullscreenOff" class="fullscreen-icon"
                     onclick="playSound(CLICK_SOUND); closeFullscreen()">
             </div>
             <div class="fullscreen-circle-btn" id="fullscreenIcon2"
-                onclick="highlightFullscreenSelection(2); showSelectedOption('On')">
+                onclick="highlightFullscreenSelection(2)">
                 <img src="../img/icons/fullscreen_on.png" id="fullscreenOn" class="fullscreen-icon"
                     onclick="playSound(CLICK_SOUND); openFullscreen()">
             </div>
         </div>
         <div class="sound-container center">
-            <h4 class="w-750">Sound</h4>
+            <h4 class="w-690">Sound</h4>
             <div class="sound-circle-btn yellow-highlight" id="soundIcon1"
-                onclick="highlightSoundSelection(1); showSelectedOption('Enabled')">
+                onclick="highlightSoundSelection(1)">
                 <img src="../img/icons/sound_on.png" id="unmuteButton" class="setting-icon"
                     onclick="playSound(CLICK_SOUND); unmuteSound()">
             </div>
             <div class="sound-circle-btn" id="soundIcon2"
-                onclick="highlightSoundSelection(2); showSelectedOption('Muted')">
+                onclick="highlightSoundSelection(2)">
                 <img src="../img/icons/sound_mute.png" id="muteButton" class="setting-icon"
                     onclick="playSound(CLICK_SOUND); muteSound()">
             </div>
         </div>
         <div class="sound-container back-btn-container-adjustment mt-50">
-            <h4 class="fs-70 w-750">Return to Game</h4>
+            <h4 class="fs-4 w-690">Return to Game</h4>
             <div class="w-344 d-flex center">
                 <div class="back-btn pos-unset back-btn-adjustment">
                     <img src="../img/icons/go_back.png" class="back-icon" onclick="playSoundAndContinue()">
@@ -77,7 +76,7 @@
             </div>
         </div>
         <div class="sound-container back-btn-container-adjustment">
-            <h4 class="fs-70 w-750">Return to Startscreen</h4>
+            <h4 class="fs-4 w-690">Return to Startscreen</h4>
             <div class="w-344 d-flex center">
                 <div class="back-btn pos-unset back-btn-adjustment">
                     <img src="../img/icons/home.png" class="home-icon home-icon-adjustment"

@@ -3,7 +3,6 @@ class World {
     level = level_1;
     statusBarHP = new StatusBar(HP_BAR_IMG, 25, -5, 'hp');
     statusBarPoison = new StatusBar(POISON_BAR_IMG, 1510, -5, 'poison');
-    statusBarCoin = new CoinCounter();
     statusBarPoisonAnimation = new PoisonBottle(1825, -12);
     canvas;
     ctx;
@@ -58,7 +57,6 @@ class World {
         // space for fixed objects
         this.addToMap(this.statusBarHP);
         this.addToMap(this.statusBarPoison);
-        this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarPoisonAnimation);
         this.ctx.translate(this.camera_x, 0); // forward again
     }
@@ -257,9 +255,11 @@ class World {
 
     constantlyRespawnFishes() {
         setInterval(() => {
-            this.level.backgroundFishes.push(
-                new BackgroundFish()
-            );
+            if (!pauseGame) {
+                this.level.backgroundFishes.push(
+                    new BackgroundFish()
+                );
+            }
         }, this.bgFishRespawnInterval);
     }
 

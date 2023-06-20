@@ -11,8 +11,8 @@ class Character extends MovableObject {
     };
     x_default = 60;
     y_default = 500;
-    y_min = 50;
-    y_max = 650;
+    y_min = 60;
+    y_max = 640;
     hp = 100;
     speed = 9;
     animationTime = 130;
@@ -113,7 +113,7 @@ class Character extends MovableObject {
     }
 
     repositionCamera() {
-        this.world.camera_x = -this.x + 100;
+        this.world.camera_x = -this.x + 180;
     }
 
     checkIdleTime() {

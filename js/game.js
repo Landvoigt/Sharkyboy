@@ -32,7 +32,6 @@ function initWorld() {
     initLevel_1();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-
 }
 
 function clearAllIntervals() {
@@ -61,6 +60,7 @@ window.addEventListener("keydown", (event) => {
         keyboard.DOWN = true;
     }
     if (event.keyCode == 32 && !pauseGame) {
+        event.preventDefault();
         if (stopAttackTimer > startAttackTimer && !keyboard.SPACEBAR) {
             // allow attack only after 1 sec has passed, prevent spamming of attack keypress
             if ((new Date().getTime() - startAttackTimer) > 800) {
@@ -83,31 +83,121 @@ window.addEventListener("keydown", (event) => {
 
 window.addEventListener("keyup", (event) => {
     if (event.keyCode == 39 || event.keyCode == 68) {
+        event.preventDefault();
         keyboard.RIGHT = false;
     }
     if (event.keyCode == 37 || event.keyCode == 65) {
+        event.preventDefault();
         keyboard.LEFT = false;
     }
     if (event.keyCode == 38 || event.keyCode == 87) {
+        event.preventDefault();
         keyboard.UP = false;
     }
     if (event.keyCode == 40 || event.keyCode == 83) {
+        event.preventDefault();
         keyboard.DOWN = false;
     }
     if (event.keyCode == 32) {
+        event.preventDefault();
         stopAttackTimer = new Date().getTime();
         world.character.isAttacking = false;
         keyboard.SPACEBAR = false;
     }
     if (event.keyCode == 18) {
+        event.preventDefault();
         keyboard.ALT = false;
         world.character.bubbleAnimationTimeout = false;
         world.character.bubbleAnimationCount = 0;
     }
     if (event.keyCode == 9) {
+        event.preventDefault();
         keyboard.TAB = false;
     }
 });
+
+function bindMobileBtnEvents() {
+    document.getElementById('btnRight').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+
+    document.getElementById('btnRight').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+
+    document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
+
+    document.getElementById('btnLeft').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
+
+    document.getElementById('btnUp').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.UP = true;
+    });
+
+    document.getElementById('btnUp').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.UP = false;
+    });
+
+    document.getElementById('btnDown').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.DOWN = true;
+    });
+
+    document.getElementById('btnDown').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.DOWN = false;
+    });
+
+    document.getElementById('btnAttack').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (stopAttackTimer > startAttackTimer && !keyboard.SPACEBAR) {
+            if ((new Date().getTime() - startAttackTimer) > 800) {
+                startAttackTimer = new Date().getTime();
+                world.character.attackAnimationCount = 0;
+            }
+            keyboard.SPACEBAR = true;
+        }
+    });
+
+    document.getElementById('btnAttack').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        stopAttackTimer = new Date().getTime();
+        world.character.isAttacking = false;
+        keyboard.SPACEBAR = false;
+    });
+
+    document.getElementById('btnBubble').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.ALT = true;
+    });
+
+    document.getElementById('btnBubble').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.ALT = false;
+        world.character.bubbleAnimationTimeout = false;
+        world.character.bubbleAnimationCount = 0;
+    });
+
+    document.getElementById('btnPause').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.TAB = true;
+        world.pauseGame();
+    });
+
+    document.getElementById('btnPause').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.TAB = false;
+    });
+}
 
 function changeDifficulty(dfc) {
     difficulty = dfc;

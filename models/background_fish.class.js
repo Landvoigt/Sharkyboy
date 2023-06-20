@@ -14,7 +14,6 @@ class BackgroundFish extends MovableObject {
         this.setMovementDirection();
         this.randomiseObjects();
         this.animate();
-        // this.checkPositionForRemoval();
     }
 
     load() {

@@ -13,10 +13,43 @@ function createCanvas() {
     document.getElementById('content').innerHTML = `
     <div style="height: 100%; width:100%; background-color: #000000;">
         <canvas id="canvas" width="1920px" height="1080px"></canvas>
-        <div id="overlayContainer" class="overlay-div"></div>
+        <div id="overlayContainer" class="overlay-div">
+            <div class="mobile-movement-container">
+                <div>
+                    <div id="btnUp" class="mobile-movement-box">
+                        <p>W</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div id="btnLeft" class="mobile-movement-box">
+                        <p>A</p>
+                    </div>
+                    <div id="btnDown" class="mobile-movement-box">
+                        <p>S</p>
+                    </div>
+                    <div id="btnRight" class="mobile-movement-box">
+                        <p>D</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-attack-container">
+                <div id="btnAttack" class="mobile-attack-box w-70">
+                    <p>Attack</p>
+                </div>
+                <div id="btnBubble" class="mobile-attack-box w-70">
+                    <p>Bubble</p>
+                </div>
+            </div>
+            <div id="btnPause" class="mobile-pause-container">
+                <div class="mobile-pause-box w-70">
+                    <p>Pause</p>
+                </div>
+            </div>
+        </div>
     </div>
     `;
     initWorld();
+    bindMobileBtnEvents();
     stopSound(MENU_SOUND);
     playSound(START_SOUND);
 }
@@ -225,7 +258,7 @@ function getNavigationHTML() {
         <div class="navigation-row">
             <h5 class="navigation-text">fin slap</h5>
             <div class="keybindings-section">
-                <div class="keybindings-container">
+                <div class="keybindings-container keybindings-cont-mobile">
                     <p>SPACEBAR</p>
                 </div>
             </div>
@@ -233,7 +266,7 @@ function getNavigationHTML() {
         <div class="navigation-row">
             <h5 class="navigation-text">poison bubble</h5>
             <div class="keybindings-section">
-                <div class="keybindings-container">
+                <div class="keybindings-container keybindings-cont-mobile">
                     <p>Hold ALT</p>
                 </div>
             </div>
@@ -241,7 +274,7 @@ function getNavigationHTML() {
         <div class="navigation-row">
             <h5 class="navigation-text">pause game</h5>
             <div class="keybindings-section">
-                <div class="keybindings-container">
+                <div class="keybindings-container keybindings-cont-mobile">
                     <p>TAB</p>
                 </div>
             </div>
@@ -289,8 +322,8 @@ function unmuteSound() {
 function addCoinsCountContainer() {
     let content = document.getElementById('overlayContainer');
     content.innerHTML += `
-    <div class="coins-count-container" id="coinsCountContainer">
-    </div>
+    <div class="overlay-container">
+        <div class="coins-count-container" id="coinsCountContainer"></div>
     `;
 }
 
@@ -298,7 +331,8 @@ function addCoins(cnt) {
     if (inGame) {
         let coinsContainer = document.getElementById('coinsCountContainer');
         coinsContainer.innerHTML = `
-        <h5 class="coins">${cnt}</h5>
+        <img src="../img/status/coins/coin.png" class="coin-counter-img">
+        <h5 class="coins w-120">${cnt}</h5>
         `;
     }
 }
@@ -361,7 +395,7 @@ function getEndscreenHTML(hl) {
             </div>
         </div>
         <div class="sound-container end-screen-container-adjustment">
-            <h4 class="fs-70 w-750">Go again</h4>
+            <h4 class="fs-4 w-690">Go again</h4>
             <div class="w-344 d-flex center">
                 <div class="back-btn pos-unset back-btn-adjustment">
                     <img src="../img/icons/restart.png" class="restart-icon" onclick="playAgain()">
@@ -369,7 +403,7 @@ function getEndscreenHTML(hl) {
             </div>
         </div>
         <div class="sound-container end-screen-container-adjustment">
-            <h4 class="fs-70 w-750">Return to Startscreen</h4>
+            <h4 class="fs-4 w-690">Return to Startscreen</h4>
             <div class="w-344 d-flex center">
                 <div class="back-btn pos-unset back-btn-adjustment">
                     <img src="../img/icons/home.png" class="home-icon home-icon-adjustment" onclick="playSoundAndReturn()">
