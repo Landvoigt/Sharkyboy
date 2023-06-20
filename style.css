@@ -560,6 +560,7 @@ canvas {
 .mobile-attack-container,
 .mobile-pause-container {
     display: none;
+    cursor: default;
 }
 
 @keyframes pulse {
@@ -968,6 +969,7 @@ canvas {
         z-index: 1;
         right: 15px;
         top: 15%;
+        display: flex;
     }
 
     .w-70 {
