@@ -14,7 +14,7 @@ function createCanvas() {
     <div style="height: 100%; width:100%; background-color: #000000;">
         <canvas id="canvas" width="1920px" height="1080px"></canvas>
         <div id="overlayContainer" class="overlay-div">
-            <div class="mobile-movement-container">
+            <div id="mobileMovement" class="mobile-movement-container">
                 <div>
                     <div id="btnUp" class="mobile-movement-box">
                         <p>W</p>
@@ -32,7 +32,7 @@ function createCanvas() {
                     </div>
                 </div>
             </div>
-            <div class="mobile-attack-container">
+            <div id="mobileAttack" class="mobile-attack-container">
                 <div id="btnAttack" class="mobile-attack-box w-70">
                     <p>Attack</p>
                 </div>
@@ -40,8 +40,8 @@ function createCanvas() {
                     <p>Bubble</p>
                 </div>
             </div>
-            <div id="btnPause" class="mobile-pause-container">
-                <div class="mobile-pause-box w-70">
+            <div id="mobilePause" class="mobile-pause-container">
+                <div id="btnPause" class="mobile-pause-box w-70">
                     <p>Pause</p>
                 </div>
             </div>
@@ -52,6 +52,21 @@ function createCanvas() {
     bindMobileBtnEvents();
     stopSound(MENU_SOUND);
     playSound(START_SOUND);
+}
+
+window.onload = function () {
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+        loadMobileKeys();
+    }
+};
+
+function loadMobileKeys() {
+    let movement = document.getElementById('mobileMovement');
+    let attack = document.getElementById('mobileAttack');
+    let pause = document.getElementById('mobilePause');
+    movement.style = 'display: flex';
+    attack.style = 'display: flex';
+    pause.style = 'display: flex';
 }
 
 function countUpNumbers() {
