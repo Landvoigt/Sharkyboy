@@ -23,9 +23,6 @@ function createCanvas() {
 window.onload = function () {
     if (/Mobi|Android/i.test(navigator.userAgent)) {
         loadMobileKeys();
-        onMobile = true;
-    } else {
-        onMobile = false;
     }
 };
 
@@ -208,7 +205,7 @@ function showNavigation() {
 
 
 function checkDevice(startscreen) {
-    if (onMobile) {
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
         startscreen.innerHTML = getNavigationHTMLMobile();
     } else {
         startscreen.innerHTML = getNavigationHTMLDesktop();

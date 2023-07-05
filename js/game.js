@@ -2,7 +2,6 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let characterPosition = 0;
-let onMobile = false;
 let inGame = false;
 let characterAlive = true;
 let pauseGame = false;
@@ -232,7 +231,7 @@ function changeDifficulty(dfc) {
     }
     if (dfc == 4) {
         endbossHealthPoints = 400;
-        characterHitFromCasualEnemy = 30;
+        characterHitFromCasualEnemy = 25;
         characterHitFromEndboss = 35;
         casualEnemyMinSpeed = 3;
         casualEnemyMaxSpeed = 4;

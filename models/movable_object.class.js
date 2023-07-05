@@ -95,6 +95,10 @@ class MovableObject extends DrawableObject {
             if (this.fallBackPointNotReached(startpoint)) {
                 this.moveCharacterBack();
                 this.applyGravity();
+                console.log(new Date().getTime() - this.lastHit);
+                if (this.characterMovesAfterHit()) {
+                    this.clearFallBackInterval(fallBackInterval);
+                }
             } else {
                 this.clearFallBackInterval(fallBackInterval);
             }
@@ -156,5 +160,10 @@ class MovableObject extends DrawableObject {
         clearInterval(fallBackInterval);
         this.y = this.y_default;
         this.characterCollided = false;
+    }
+
+    characterMovesAfterHit() {
+        return (new Date().getTime() - this.lastHit > 100) && this.world.keyboard.UP ||
+            (new Date().getTime() - this.lastHit > 100) && this.world.keyboard.DOWN;
     }
 }
