@@ -1,0 +1,497 @@
+@media screen and (orientation:portrait) {
+    body {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .screen-rotate {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        top: 0;
+        height: 100%;
+        width: 120%;
+        background-color: #232323;
+    }
+
+    .screen-rotate-span {
+        display: flex;
+        position: absolute;
+        z-index: 1000;
+        font-size: 2em;
+        color: rgb(250, 245, 216);
+        text-align: center;
+    }
+}
+
+@media screen and (orientation:landscape) {
+    .screen-rotate {
+        display: none;
+    }
+
+    .screen-rotate-span {
+        display: none;
+    }
+}
+
+@media (max-width: 1700px) {
+    .start-button {
+        height: 150px;
+        width: 30%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .settings-button,
+    .navigation-button {
+        height: 130px;
+        width: 23%;
+    }
+
+    .navigation-row {
+        margin-left: -200px;
+    }
+}
+
+@media (max-width: 1300px) {
+    h2 {
+        font-size: 4.5em;
+    }
+
+    h3 {
+        font-size: 3em;
+    }
+
+    h6 {
+        font-size: 8.5em;
+    }
+
+    .start-button {
+        height: 140px;
+    }
+
+    .settings-button,
+    .navigation-button {
+        height: 120px;
+    }
+
+    .mt-50 {
+        margin: 0;
+    }
+
+    .w-344 {
+        width: 310px;
+    }
+
+    .coins-count-container {
+        height: 80px;
+    }
+
+    .coin-counter-img {
+        height: 75px;
+        width: 75px;
+    }
+
+    .coins-count-container {
+        gap: 25px;
+    }
+
+    .w-120 {
+        width: 120px !important;
+    }
+
+    .navigation-row {
+        margin-left: -25px;
+    }
+}
+
+@media (max-width: 1050px) {
+    h1 {
+        font-size: 7em;
+    }
+
+    h2 {
+        font-size: 3.7em;
+    }
+
+    h3 {
+        font-size: 2.1em;
+    }
+
+    h4 {
+        width: 260px !important;
+        font-size: 3em !important;
+    }
+
+    h4,
+    h5 {
+        text-shadow:
+            -1px -1px 0 #4e4e4e,
+            1px -1px 0 #383838,
+            -1px 1px 0 #535353,
+            1px 1px 0 #505050,
+            1px 0px 1px #CCCCCC,
+            0px 1px 1px #EEEEEE,
+            2px 1px 1px #646464,
+            1px 2px 1px #EEEEEE,
+            3px 2px 1px #9c9c9c,
+            2px 3px 1px #EEEEEE,
+            4px 3px 1px #CCCCCC,
+            3px 4px 1px #EEEEEE;
+    }
+
+    h6 {
+        font-size: 5.5em;
+        margin-right: -70px;
+    }
+
+    .mt-140 {
+        margin-top: 15px;
+    }
+
+    .start-button {
+        height: 110px;
+        width: 250px;
+        order: 2;
+    }
+
+    .settings-button {
+        height: 90px;
+        width: 210px;
+        order: 1;
+    }
+
+    .navigation-button {
+        height: 90px;
+        width: 210px;
+        order: 2;
+    }
+
+    .startscreen-btn-box {
+        flex-direction: row;
+        height: 30%;
+        margin-top: 7%;
+        gap: 50px;
+    }
+
+    .navigation-text {
+        font-size: 2.7em !important;
+    }
+
+    p {
+        font-size: 1.8em;
+        margin: 0;
+    }
+
+    .keybindings-container {
+        height: 43px;
+        width: 45px;
+        border: 3px solid rgb(231, 208, 3);
+        border-radius: 18px;
+        margin: 4px;
+    }
+
+    .keybindings-container:before {
+        border-radius: 16px;
+        border: 3px solid rgba(21, 30, 92, 0.767);
+    }
+
+    .navigation-row-adjustment {
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+
+    .keybindings-cont-mobile {
+        width: 160px;
+    }
+
+    .back-btn {
+        top: 15px;
+        right: 15px;
+        height: 50px;
+        width: 50px;
+        border: 3px solid rgb(64, 238, 215);
+    }
+
+    .back-btn:before {
+        border: 3px solid rgba(21, 30, 92, 0.767);
+    }
+
+    .home-icon {
+        height: 28px;
+        width: 28px;
+        margin: 0;
+        margin-bottom: 3px;
+    }
+
+    .change-display {
+        gap: 10px;
+    }
+
+    .selection-text-container {
+        display: none;
+    }
+
+    .difficulty-circle-btn,
+    .sound-circle-btn,
+    .fullscreen-circle-btn {
+        margin: 12px;
+    }
+
+    .fullscreen-circle-btn,
+    .sound-circle-btn,
+    .difficulty-circle-btn {
+        width: 65px;
+        height: 65px;
+    }
+
+    .fullscreen-icon,
+    .setting-icon {
+        height: 35px;
+        width: 35px;
+    }
+
+    .difficulty-icon {
+        height: 38px;
+        width: 38px;
+    }
+
+    .fs-4 {
+        font-size: 3em !important;
+    }
+
+    .w-344 {
+        width: 200px;
+    }
+
+    .w-690 {
+        width: 450px !important;
+    }
+
+    .fs-4 {
+        font-size: 2.4em !important;
+    }
+
+    .back-icon {
+        height: 37px;
+        width: 37px;
+    }
+
+    .restart-icon {
+        height: 33px;
+        width: 33px;
+    }
+
+    .back-btn-container-adjustment {
+        height: 90px;
+    }
+
+    .end-screen-container-adjustment {
+        height: 100px;
+    }
+
+    .resume-container {
+        height: 90px;
+    }
+
+    .coin-img {
+        height: 65px;
+        width: 65px;
+    }
+
+    .pufferfish-img {
+        height: 40px;
+        width: 55px;
+    }
+
+    .killerwhale-img {
+        height: 70px;
+        width: 70px;
+    }
+
+    .resume-box {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .counter {
+        width: 80px !important;
+        font-size: 2.6em !important;
+    }
+
+    .coins-count-container {
+        height: 50px;
+    }
+
+    .coin-counter-img {
+        height: 55px;
+        width: 55px;
+    }
+
+    .w-120 {
+        width: 90px !important;
+    }
+
+    .mobile-movement-container {
+        position: absolute;
+        z-index: 1;
+        left: 15px;
+        bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mobile-movement-box,
+    .mobile-attack-box,
+    .mobile-pause-box {
+        opacity: 0.9;
+        height: 33px;
+        width: 36px;
+        background-color: rgb(231, 208, 3);
+        border: 3px solid rgb(231, 208, 3);
+        border-radius: 12px;
+        margin: 2px;
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+        transform: scale(1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mobile-movement-box p,
+    .mobile-attack-box p,
+    .mobile-pause-box p {
+        font-size: 1.2em !important;
+    }
+
+    .mobile-movement-box:before,
+    .mobile-attack-box:before,
+    .mobile-pause-box:before {
+        content: " ";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 9px;
+        border: 2px solid rgba(21, 30, 92, 0.767);
+    }
+
+    .mobile-attack-container {
+        position: absolute;
+        z-index: 1;
+        right: 15px;
+        bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .mobile-pause-container {
+        position: absolute;
+        z-index: 1;
+        right: 15px;
+        top: 15%;
+        display: flex;
+    }
+
+    .w-70 {
+        width: 70px !important;
+    }
+
+    .navigation-bg {
+        border-radius: 50px;
+    }
+
+}
+
+@media (max-width: 700px) {
+    h1 {
+        font-size: 6em;
+    }
+
+    h2 {
+        font-size: 3em;
+    }
+
+    h3 {
+        font-size: 1.7em;
+    }
+
+    .start-button {
+        height: 95px;
+        width: 200px;
+    }
+
+    .settings-button {
+        height: 70px;
+        width: 160px;
+    }
+
+    .navigation-bg {
+        border-radius: 50px;
+    }
+
+    .navigation-row {
+        width: 95%;
+        gap: 15px;
+        margin-left: 0 !important;
+    }
+
+    .navigation-row-adjustment {
+        margin-bottom: 5%;
+    }
+
+    .navigation-button {
+        height: 70px;
+        width: 160px;
+    }
+
+    .startscreen-btn-box {
+        height: 30%;
+        gap: 25px;
+    }
+
+    .navigation-text {
+        font-size: 1.9em !important;
+    }
+
+    .keybindings-container {
+        height: 36px;
+        width: 40px;
+    }
+
+    .keybindings-cont-mobile {
+        width: 135px;
+    }
+
+    p {
+        font-size: 1.5em;
+    }
+
+    .coins-count-container {
+        height: 30px;
+        gap: 0;
+    }
+
+    .coin-counter-img {
+        height: 33px;
+        width: 33px;
+    }
+
+    .w-120 {
+        width: 60px !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .screen-rotate-span {
+        left: 33%;
+    }
+}
