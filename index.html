@@ -8,6 +8,7 @@
     <title>Sharkyboy</title>
     <link rel="icon" type="image/png" href="../img/icons/sharkyboy_favicon.png">
     <link rel="stylesheet" href="style.css">
+    <script src="../js/templates.js"></script>
     <script src="../script.js"></script>
     <script src="../models/keyboard.class.js"></script>
     <script src="../js/game.js"></script>
@@ -40,51 +41,7 @@
         <div class="startscreen" id="startscreen">
         </div>
     </div>
-    <div id="pauseScreen" class="pause-screen d-none">
-        <div class="sound-container center">
-            <h4 class="w-690">Fullscreen</h4>
-            <div class="fullscreen-circle-btn yellow-highlight" id="fullscreenIcon1"
-                onclick="highlightFullscreenSelection(1)">
-                <img src="../img/icons/fullscreen_off.png" id="fullscreenOff" class="fullscreen-icon"
-                    onclick="playSound(CLICK_SOUND); closeFullscreen()">
-            </div>
-            <div class="fullscreen-circle-btn" id="fullscreenIcon2"
-                onclick="highlightFullscreenSelection(2)">
-                <img src="../img/icons/fullscreen_on.png" id="fullscreenOn" class="fullscreen-icon"
-                    onclick="playSound(CLICK_SOUND); openFullscreen()">
-            </div>
-        </div>
-        <div class="sound-container center">
-            <h4 class="w-690">Sound</h4>
-            <div class="sound-circle-btn yellow-highlight" id="soundIcon1"
-                onclick="highlightSoundSelection(1)">
-                <img src="../img/icons/sound_on.png" id="unmuteButton" class="setting-icon"
-                    onclick="playSound(CLICK_SOUND); unmuteSound()">
-            </div>
-            <div class="sound-circle-btn" id="soundIcon2"
-                onclick="highlightSoundSelection(2)">
-                <img src="../img/icons/sound_mute.png" id="muteButton" class="setting-icon"
-                    onclick="playSound(CLICK_SOUND); muteSound()">
-            </div>
-        </div>
-        <div class="sound-container back-btn-container-adjustment mt-50">
-            <h4 class="fs-4 w-690">Return to Game</h4>
-            <div class="w-344 d-flex center">
-                <div class="back-btn pos-unset back-btn-adjustment">
-                    <img src="../img/icons/go_back.png" class="back-icon" onclick="playSoundAndContinue()">
-                </div>
-            </div>
-        </div>
-        <div class="sound-container back-btn-container-adjustment">
-            <h4 class="fs-4 w-690">Return to Startscreen</h4>
-            <div class="w-344 d-flex center">
-                <div class="back-btn pos-unset back-btn-adjustment">
-                    <img src="../img/icons/home.png" class="home-icon home-icon-adjustment"
-                        onclick="playSoundAndReturn()">
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="pauseScreen" class="pause-screen d-none"></div>
     <div id="endScreen" class="end-screen d-none"></div>
 </body>
 

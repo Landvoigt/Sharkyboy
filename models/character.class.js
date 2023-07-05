@@ -240,7 +240,7 @@ class Character extends MovableObject {
     }
 
     canDoBubble() {
-        return this.world.keyboard.ALT && collectedPoison > 0 && !this.bubbleAnimationTimeout;
+        return this.world.keyboard.CTRL && collectedPoison > 0 && !this.bubbleAnimationTimeout;
     }
 
     canAttack() {

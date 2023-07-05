@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let characterPosition = 0;
+let onMobile = false;
 let inGame = false;
 let characterAlive = true;
 let pauseGame = false;
@@ -15,7 +16,14 @@ let killedPufferFishCounter = 0;
 let killedEndbossCounter = 0;
 let gameWon;
 let fullscreen;
+let onSettingsPage = false;
 const elem = document.documentElement;
+let highlightCache = {
+    fullscreen: 1,
+    sound: 1,
+    difficulty: 2
+}
+
 
 let difficulty = 2;
 let endbossHealthPoints = 250;
@@ -70,9 +78,9 @@ window.addEventListener("keydown", (event) => {
             keyboard.SPACEBAR = true;
         }
     }
-    if (event.keyCode == 18 && !pauseGame) {
+    if (event.keyCode == 17 && !pauseGame) {
         event.preventDefault();
-        keyboard.ALT = true;
+        keyboard.CTRL = true;
     }
     if (event.keyCode == 9) {
         event.preventDefault();
@@ -104,9 +112,9 @@ window.addEventListener("keyup", (event) => {
         world.character.isAttacking = false;
         keyboard.SPACEBAR = false;
     }
-    if (event.keyCode == 18) {
+    if (event.keyCode == 17) {
         event.preventDefault();
-        keyboard.ALT = false;
+        keyboard.CTRL = false;
         world.character.bubbleAnimationTimeout = false;
         world.character.bubbleAnimationCount = 0;
     }
@@ -177,12 +185,12 @@ function bindMobileBtnEvents() {
 
     document.getElementById('btnBubble').addEventListener('touchstart', (e) => {
         e.preventDefault();
-        keyboard.ALT = true;
+        keyboard.CTRL = true;
     });
 
     document.getElementById('btnBubble').addEventListener('touchend', (e) => {
         e.preventDefault();
-        keyboard.ALT = false;
+        keyboard.CTRL = false;
         world.character.bubbleAnimationTimeout = false;
         world.character.bubbleAnimationCount = 0;
     });
