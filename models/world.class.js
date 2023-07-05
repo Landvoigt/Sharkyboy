@@ -186,6 +186,7 @@ class World {
         this.level.coins.forEach((coin) => {
             coinsIndex++;
             if (this.character.isColliding(coin)) {
+                playSound(COLLECT_SOUND);
                 this.coinsCount += 5;
                 this.level.coins.splice(coinsIndex, 1);
             }
@@ -198,6 +199,7 @@ class World {
         this.level.collectibles.forEach((poison) => {
             poisonIndex++;
             if (this.character.isColliding(poison) && collectedPoison < 5) {
+                playSound(COLLECT_SOUND);
                 collectedPoison++;
                 this.level.collectibles.splice(poisonIndex, 1);
             }

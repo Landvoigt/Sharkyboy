@@ -58,6 +58,7 @@ class Character extends MovableObject {
     checkCharacterPosition() {
         this.getCharacterPosition();
         if (this.enterEndzone()) {
+            ENDGAME_MUSIC.volume = 0.3;
             playSound(ENDGAME_MUSIC);
             stopSound(GAME_MUSIC);
         }

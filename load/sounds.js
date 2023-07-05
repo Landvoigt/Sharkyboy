@@ -8,6 +8,7 @@ const BUBBLE_BLOW_SOUND = new Audio('../sounds/bubble_blow.mp3');
 const BUBBLE_POP_SOUND = new Audio('../sounds/bubble_pop.mp3');
 const GAMEOVER_SOUND = new Audio('../sounds/game_over.mp3');
 const CLICK_SOUND = new Audio('../sounds/click.mp3');
+const COLLECT_SOUND = new Audio('../sounds/collect.mp3');
 const START_SOUND = new Audio('../sounds/start_game.mp3');
 const ENEMY_DEAD_SOUND = new Audio('../sounds/enemy_dead.mp3'); 
 const KILLERWHALE_HURT_SOUND = new Audio('../sounds/killerwhale_hurt.mp3');
@@ -26,6 +27,7 @@ function pushAudios() {
     allAudioFiles.push(BUBBLE_POP_SOUND);
     allAudioFiles.push(GAMEOVER_SOUND);
     allAudioFiles.push(CLICK_SOUND);
+    allAudioFiles.push(COLLECT_SOUND);
     allAudioFiles.push(START_SOUND);
     allAudioFiles.push(ENEMY_DEAD_SOUND);
     allAudioFiles.push(KILLERWHALE_HURT_SOUND);
