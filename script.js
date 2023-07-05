@@ -1,9 +1,15 @@
+/**
+ * shows the startpage, pushes audios into array
+ */
 function initialize() {
     showStartpage();
     pushAudios();
 }
 
 
+/**
+ * checks the device then runs the game
+ */
 function startGame() {
     let startscreen = document.getElementById('startscreen');
     checkDevice(startscreen);
@@ -11,6 +17,9 @@ function startGame() {
 }
 
 
+/**
+ * generates the canvas
+ */
 function createCanvas() {
     document.getElementById('content').innerHTML = getContentHTML();
     initWorld();
@@ -20,6 +29,9 @@ function createCanvas() {
 }
 
 
+/**
+ * loads touchable buttons on mobile devices
+ */
 window.onload = function () {
     if (/Mobi|Android/i.test(navigator.userAgent)) {
         loadMobileKeys();
@@ -27,6 +39,9 @@ window.onload = function () {
 };
 
 
+/**
+ * shows touchable buttons on mobile devices
+ */
 function loadMobileKeys() {
     let movement = document.getElementById('mobileMovement');
     let attack = document.getElementById('mobileAttack');
@@ -37,27 +52,43 @@ function loadMobileKeys() {
 }
 
 
-function countUpNumbers() {
-    const counters = document.querySelectorAll('.counter');
-    counters.forEach((valueDisplay) => {
-        let startValue = 0;
-        let endValue = parseInt(valueDisplay.getAttribute('data-target'));
-        let duration = Math.floor(1000 / endValue);
-        if (endValue == 0) {
-            valueDisplay.textContent = startValue;
-        } else {
-            let counter = setInterval(function () {
-                startValue += 1;
-                valueDisplay.textContent = startValue;
-                if (startValue == endValue) {
-                    clearInterval(counter);
-                }
-            }, duration);
-        }
-    });
+/**
+ * shows startpage
+ */
+function showStartpage() {
+    onSettingsPage = false;
+    let startscreen = document.getElementById('startscreen');
+    startscreen.classList.remove('change-display');
+    startscreen.innerHTML = getStartpageHMTL();
 }
 
 
+/**
+ * shows navigation page
+ */
+function showNavigation() {
+    let startscreen = document.getElementById('startscreen');
+    startscreen.classList.add('change-display');
+    checkDevice(startscreen);
+    startscreen.innerHTML += getHomeButtonHTML();
+}
+
+
+/**
+ * shows different game keybindings based on the device
+ */
+function checkDevice(startscreen) {
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+        startscreen.innerHTML = getNavigationHTMLMobile();
+    } else {
+        startscreen.innerHTML = getNavigationHTMLDesktop();
+    }
+}
+
+
+/**
+ * shows the settings page
+ */
 function showSettings() {
     onSettingsPage = true;
     playSound(MENU_SOUND);
@@ -69,40 +100,9 @@ function showSettings() {
 }
 
 
-function highlightDifficultySelection(cnt) {
-    removeDifficultySelectionHighlights();
-    let clickedIcon = document.getElementById(`difficultyIcon${cnt}`);
-    clickedIcon.classList.add('yellow-highlight');
-    highlightCache.difficulty = cnt;
-}
-
-
-function removeDifficultySelectionHighlights() {
-    let difficultyIcons = document.getElementsByClassName('difficulty-circle-btn');
-    for (let i = 0; i < difficultyIcons.length; i++) {
-        icon = difficultyIcons[i];
-        removeHighlight(icon);
-    }
-}
-
-
-function highlightSoundSelection(cnt) {
-    removeSoundSelectionHighlights();
-    let clickedIcon = document.getElementById(`soundIcon${cnt}`);
-    clickedIcon.classList.add('yellow-highlight');
-    highlightCache.sound = cnt;
-}
-
-
-function removeSoundSelectionHighlights() {
-    let soundIcons = document.getElementsByClassName('sound-circle-btn');
-    for (let i = 0; i < soundIcons.length; i++) {
-        icon = soundIcons[i];
-        removeHighlight(icon);
-    }
-}
-
-
+/**
+ * highlightes current fullscreen icon
+ */
 function highlightFullscreenSelection(cnt) {
     removeFullscreenSelectionHighlights();
     let clickedIcon = document.getElementById(`fullscreenIcon${cnt}`);
@@ -111,6 +111,9 @@ function highlightFullscreenSelection(cnt) {
 }
 
 
+/**
+ * gets all fullscreen icons
+ */
 function removeFullscreenSelectionHighlights() {
     let fullscreenIcons = document.getElementsByClassName('fullscreen-circle-btn');
     for (let i = 0; i < fullscreenIcons.length; i++) {
@@ -120,27 +123,63 @@ function removeFullscreenSelectionHighlights() {
 }
 
 
+/**
+ * highlightes current sound icon
+ */
+function highlightSoundSelection(cnt) {
+    removeSoundSelectionHighlights();
+    let clickedIcon = document.getElementById(`soundIcon${cnt}`);
+    clickedIcon.classList.add('yellow-highlight');
+    highlightCache.sound = cnt;
+}
+
+
+/**
+ * gets all sound icons
+ */
+function removeSoundSelectionHighlights() {
+    let soundIcons = document.getElementsByClassName('sound-circle-btn');
+    for (let i = 0; i < soundIcons.length; i++) {
+        icon = soundIcons[i];
+        removeHighlight(icon);
+    }
+}
+
+
+/**
+ * highlightes current difficulty icon
+ */
+function highlightDifficultySelection(cnt) {
+    removeDifficultySelectionHighlights();
+    let clickedIcon = document.getElementById(`difficultyIcon${cnt}`);
+    clickedIcon.classList.add('yellow-highlight');
+    highlightCache.difficulty = cnt;
+}
+
+
+/**
+ * gets all difficulty icons
+ */
+function removeDifficultySelectionHighlights() {
+    let difficultyIcons = document.getElementsByClassName('difficulty-circle-btn');
+    for (let i = 0; i < difficultyIcons.length; i++) {
+        icon = difficultyIcons[i];
+        removeHighlight(icon);
+    }
+}
+
+
+/**
+ * removes highlight 
+ */
 function removeHighlight(element) {
     element.classList.remove('yellow-highlight');
 }
 
 
-function showSelectedOption(text) {
-    let selectedOption = document.getElementById('selectedOption');
-    selectedOption.innerHTML = `${text}`;
-    selectedOption.classList.remove('d-none');
-    setTimeout(hideSelectedOption, 1250);
-}
-
-
-function hideSelectedOption() {
-    if (onSettingsPage) {
-        let selectedOption = document.getElementById('selectedOption');
-        selectedOption.classList.add('d-none');
-    }
-}
-
-
+/**
+ * checks for already given fullscreen and sound settings and adds highlight
+ */
 function checkExistingSettings() {
     removeFullscreenSelectionHighlights();
     removeSoundSelectionHighlights();
@@ -149,17 +188,34 @@ function checkExistingSettings() {
 }
 
 
+/**
+ * checks for already given difficulty and adds highlight
+ */
 function checkExistingDifficulty() {
     removeDifficultySelectionHighlights();
     document.getElementById(`difficultyIcon${highlightCache.difficulty}`).classList.add('yellow-highlight');
 }
 
 
-function showStartpage() {
-    onSettingsPage = false;
-    let startscreen = document.getElementById('startscreen');
-    startscreen.classList.remove('change-display');
-    startscreen.innerHTML = getStartpageHMTL();
+/**
+ * shows small text field with selected setting, removes after timeout
+ */
+function showSelectedOption(text) {
+    let selectedOption = document.getElementById('selectedOption');
+    selectedOption.innerHTML = `${text}`;
+    selectedOption.classList.remove('d-none');
+    setTimeout(hideSelectedOption, 1250);
+}
+
+
+/**
+ * hides text field
+ */
+function hideSelectedOption() {
+    if (onSettingsPage) {
+        let selectedOption = document.getElementById('selectedOption');
+        selectedOption.classList.add('d-none');
+    }
 }
 
 
@@ -175,9 +231,24 @@ function playSoundAndContinue() {
 }
 
 
+/**
+ * hides the pause screen, resets sounds and variables, shows startpage
+ */
 function returnToStartpage() {
     deletePauseScreen();
     stopAllSounds();
+    resetGameVariables();
+    changeDifficulty(currentDifficulty);
+    document.getElementById('content').innerHTML = `<div class="startscreen" id="startscreen"></div>`;
+    showStartpage();
+    playSound(MENU_SOUND);
+}
+
+
+/**
+ * resets some game variables to start the game again
+ */
+function resetGameVariables() {
     inGame = false;
     pauseGame = false;
     characterAlive = true;
@@ -187,29 +258,6 @@ function returnToStartpage() {
     killedEndbossCounter = 0;
     gameWon = '';
     world.level.endboss[0].endbossAlive = true;
-    changeDifficulty(difficulty);
-    document.getElementById('content').innerHTML = `
-    <div class="startscreen" id="startscreen"></div>
-    `;
-    showStartpage();
-    playSound(MENU_SOUND);
-}
-
-
-function showNavigation() {
-    let startscreen = document.getElementById('startscreen');
-    startscreen.classList.add('change-display');
-    checkDevice(startscreen);
-    startscreen.innerHTML += getHomeButtonHTML();
-}
-
-
-function checkDevice(startscreen) {
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-        startscreen.innerHTML = getNavigationHTMLMobile();
-    } else {
-        startscreen.innerHTML = getNavigationHTMLDesktop();
-    }
 }
 
 
@@ -223,6 +271,9 @@ function stopSound(audioFile) {
 }
 
 
+/**
+ * stops all running audio
+ */
 function stopAllSounds() {
     allAudioFiles.forEach((audio) => {
         audio.pause();
@@ -230,6 +281,9 @@ function stopAllSounds() {
 }
 
 
+/**
+ * mutes all running audio
+ */
 function muteSound() {
     sound = false;
     allAudioFiles.forEach(function (audio) {
@@ -238,6 +292,9 @@ function muteSound() {
 }
 
 
+/**
+ * turns every running audio on
+ */
 function unmuteSound() {
     sound = true;
     allAudioFiles.forEach(function (audio) {
@@ -246,15 +303,22 @@ function unmuteSound() {
 }
 
 
+/**
+ * adds a container on top of the game to show collected coins
+ */
 function addCoinsCountContainer() {
     let content = document.getElementById('overlayContainer');
     content.innerHTML += `
     <div class="overlay-container">
         <div class="coins-count-container" id="coinsCountContainer"></div>
+    <div>
     `;
 }
 
 
+/**
+ * shows the collected coins
+ */
 function addCoins(cnt) {
     if (inGame) {
         let coinsContainer = document.getElementById('coinsCountContainer');
@@ -266,6 +330,9 @@ function addCoins(cnt) {
 }
 
 
+/**
+ * shows the pause screen, highlights current settings
+ */
 function showPauseScreen() {
     let pauseScreen = document.getElementById('pauseScreen');
     pauseScreen.classList.remove('d-none');
@@ -274,6 +341,9 @@ function showPauseScreen() {
 }
 
 
+/**
+ * deletes pause screen and end screen
+ */
 function deletePauseScreen() {
     let pauseScreen = document.getElementById('pauseScreen');
     pauseScreen.innerHTML = '';
@@ -283,19 +353,17 @@ function deletePauseScreen() {
 }
 
 
-function showWinScreen() {
-    world.pauseGame();
-    deletePauseScreen();
-    let winScreen = document.getElementById('winScreen');
-    winScreen.classList.remove('d-none');
-}
-
-
+/**
+ * continues paused game
+ */
 function continueGame() {
     world.pauseGame();
 }
 
 
+/**
+ * shows end screen after checking for win or lose, shows points
+ */
 function showEndScreen() {
     let headline;
     let src;
@@ -310,16 +378,22 @@ function showEndScreen() {
     endScreen.classList.remove('d-none');
     endScreen.style = `background-image: url(${src});`;
     endScreen.innerHTML = getEndscreenHTML(headline);
-    countUpNumbers();
+    showScoredPoints();
 }
 
 
+/**
+ * restarts game
+ */
 function playAgain() {
     returnToStartpage();
     startGame();
 }
 
 
+/**
+ * shows game in fullscreen
+ */
 function openFullscreen() {
     fullscreen = true;
     if (elem.requestFullscreen) {
@@ -332,6 +406,9 @@ function openFullscreen() {
 }
 
 
+/**
+ * removes game from fullscreen
+ */
 function closeFullscreen() {
     fullscreen = false;
     if (document.exitFullscreen) {
@@ -341,4 +418,36 @@ function closeFullscreen() {
     } else if (document.msExitFullscreen) { /* IE11 */
         document.msExitFullscreen();
     }
+}
+
+
+/**
+ * checks all scored points and gets the associated containers
+ */
+function showScoredPoints() {
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach((valueDisplay) => {
+        let startValue = 0;
+        let endValue = parseInt(valueDisplay.getAttribute('data-target'));
+        if (endValue == 0) {
+            valueDisplay.textContent = startValue;
+        } else {
+            showPointsAnimation(startValue, endValue);
+        }
+    });
+}
+
+
+/**
+ * shows a counting up animation for all scored points
+ */
+function showPointsAnimation(startValue, endValue) {
+    let duration = Math.floor(1000 / endValue);
+    let counter = setInterval(function () {
+        startValue += 1;
+        valueDisplay.textContent = startValue;
+        if (startValue == endValue) {
+            clearInterval(counter);
+        }
+    }, duration);
 }

@@ -1,10 +1,12 @@
 let level_1;
 
+
+/**
+ * loads all objects of the first level
+ */
 function initLevel_1() {
     level_1 = new Level(
-        [
-            
-        ],
+        [],
         [
             new Endboss(),
         ],

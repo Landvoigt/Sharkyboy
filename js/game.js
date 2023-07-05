@@ -24,14 +24,9 @@ let highlightCache = {
 }
 
 
-let difficulty = 2;
-let endbossHealthPoints = 250;
-let characterHitFromCasualEnemy = 10;
-let characterHitFromEndboss = 25;
-let casualEnemyMinSpeed = 0.2;
-let casualEnemyMaxSpeed = 0.6;
-
-
+/**
+ * loads the world, adds the collected coins container
+ */
 function initWorld() {
     addCoinsCountContainer();
     inGame = true;
@@ -41,13 +36,22 @@ function initWorld() {
     world = new World(canvas, keyboard);
 }
 
+
+/**
+ * stops all intervals
+ */
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
+
+/**
+ * stops all timeouts
+ */
 function clearAllTimeouts() {
     for (let i = 1; i < 9999; i++) window.clearTimeout(i);
 }
+
 
 window.addEventListener("keydown", (event) => {
     if (event.keyCode == 39 && !pauseGame || event.keyCode == 68 && !pauseGame) {
@@ -88,6 +92,7 @@ window.addEventListener("keydown", (event) => {
     }
 });
 
+
 window.addEventListener("keyup", (event) => {
     if (event.keyCode == 39 || event.keyCode == 68) {
         event.preventDefault();
@@ -114,6 +119,7 @@ window.addEventListener("keyup", (event) => {
     if (event.keyCode == 17) {
         event.preventDefault();
         keyboard.CTRL = false;
+        // resets the animation count
         world.character.bubbleAnimationTimeout = false;
         world.character.bubbleAnimationCount = 0;
     }
@@ -123,6 +129,10 @@ window.addEventListener("keyup", (event) => {
     }
 });
 
+
+/**
+ * binds the mobile buttons for mobile interaction
+ */
 function bindMobileBtnEvents() {
     document.getElementById('btnRight').addEventListener('touchstart', (e) => {
         e.preventDefault();
@@ -204,36 +214,4 @@ function bindMobileBtnEvents() {
         e.preventDefault();
         keyboard.TAB = false;
     });
-}
-
-function changeDifficulty(dfc) {
-    difficulty = dfc;
-    if (dfc == 1) {
-        endbossHealthPoints = 150;
-        characterHitFromCasualEnemy = 5;
-        characterHitFromEndboss = 15;
-        casualEnemyMinSpeed = 0.15;
-        casualEnemyMaxSpeed = 0.4;
-    }
-    if (dfc == 2) {
-        endbossHealthPoints = 250;
-        characterHitFromCasualEnemy = 10;
-        characterHitFromEndboss = 25;
-        casualEnemyMinSpeed = 0.25;
-        casualEnemyMaxSpeed = 0.6;
-    }
-    if (dfc == 3) {
-        endbossHealthPoints = 250;
-        characterHitFromCasualEnemy = 20;
-        characterHitFromEndboss = 35;
-        casualEnemyMinSpeed = 1.6;
-        casualEnemyMaxSpeed = 2;
-    }
-    if (dfc == 4) {
-        endbossHealthPoints = 400;
-        characterHitFromCasualEnemy = 25;
-        characterHitFromEndboss = 35;
-        casualEnemyMinSpeed = 3;
-        casualEnemyMaxSpeed = 4;
-    }
 }

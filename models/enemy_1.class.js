@@ -99,6 +99,9 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         this.transitionAnimationCount++;
     }
 
+    /**
+     * generates random x and y spawn point out of the field of view on the right side 
+     */
     getRandomSpawnPoint() {
         this.x = Math.floor(Math.random() * ((characterPosition + 1700) - (characterPosition + 2000))) + (characterPosition + 2000);
         this.y = Math.floor(Math.random() * 640) + 250;
@@ -110,27 +113,27 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         this.randomFlyingSpeed_y = 3 + Math.random() * 5;
     }
 
-    characterNearby() {
+    characterNearby() { // character is within 1000px near enemy
         return characterPosition + 1000 > this.x;
     }
 
-    transitionAnimationStarted() {
+    transitionAnimationStarted() { // first img of transition is shown
         return this.transitionAnimationCount == 0;
     }
 
-    transitionAnimationRunning() {
+    transitionAnimationRunning() { // last img of transition is not reached yet
         return this.transitionAnimationCount <= 4;
     }
 
-    transitionAnimationEnded() {
-        return this.characterNearby() && this.transitionAnimationCount == 4;
+    transitionAnimationEnded() { // last img of transition is shown
+        return this.transitionAnimationCount == 4;
     }
 
-    deadAnimationStarted() {
+    deadAnimationStarted() { // first img of dead is shown
         return this.deadAnimationCount == 0;
     }
 
-    deadAnimationEnded() {
+    deadAnimationEnded() { // last img of dead is shown
         return this.deadAnimationCount == 2;
     }
 }

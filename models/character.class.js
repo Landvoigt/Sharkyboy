@@ -33,6 +33,10 @@ class Character extends MovableObject {
         this.animate();
     }
 
+
+    /**
+     * preloads all character imgs
+     */
     load() {
         this.loadImages(CHARACTER_IDLE_IMG);
         this.loadImages(CHARACTER_SWIMMING_IMG);
@@ -43,6 +47,10 @@ class Character extends MovableObject {
         this.loadImages(CHARACTER_LONG_IDLE_IMG);
     }
 
+
+    /**
+     * animates the character
+     */
     animate() {
         setInterval(() => {
             stopSound(SWIMMING_SOUND);
@@ -55,6 +63,10 @@ class Character extends MovableObject {
         this.startAnimationTimer();
     }
 
+
+    /**
+     * checks x position of character to adjust music
+     */
     checkCharacterPosition() {
         this.getCharacterPosition();
         if (this.enterEndzone()) {
@@ -67,6 +79,7 @@ class Character extends MovableObject {
             stopSound(ENDGAME_MUSIC);
         }
     }
+
 
     moveCharacterInAllDirections() {
         if (this.canMoveRight()) {
@@ -260,39 +273,39 @@ class Character extends MovableObject {
         return timePassed > this.timeUntilSleepAnimation;
     }
 
-    bubbleAnimationStarted() {
+    bubbleAnimationStarted() { // first img of bubble attack is shown
         return this.bubbleAnimationCount == 0;
     }
 
-    bubbleAnimationRunning() {
+    bubbleAnimationRunning() { // third img of bubble attack is shown
         return this.bubbleAnimationCount == 2;
     }
 
-    bubbleAnimationEnded() {
+    bubbleAnimationEnded() { // last img of bubble attack is shown
         return this.bubbleAnimationCount == 7;
     }
 
-    slapAnimationStarted() {
+    slapAnimationStarted() { // first img of slap attack is shown
         return this.attackAnimationCount == 0;
     }
 
-    slapAnimationAttackStarted() {
+    slapAnimationAttackStarted() { // second img of slap attack is shown
         return this.attackAnimationCount == 1;
     }
 
-    slapAnimationRunning() {
+    slapAnimationRunning() { // fifth img of slap attack is shown
         return this.attackAnimationCount == 4;
     }
 
-    slapAnimationEnded() {
+    slapAnimationEnded() { // last img of slap attack is shown
         return this.attackAnimationCount == 7;
     }
-
-    deadAnimationStarted() {
+    
+    deadAnimationStarted() { // first img of dead is shown
         return this.deadAnimationCount == 0;
     }
-
-    deadAnimationRunning() {
+    
+    deadAnimationRunning() { // last img of dead is shown
         return this.deadAnimationCount <= 9;
     }
 }

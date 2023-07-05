@@ -81,10 +81,6 @@ class Endboss extends MovableObject {
             this.resetCurrentImage();
             this.isAttacking = true;
         }
-        if (this.attackAnimationRunning()) {
-            this.moveLeftDuringAttack();
-            this.playAnimation(KILLERWHALE_ATTACK_IMG);
-        }
         if (this.currentlyAttacking()) {
             this.moveHitbox();
         }
@@ -92,6 +88,8 @@ class Endboss extends MovableObject {
             this.attackFinished();
         }
         this.attackImageCount++;
+        this.playAnimation(KILLERWHALE_ATTACK_IMG);
+        this.moveLeftDuringAttack();
     }
 
     moveLeftDuringAttack() {
@@ -164,13 +162,11 @@ class Endboss extends MovableObject {
                 this.resetCurrentImage();
                 playSound(KILLERWHALE_HURT_SOUND);
             }
-            if (this.deadAnimationRunning()) {
-                this.playAnimation(KILLERWHALE_DEAD_IMG);
-            }
             if (this.deadAnimationEnded()) {
                 playSound(WINNING_SOUND);
             }
             this.deadAnimationCount++;
+            this.playAnimation(KILLERWHALE_DEAD_IMG);
         }, this.deadAnimationTime);
     }
 
@@ -178,39 +174,31 @@ class Endboss extends MovableObject {
         return new Date().getTime();
     }
 
-    spawnAnimationRunning() {
+    spawnAnimationRunning() { // first img of spawn is shown
         return this.spawnAnimationCount <= 9;
     }
 
-    spawnAnimationEnded() {
+    spawnAnimationEnded() { // last img of spawn is shown
         return this.spawnAnimationCount == 9;
     }
 
-    attackAnimationStarted() {
+    attackAnimationStarted() { // first img of attack is shown
         return this.attackImageCount == 0;
     }
 
-    attackAnimationRunning() {
-        return this.attackImageCount <= 4;
-    }
-
-    attackAnimationEnded() {
-        return this.attackImageCount == 5;
-    }
-
-    currentlyAttacking() {
+    currentlyAttacking() { // forth img of attack is shown
         return this.attackImageCount == 3;
     }
 
-    deadAnimationStarted() {
+    attackAnimationEnded() { // last img of attack is shown
+        return this.attackImageCount == 5;
+    }
+
+    deadAnimationStarted() { // first img of dead is shown
         return this.deadAnimationCount == 0;
     }
 
-    deadAnimationRunning() {
-        return this.deadAnimationCount <= 4;
-    }
-
-    deadAnimationEnded() {
+    deadAnimationEnded() { // last img of dead is shown
         return this.deadAnimationCount == 4;
     }
 }
