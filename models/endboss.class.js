@@ -54,7 +54,7 @@ class Endboss extends MovableObject {
         setInterval(() => {
             this.spawnAnimation();
             if (this.isDead()) {
-                world.gameWon();
+                gameFinished();
             } else if (this.isHurt()) {
                 this.hurtAnimation();
             } else if (this.canAttack()) {

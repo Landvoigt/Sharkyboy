@@ -189,7 +189,7 @@ class Character extends MovableObject {
     */
     playCharacterAnimations() {
         if (this.isDead()) {
-            this.world.gameOver();
+            gameOver();
         } else if (this.isHurt()) {
             this.changeAnimationTime(130);
             this.hurtAnimation();

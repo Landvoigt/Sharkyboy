@@ -26,6 +26,8 @@ function createCanvas() {
     bindMobileBtnEvents();
     stopSound(MENU_SOUND);
     playSound(START_SOUND);
+    GAME_MUSIC.volume = 0.1;
+    playSound(GAME_MUSIC);
 }
 
 
@@ -192,6 +194,31 @@ function addCoins(cnt) {
 
 
 /**
+* pauses game and shows pause screen or continues game and hides pause screen
+*/
+function pauseRunningGame() {
+    if (!pauseGame) {
+        pauseGame = true;
+        showPauseScreen();
+        return;
+    }
+    if (pauseGame) {
+        pauseGame = false;
+        continueGame();
+        deletePauseScreen();
+    }
+}
+
+
+/**
+ * continues the game world drawing after pause
+ */
+function continueGame() {
+    world.draw();
+}
+
+
+/**
  * shows the pause screen, highlights current settings
  */
 function showPauseScreen() {
@@ -215,10 +242,31 @@ function deletePauseScreen() {
 
 
 /**
- * continues paused game
+ * handles the game over conditions, shows endscreen after animations
  */
-function continueGame() {
-    world.pauseGame();
+function gameOver() {
+    inGame = false;
+    characterAlive = false;
+    gameWon = false;
+    clearAllIntervals();
+    stopAllSounds();
+    GAMEOVER_SOUND.play();
+    world.character.deadAnimation();
+    setTimeout(showEndScreen, 2500);
+}
+
+
+/**
+* handles the game won conditions, shows endscreen after animations
+*/
+function gameFinished() {
+    inGame = false;
+    killedEndbossCounter++;
+    gameWon = true;
+    clearAllIntervals();
+    stopAllSounds();
+    world.level.endboss[0].deadAnimation();
+    setTimeout(showEndScreen, 2000);
 }
 
 

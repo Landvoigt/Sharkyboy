@@ -88,10 +88,13 @@ window.addEventListener("keydown", (event) => {
         event.preventDefault();
         keyboard.CTRL = true;
     }
+    if (event.keyCode == 18) {
+        event.preventDefault();
+    }
     if (event.keyCode == 9) {
         event.preventDefault();
         keyboard.TAB = true;
-        world.pauseGame();
+        pauseRunningGame();
     }
 });
 
@@ -128,6 +131,9 @@ window.addEventListener("keyup", (event) => {
         // resets the animation images
         world.character.bubbleAnimationTimeout = false;
         world.character.bubbleAnimationCount = 0;
+    }
+    if (event.keyCode == 18) {
+        event.preventDefault();
     }
     if (event.keyCode == 9) {
         event.preventDefault();
@@ -213,7 +219,7 @@ function bindMobileBtnEvents() {
     document.getElementById('btnPause').addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.TAB = true;
-        world.pauseGame();
+        pauseRunningGame();
     });
 
     document.getElementById('btnPause').addEventListener('touchend', (e) => {

@@ -1,6 +1,3 @@
-/**
- * represents the game world
- */
 class World {
     character = new Character();
     level = level_1;
@@ -22,8 +19,6 @@ class World {
 
     /**
     * creates an instance of the World class
-    * @param {Object} canvas - the canvas element
-    * @param {Object} keyboard - the keyboard input object
     */
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -32,7 +27,6 @@ class World {
         this.run();
         this.draw();
         this.setWorld();
-        this.playBgMusic();
         this.constantlyRespawnFishes();
     }
 
@@ -127,7 +121,6 @@ class World {
 
     /**
     * adds objects to the map
-    * @param {Array} objects - an array of objects to add to the map
     */
     addObjectsToMap(objects) {
         if (objects.length > 0) {
@@ -140,7 +133,6 @@ class World {
 
     /**
     * adds an object to the map, mirrors it if wanted
-    * @param {Object} obj - the object to add to the map
     */
     addToMap(obj) {
         if (obj.otherDirection) {
@@ -150,13 +142,11 @@ class World {
         if (obj.otherDirection) {
             this.flipImageBack(obj);
         }
-        obj.drawFrame(this.ctx);
     }
 
 
     /**
     * mirrors an image horizontally
-    * @param {Object} obj - the object to mirror the image for
     */
     flipImage(obj) {
         this.ctx.save();
@@ -168,7 +158,6 @@ class World {
 
     /**
     * flips the image back to its original orientation
-    * @param {Object} obj - the object to flip the image back for
     */
     flipImageBack(obj) {
         obj.x = obj.x * -1;
@@ -226,7 +215,7 @@ class World {
             this.checkBubbleCollisionWithEnemy(bubble, bblCollisionInterval);
             this.checkBubbleCollisionWithEndboss(bubble, bblCollisionInterval);
             if (this.bubbleOutsideObservedWorld(bubble)) {
-                this.deleteBubble();
+                this.deleteBubble(bblCollisionInterval);
             }
         }, 200);
     }
@@ -257,7 +246,6 @@ class World {
 
     /**
     * handles the character getting hit by an enemy or the end boss
-    * @param {number} dmg - the damage value
     */
     characterGetsHitted(dmg) {
         this.character.hit(dmg);
@@ -370,72 +358,9 @@ class World {
     /**
      * deletes last bubble, clears movement interval
      */
-    deleteBubble() {
+    deleteBubble(bblCollisionInterval) {
         this.movableBubbles.pop();
         clearInterval(bblCollisionInterval);
-    }
-
-
-    /**
-    * plays the game background music
-    */
-    playBgMusic() {
-        GAME_MUSIC.volume = 0.1;
-        GAME_MUSIC.play();
-    }
-
-
-    /**
-     * handles the game over conditions, shows endscreen after animations
-     */
-    gameOver() {
-        inGame = false;
-        characterAlive = false;
-        gameWon = false;
-        clearAllIntervals();
-        stopAllSounds();
-        GAMEOVER_SOUND.play();
-        this.character.deadAnimation();
-        setTimeout(showEndScreen, 2500);
-    }
-
-
-    /**
-    * handles the game won conditions, shows endscreen after animations
-    */
-    gameWon() {
-        inGame = false;
-        killedEndbossCounter++;
-        gameWon = true;
-        clearAllIntervals();
-        stopAllSounds();
-        this.level.endboss[0].deadAnimation();
-        setTimeout(showEndScreen, 2000);
-    }
-
-
-    /**
-     * pauses game and shows pause screen or continues game and hides pause screen
-     */
-    pauseGame() {
-        if (!pauseGame) {
-            pauseGame = true;
-            showPauseScreen();
-            return;
-        }
-        if (pauseGame) {
-            pauseGame = false;
-            this.continueGame();
-            deletePauseScreen();
-        }
-    }
-
-
-    /**
-     * continues the game world drawing after pause
-     */
-    continueGame() {
-        this.draw();
     }
 
 

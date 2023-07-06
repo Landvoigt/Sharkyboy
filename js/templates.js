@@ -246,14 +246,14 @@ function getPauseScreenHTML() {
             <img src="../img/icons/sound_on.png" id="unmuteButton" class="setting-icon">
         </div>
         <div class="sound-circle-btn" id="soundIcon2"
-            onclick="playSound(CLICK_SOUND); muteSound(); removeHighlights('sound'); highlightSelectedOption('soundIcon1'); saveHighlightSound(2)">
+            onclick="playSound(CLICK_SOUND); muteSound(); removeHighlights('sound'); highlightSelectedOption('soundIcon2'); saveHighlightSound(2)">
             <img src="../img/icons/sound_mute.png" id="muteButton" class="setting-icon">
         </div>
     </div>
     <div class="sound-container back-btn-container-adjustment mt-50">
         <h4 class="fs-4 w-690">Return to Game</h4>
         <div class="w-344 d-flex center">
-            <div class="back-btn pos-unset back-btn-adjustment" onclick="playSound(CLICK_SOUND); setTimeout(continueGame, 100)">
+            <div class="back-btn pos-unset back-btn-adjustment" onclick="playSound(CLICK_SOUND); setTimeout(pauseRunningGame, 100)">
                 <img src="../img/icons/go_back.png" class="back-icon">
             </div>
         </div>
