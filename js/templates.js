@@ -23,34 +23,42 @@ function getSettingsHTML() {
     </div>
     <div class="sound-container">
         <h4>Fullscreen</h4>
-        <div class="fullscreen-circle-btn yellow-highlight" id="fullscreenIcon1" onclick="playSound(CLICK_SOUND); closeFullscreen(); showSelectedOption('Off'); highlightFullscreenSelection(1)">
+        <div class="fullscreen-circle-btn yellow-highlight" id="fullscreenIcon1" onclick="playSound(CLICK_SOUND); closeFullscreen(); showSelectedOption('Off'); 
+        removeHighlights('fullscreen'); highlightSelectedOption('fullscreenIcon1'); saveHighlightFullScreen(1)">
             <img src="../img/icons/fullscreen_off.png" id="fullscreenOff" class="fullscreen-icon">
         </div>
-        <div class="fullscreen-circle-btn" id="fullscreenIcon2" onclick="playSound(CLICK_SOUND); openFullscreen(); showSelectedOption('On'); highlightFullscreenSelection(2)">
+        <div class="fullscreen-circle-btn" id="fullscreenIcon2" onclick="playSound(CLICK_SOUND); openFullscreen(); showSelectedOption('On'); 
+        removeHighlights('fullscreen'); highlightSelectedOption('fullscreenIcon2'); saveHighlightFullScreen(2)">
             <img src="../img/icons/fullscreen_on.png" id="fullscreenOn" class="fullscreen-icon">
         </div>
     </div>
     <div class="sound-container">
         <h4>Sound</h4>
-        <div class="sound-circle-btn yellow-highlight" id="soundIcon1" onclick="playSound(CLICK_SOUND); unmuteSound(); showSelectedOption('Enabled'); highlightSoundSelection(1)">
+        <div class="sound-circle-btn yellow-highlight" id="soundIcon1" onclick="playSound(CLICK_SOUND); unmuteSound(); showSelectedOption('Enabled'); 
+        removeHighlights('sound'); highlightSelectedOption('soundIcon1'); saveHighlightSound(1)">
             <img src="../img/icons/sound_on.png" id="unmuteButton" class="setting-icon">
         </div>
-        <div class="sound-circle-btn" id="soundIcon2" onclick="playSound(CLICK_SOUND); muteSound(); showSelectedOption('Muted'); highlightSoundSelection(2)">
+        <div class="sound-circle-btn" id="soundIcon2" onclick="playSound(CLICK_SOUND); muteSound(); showSelectedOption('Muted'); 
+        removeHighlights('sound'); highlightSelectedOption('soundIcon2'); saveHighlightSound(2)">
             <img src="../img/icons/sound_mute.png" id="muteButton" class="setting-icon">
         </div>
     </div>
     <div class="difficulty-container">
         <h4>Difficulty</h4>
-        <div class="difficulty-circle-btn" id="difficultyIcon1" onclick="playSound(CLICK_SOUND); changeDifficulty(1); showSelectedOption('Easy Peasy'); highlightDifficultySelection(1)">
+        <div class="difficulty-circle-btn" id="difficultyIcon1" onclick="playSound(CLICK_SOUND); changeDifficulty(1); showSelectedOption('Easy Peasy'); 
+        removeHighlights('difficulty'); highlightSelectedOption('difficultyIcon1'); saveHighlightDifficulty(1)">
             <img src="../img/icons/carp.png" class="difficulty-icon">
         </div>
-        <div class="difficulty-circle-btn yellow-highlight" id="difficultyIcon2" onclick="playSound(CLICK_SOUND); changeDifficulty(2); showSelectedOption('Medium'); highlightDifficultySelection(2)">
+        <div class="difficulty-circle-btn yellow-highlight" id="difficultyIcon2" onclick="playSound(CLICK_SOUND); changeDifficulty(2); showSelectedOption('Medium'); 
+        removeHighlights('difficulty'); highlightSelectedOption('difficultyIcon2'); saveHighlightDifficulty(2)">
             <img src="../img/icons/frogfish.png" class="difficulty-icon">
         </div>
-        <div class="difficulty-circle-btn" id="difficultyIcon3" onclick="playSound(CLICK_SOUND); changeDifficulty(3); showSelectedOption('Hard'); highlightDifficultySelection(3)">
+        <div class="difficulty-circle-btn" id="difficultyIcon3" onclick="playSound(CLICK_SOUND); changeDifficulty(3); showSelectedOption('Hard'); 
+        removeHighlights('difficulty'); highlightSelectedOption('difficultyIcon3'); saveHighlightDifficulty(3)">
             <img src="../img/icons/dolphin.png" class="difficulty-icon">
         </div>
-        <div class="difficulty-circle-btn" id="difficultyIcon4" onclick="playSound(CLICK_SOUND); changeDifficulty(4); showSelectedOption('Extremly Hard'); highlightDifficultySelection(4)">
+        <div class="difficulty-circle-btn" id="difficultyIcon4" onclick="playSound(CLICK_SOUND); changeDifficulty(4); showSelectedOption('Extremly Hard'); 
+        removeHighlights('difficulty'); highlightSelectedOption('difficultyIcon4'); saveHighlightDifficulty(4)">
             <img src="../img/icons/shark.png" class="difficulty-icon">
         </div>
     </div>
@@ -223,29 +231,29 @@ function getPauseScreenHTML() {
     <div class="sound-container center">
         <h4 class="w-690">Fullscreen</h4>
         <div class="fullscreen-circle-btn yellow-highlight" id="fullscreenIcon1"
-            onclick="playSound(CLICK_SOUND); closeFullscreen(); highlightFullscreenSelection(1)">
+            onclick="playSound(CLICK_SOUND); closeFullscreen(); removeHighlights('fullscreen'); highlightSelectedOption('fullscreenIcon1'); saveHighlightFullScreen(1)">
             <img src="../img/icons/fullscreen_off.png" id="fullscreenOff" class="fullscreen-icon">
         </div>
         <div class="fullscreen-circle-btn" id="fullscreenIcon2"
-            onclick="playSound(CLICK_SOUND); openFullscreen(); highlightFullscreenSelection(2)">
+            onclick="playSound(CLICK_SOUND); openFullscreen(); removeHighlights('fullscreen'); highlightSelectedOption('fullscreenIcon2'); saveHighlightFullScreen(2)">
             <img src="../img/icons/fullscreen_on.png" id="fullscreenOn" class="fullscreen-icon">
         </div>
     </div>
     <div class="sound-container center">
         <h4 class="w-690">Sound</h4>
         <div class="sound-circle-btn yellow-highlight" id="soundIcon1"
-            onclick="playSound(CLICK_SOUND); unmuteSound(); highlightSoundSelection(1)">
+            onclick="playSound(CLICK_SOUND); unmuteSound(); removeHighlights('sound'); highlightSelectedOption('soundIcon1'); saveHighlightSound(1)">
             <img src="../img/icons/sound_on.png" id="unmuteButton" class="setting-icon">
         </div>
         <div class="sound-circle-btn" id="soundIcon2"
-            onclick="playSound(CLICK_SOUND); muteSound(); highlightSoundSelection(2)">
+            onclick="playSound(CLICK_SOUND); muteSound(); removeHighlights('sound'); highlightSelectedOption('soundIcon1'); saveHighlightSound(2)">
             <img src="../img/icons/sound_mute.png" id="muteButton" class="setting-icon">
         </div>
     </div>
     <div class="sound-container back-btn-container-adjustment mt-50">
         <h4 class="fs-4 w-690">Return to Game</h4>
         <div class="w-344 d-flex center">
-            <div class="back-btn pos-unset back-btn-adjustment" onclick="playSoundAndContinue()">
+            <div class="back-btn pos-unset back-btn-adjustment" onclick="playSound(CLICK_SOUND); setTimeout(continueGame, 100)">
                 <img src="../img/icons/go_back.png" class="back-icon">
             </div>
         </div>
@@ -253,7 +261,7 @@ function getPauseScreenHTML() {
     <div class="sound-container back-btn-container-adjustment">
         <h4 class="fs-4 w-690">Return to Startscreen</h4>
         <div class="w-344 d-flex center">
-            <div class="back-btn pos-unset back-btn-adjustment" onclick="playSoundAndReturn()">
+            <div class="back-btn pos-unset back-btn-adjustment" onclick="playSound(CLICK_SOUND); setTimeout(returnToStartpage, 100)">
                 <img src="../img/icons/home.png" class="home-icon home-icon-adjustment">
             </div>
         </div>
@@ -290,7 +298,7 @@ function getEndscreenHTML(hl) {
         <div class="sound-container end-screen-container-adjustment">
             <h4 class="fs-4 w-690">Return to Startscreen</h4>
             <div class="w-344 d-flex center">
-                <div class="back-btn pos-unset back-btn-adjustment" onclick="playSoundAndReturn()">
+                <div class="back-btn pos-unset back-btn-adjustment" onclick="playSound(CLICK_SOUND); setTimeout(returnToStartpage, 100)">
                     <img src="../img/icons/home.png" class="home-icon home-icon-adjustment">
                 </div>
             </div>

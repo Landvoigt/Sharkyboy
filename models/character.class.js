@@ -27,6 +27,9 @@ class Character extends MovableObject {
     isAttacking = false;
     bubbleAnimationTimeout = false;
 
+    /**
+    * creates an instance of Character
+    */
     constructor() {
         super().loadImage(CHARACTER_SWIMMING_IMG[0]);
         this.load();
@@ -81,6 +84,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+    * moves the character in all directions
+    */
     moveCharacterInAllDirections() {
         if (this.canMoveRight()) {
             this.moveRight();
@@ -96,46 +102,78 @@ class Character extends MovableObject {
         }
     }
 
+
+    /**
+    * moves the character to the right
+    */
     moveRight() {
         super.moveRight();
         this.setMovementAttributes();
         this.otherDirection = false;
     }
 
+
+    /**
+    * moves the character to the left, mirrors image
+    */
     moveLeft() {
         super.moveLeft();
         this.setMovementAttributes();
         this.otherDirection = true;
     }
 
+
+    /**
+    * moves the character up
+    */
     moveUp() {
         super.moveUp();
         this.setMovementAttributes();
         this.y_default = this.y;
     }
 
+
+    /**
+    * moves the character down
+    */
     moveDown() {
         super.moveDown();
         this.setMovementAttributes();
         this.y_default = this.y;
     }
 
+
+    /**
+     * plays sound, resets idle boolean and last movement time
+     */
     setMovementAttributes() {
         playSound(SWIMMING_SOUND);
         this.isIdling = false;
         this.lastMovementTime = new Date().getTime() / 1000;
     }
 
+
+    /**
+    * repositions the camera based on the character's position
+    */
     repositionCamera() {
         this.world.camera_x = -this.x + 180;
     }
 
+
+    /**
+     * sets a timestamp if character begins to idle
+     */
     checkIdleTime() {
         if (this.isIdling) {
             this.lastMovementTime = new Date().getTime() / 1000;
         }
     }
 
+
+    /**
+    * if the character is alive it generates an interval for character animations with changeable animation times
+    */
     startAnimationTimer() {
         if (characterAlive) {
             this.animationTimeout = setTimeout(() => {
@@ -145,6 +183,10 @@ class Character extends MovableObject {
         }
     }
 
+
+    /**
+    * plays the character animations based on the character's state
+    */
     playCharacterAnimations() {
         if (this.isDead()) {
             this.world.gameOver();
@@ -172,10 +214,19 @@ class Character extends MovableObject {
         }
     }
 
+
+    /**
+    * changes time until next animation img is shown
+    * @param {number} ms - animation time in milliseconds
+    */
     changeAnimationTime(ms) {
         this.animationTime = ms;
     }
 
+
+    /**
+    * performs the bubble attack animation, sets percentage of poison status bar when performed, creates bubble and removes poison from collected
+    */
     bubbleAnimation() {
         if (this.bubbleAnimationStarted()) {
             this.resetCurrentImage();
@@ -186,8 +237,6 @@ class Character extends MovableObject {
         }
         if (this.bubbleAnimationEnded()) {
             this.world.createBubble();
-            playSound(BUBBLE_POP_SOUND);
-            collectedPoison--;
             this.bubbleAnimationTimeout = true;
         }
         this.bubbleAnimationCount++;
@@ -195,6 +244,10 @@ class Character extends MovableObject {
         this.lastMovementTime = new Date().getTime() / 1000;
     }
 
+
+    /**
+    * performs the slap attack animation
+    */
     slapAnimation() {
         if (this.slapAnimationStarted()) {
             this.resetCurrentImage();
@@ -213,6 +266,10 @@ class Character extends MovableObject {
         this.lastMovementTime = new Date().getTime() / 1000;
     }
 
+
+    /**
+    * performs the character dead animation
+    */
     deadAnimation() {
         setInterval(() => {
             if (this.deadAnimationStarted()) {
@@ -225,42 +282,82 @@ class Character extends MovableObject {
         }, 120);
     }
 
+
+    /**
+    * gets the current x position of the character.
+    */
     getCharacterPosition() {
         characterPosition = this.x;
     }
 
+
+    /**
+    * checks if the character enters the endzone
+    */
     enterEndzone() {
         return characterPosition > this.world.level.levelEndzoneStart_x;
     }
 
+
+    /**
+    * checks if the character leaves the endzone
+    */
     leaveEndzone() {
         return characterPosition < this.world.level.levelEndzoneStart_x && endbossReached;
     }
 
+
+    /**
+     * checks if character isnt at level end, isnt collided and the right key is pushed
+     */
     canMoveRight() {
         return this.world.keyboard.RIGHT && this.x < this.world.level.levelEnd_x && !this.characterCollided;
     }
 
+
+    /**
+    * checks if character isnt at level end, isnt collided and the right key is pushed
+    */
     canMoveLeft() {
         return this.world.keyboard.LEFT && this.x > this.world.level.levelStart_x && !this.characterCollided;
     }
 
+
+    /**
+    * checks if character is in movable vertical area, isnt collided and the right key is pushed
+    */
     canMoveUp() {
         return this.world.keyboard.UP && this.y > this.y_min && !this.characterCollided;
     }
 
+
+    /**
+    * checks if character is in movable vertical area, isnt collided and the right key is pushed
+    */
     canMoveDown() {
         return this.world.keyboard.DOWN && this.y < this.y_max && !this.characterCollided;
     }
 
+
+    /**
+     * checks if there´s enough collected poison, there´s no timeout and the right key is pushed
+     */
     canDoBubble() {
         return this.world.keyboard.CTRL && collectedPoison > 0 && !this.bubbleAnimationTimeout;
     }
 
+
+    /**
+    * checks if there´s no timeout, attack animation is running and the right key is pushed
+    */
     canAttack() {
         return this.world.keyboard.SPACEBAR && startAttackTimer > stopAttackTimer && this.attackAnimationCount <= 7;
     }
 
+
+    /**
+    * checks if there´s no collision and the right key is pushed
+    */
     isSwimming() {
         return this.world.keyboard.RIGHT && !this.characterCollided ||
             this.world.keyboard.LEFT && !this.characterCollided ||
@@ -268,44 +365,84 @@ class Character extends MovableObject {
             this.world.keyboard.DOWN && !this.characterCollided;
     }
 
+
+    /**
+     * checks the time since last character movement
+     */
     isntMoving() {
         let timePassed = (new Date().getTime() / 1000) - this.lastMovementTime;
         return timePassed > this.timeUntilSleepAnimation;
     }
 
-    bubbleAnimationStarted() { // first img of bubble attack is shown
+
+    /**
+    * returns true when first img of bubble attack animation is shown
+    */
+    bubbleAnimationStarted() {
         return this.bubbleAnimationCount == 0;
     }
 
-    bubbleAnimationRunning() { // third img of bubble attack is shown
+
+    /**
+    * returns true when third img of bubble attack animation is shown
+    */
+    bubbleAnimationRunning() {
         return this.bubbleAnimationCount == 2;
     }
 
-    bubbleAnimationEnded() { // last img of bubble attack is shown
+
+    /**
+    * returns true when last img of bubble attack animation is shown
+    */
+    bubbleAnimationEnded() {
         return this.bubbleAnimationCount == 7;
     }
 
-    slapAnimationStarted() { // first img of slap attack is shown
+
+    /**
+    * returns true when first img of slap attack animation is shown
+    */
+    slapAnimationStarted() {
         return this.attackAnimationCount == 0;
     }
 
-    slapAnimationAttackStarted() { // second img of slap attack is shown
+
+    /**
+    * returns true when second img of slap attack animation is shown
+    */
+    slapAnimationAttackStarted() {
         return this.attackAnimationCount == 1;
     }
 
-    slapAnimationRunning() { // fifth img of slap attack is shown
+
+    /**
+    * returns true when fifth img of slap attack animation is shown
+    */
+    slapAnimationRunning() {
         return this.attackAnimationCount == 4;
     }
 
-    slapAnimationEnded() { // last img of slap attack is shown
+
+    /**
+    * returns true when last img of slap attack animation is shown
+    */
+    slapAnimationEnded() {
         return this.attackAnimationCount == 7;
     }
     
-    deadAnimationStarted() { // first img of dead is shown
+
+    /**
+    * returns true when first img of character dead animation is shown
+    */
+    deadAnimationStarted() {
         return this.deadAnimationCount == 0;
     }
     
-    deadAnimationRunning() { // last img of dead is shown
+
+    /**
+    * returns true when last img of character dead animation is shown
+    */
+    deadAnimationRunning() {
         return this.deadAnimationCount <= 9;
     }
 }

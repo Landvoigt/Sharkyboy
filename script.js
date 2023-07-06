@@ -87,151 +87,6 @@ function checkDevice(startscreen) {
 
 
 /**
- * shows the settings page
- */
-function showSettings() {
-    onSettingsPage = true;
-    playSound(MENU_SOUND);
-    let startscreen = document.getElementById('startscreen');
-    startscreen.classList.add('change-display');
-    startscreen.innerHTML = getSettingsHTML();
-    checkExistingSettings();
-    checkExistingDifficulty();
-}
-
-
-/**
- * highlightes current fullscreen icon
- */
-function highlightFullscreenSelection(cnt) {
-    removeFullscreenSelectionHighlights();
-    let clickedIcon = document.getElementById(`fullscreenIcon${cnt}`);
-    clickedIcon.classList.add('yellow-highlight');
-    highlightCache.fullscreen = cnt;
-}
-
-
-/**
- * gets all fullscreen icons
- */
-function removeFullscreenSelectionHighlights() {
-    let fullscreenIcons = document.getElementsByClassName('fullscreen-circle-btn');
-    for (let i = 0; i < fullscreenIcons.length; i++) {
-        icon = fullscreenIcons[i];
-        removeHighlight(icon);
-    }
-}
-
-
-/**
- * highlightes current sound icon
- */
-function highlightSoundSelection(cnt) {
-    removeSoundSelectionHighlights();
-    let clickedIcon = document.getElementById(`soundIcon${cnt}`);
-    clickedIcon.classList.add('yellow-highlight');
-    highlightCache.sound = cnt;
-}
-
-
-/**
- * gets all sound icons
- */
-function removeSoundSelectionHighlights() {
-    let soundIcons = document.getElementsByClassName('sound-circle-btn');
-    for (let i = 0; i < soundIcons.length; i++) {
-        icon = soundIcons[i];
-        removeHighlight(icon);
-    }
-}
-
-
-/**
- * highlightes current difficulty icon
- */
-function highlightDifficultySelection(cnt) {
-    removeDifficultySelectionHighlights();
-    let clickedIcon = document.getElementById(`difficultyIcon${cnt}`);
-    clickedIcon.classList.add('yellow-highlight');
-    highlightCache.difficulty = cnt;
-}
-
-
-/**
- * gets all difficulty icons
- */
-function removeDifficultySelectionHighlights() {
-    let difficultyIcons = document.getElementsByClassName('difficulty-circle-btn');
-    for (let i = 0; i < difficultyIcons.length; i++) {
-        icon = difficultyIcons[i];
-        removeHighlight(icon);
-    }
-}
-
-
-/**
- * removes highlight 
- */
-function removeHighlight(element) {
-    element.classList.remove('yellow-highlight');
-}
-
-
-/**
- * checks for already given fullscreen and sound settings and adds highlight
- */
-function checkExistingSettings() {
-    removeFullscreenSelectionHighlights();
-    removeSoundSelectionHighlights();
-    document.getElementById(`fullscreenIcon${highlightCache.fullscreen}`).classList.add('yellow-highlight');
-    document.getElementById(`soundIcon${highlightCache.sound}`).classList.add('yellow-highlight');
-}
-
-
-/**
- * checks for already given difficulty and adds highlight
- */
-function checkExistingDifficulty() {
-    removeDifficultySelectionHighlights();
-    document.getElementById(`difficultyIcon${highlightCache.difficulty}`).classList.add('yellow-highlight');
-}
-
-
-/**
- * shows small text field with selected setting, removes after timeout
- */
-function showSelectedOption(text) {
-    let selectedOption = document.getElementById('selectedOption');
-    selectedOption.innerHTML = `${text}`;
-    selectedOption.classList.remove('d-none');
-    setTimeout(hideSelectedOption, 1250);
-}
-
-
-/**
- * hides text field
- */
-function hideSelectedOption() {
-    if (onSettingsPage) {
-        let selectedOption = document.getElementById('selectedOption');
-        selectedOption.classList.add('d-none');
-    }
-}
-
-
-function playSoundAndReturn() {
-    playSound(CLICK_SOUND);
-    setTimeout(returnToStartpage, 100);
-}
-
-
-function playSoundAndContinue() {
-    playSound(CLICK_SOUND);
-    setTimeout(continueGame, 100);
-}
-
-
-/**
  * hides the pause screen, resets sounds and variables, shows startpage
  */
 function returnToStartpage() {
@@ -253,19 +108,25 @@ function resetGameVariables() {
     pauseGame = false;
     characterAlive = true;
     endbossReached = false;
+    gameWon = '';
     collectedPoison = 0;
     killedPufferFishCounter = 0;
     killedEndbossCounter = 0;
-    gameWon = '';
     world.level.endboss[0].endbossAlive = true;
 }
 
 
+/**
+ * plays specific sound
+ */
 function playSound(audioFile) {
     audioFile.play();
 }
 
 
+/**
+ * stops specific sound
+ */
 function stopSound(audioFile) {
     audioFile.pause();
 }

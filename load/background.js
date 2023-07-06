@@ -21,7 +21,3 @@ const BG_ORANGE_FISH_IMG_SWIM = [
     '../img/background/fishes/puffer_fish_orange/swim/(4).png',
     '../img/background/fishes/puffer_fish_orange/swim/(5).png'
 ];
-
-const BG_SQUID_IMG_SWIM = [
-
-];

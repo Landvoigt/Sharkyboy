@@ -9,6 +9,9 @@ class PoisonBottle extends MovableObject {
     };
     animationTime = 130;
 
+    /**
+    * creates an instance of PoisonBottle
+    */
     constructor(x, y) {
         super();
         this.loadImage(COLLECTIBLE_POISON_IMG[0]);
@@ -18,6 +21,10 @@ class PoisonBottle extends MovableObject {
         this.animate();
     }
 
+
+    /**
+     * plays the bottle floating animation
+     */
     animate() {
         setInterval(() => {
             this.playAnimation(COLLECTIBLE_POISON_IMG);

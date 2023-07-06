@@ -16,6 +16,10 @@ const WINNING_SOUND = new Audio('../sounds/victory.mp3');
 
 let allAudioFiles = [];
 
+
+/**
+ * pushes all audios in array to access later
+ */
 function pushAudios() {
     allAudioFiles.push(MENU_SOUND);
     allAudioFiles.push(GAME_MUSIC);

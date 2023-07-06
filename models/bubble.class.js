@@ -8,6 +8,9 @@ class Bubble extends MovableObject {
         height: 10,
     };
 
+    /**
+    * creates an instance of Bubble
+    */
     constructor(x, y) {
         super().loadImage('../img/character/attack/bubble_trap/poison_bubble.png');
         this.x = x;
@@ -15,6 +18,10 @@ class Bubble extends MovableObject {
         this.moveRight();
     }
 
+
+    /**
+     * moves bubble to the right with given speed
+     */
     moveRight() {
         this.speedY = 30;
         setInterval(() => {

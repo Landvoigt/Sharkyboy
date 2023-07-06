@@ -53,6 +53,9 @@ function clearAllTimeouts() {
 }
 
 
+/**
+ * adds the keydown events
+ */
 window.addEventListener("keydown", (event) => {
     if (event.keyCode == 39 && !pauseGame || event.keyCode == 68 && !pauseGame) {
         event.preventDefault();
@@ -93,6 +96,9 @@ window.addEventListener("keydown", (event) => {
 });
 
 
+/**
+ * adds the keyup events
+ */
 window.addEventListener("keyup", (event) => {
     if (event.keyCode == 39 || event.keyCode == 68) {
         event.preventDefault();
@@ -119,7 +125,7 @@ window.addEventListener("keyup", (event) => {
     if (event.keyCode == 17) {
         event.preventDefault();
         keyboard.CTRL = false;
-        // resets the animation count
+        // resets the animation images
         world.character.bubbleAnimationTimeout = false;
         world.character.bubbleAnimationCount = 0;
     }

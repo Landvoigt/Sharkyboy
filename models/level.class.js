@@ -9,6 +9,9 @@ class Level {
     levelEndzoneStart_x = 8000;
     levelEnd_x = 11500;
 
+    /**
+    * creates an instance of Level
+    */
     constructor(enemies, endboss, backgroundObjects, backgroundFishes, coins, collectibles) {
         this.enemies = enemies;
         this.endboss = endboss;

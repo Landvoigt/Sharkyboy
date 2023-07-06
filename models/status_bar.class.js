@@ -4,6 +4,9 @@ class StatusBar extends DrawableObject {
     type;
     images;
 
+    /**
+    * creates an instance of StatusBar
+    */
     constructor(statusImages, x, y, type) {
         super();
         this.images = statusImages;
@@ -14,6 +17,10 @@ class StatusBar extends DrawableObject {
         this.checkType();
     }
 
+
+    /**
+     * checks which type of status bar is generated, sets percentage and direction based on type
+     */
     checkType() {
         if (this.type == 'hp') {
             this.setPercentage(100);
@@ -23,11 +30,22 @@ class StatusBar extends DrawableObject {
         }
     }
 
+
+    /**
+    * sets the percentage of the status bar and updates the image accordingly
+    * @param {number} percentage - the percentage value
+    */
     setPercentage(percentage) {
         let imagePath = this.images[this.resolveImageIndex(percentage)];
         this.img = this.imageCache[imagePath];
     }
 
+
+    /**
+    * resolves the index of the status bar image based on the percentage value
+    * @param {number} percentage - the percentage value
+    * @returns {number} the index of the status bar image
+    */
     resolveImageIndex(percentage) {
         if (percentage == 100) {
             return 5;

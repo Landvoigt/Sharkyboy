@@ -6,6 +6,9 @@ let casualEnemyMinSpeed = 0.2;
 let casualEnemyMaxSpeed = 0.6;
 
 
+/**
+ * changes the game difficulty in 4 levels 
+ */
 function changeDifficulty(dfc) {
     currentDifficulty = dfc;
     if (dfc == 1) {
@@ -23,6 +26,9 @@ function changeDifficulty(dfc) {
 }
 
 
+/**
+ * sets the difficulty parameters to easy
+ */
 function setEasyDifficulty() {
     endbossHealthPoints = 150;
     characterHitFromCasualEnemy = 5;
@@ -32,6 +38,9 @@ function setEasyDifficulty() {
 }
 
 
+/**
+ * sets the difficulty parameters to standard
+ */
 function setStandardDifficulty() {
     endbossHealthPoints = 250;
     characterHitFromCasualEnemy = 10;
@@ -41,6 +50,9 @@ function setStandardDifficulty() {
 }
 
 
+/**
+ * sets the difficulty parameters to hard
+ */
 function setHardDifficulty() {
     endbossHealthPoints = 250;
     characterHitFromCasualEnemy = 20;
@@ -50,6 +62,9 @@ function setHardDifficulty() {
 }
 
 
+/**
+ * sets the difficulty parameters to extremly hard
+ */
 function setExtremHardDifficulty() {
     endbossHealthPoints = 400;
     characterHitFromCasualEnemy = 25;

@@ -18,6 +18,9 @@ class Enemy_1 extends MovableObject {  // Pufferfish
     transitionDone = false;
     enemyDead = false;
 
+    /**
+    * creates an instance of Endboss
+    */
     constructor() {
         super().loadImage(PUFFER_FISH_RED_SWIM_IMG[0]);
         this.load();
@@ -27,6 +30,10 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         this.animate();
     }
 
+
+    /**
+     * preloads all normal enemy imgs
+     */
     load() {
         this.loadImages(PUFFER_FISH_RED_SWIM_IMG);
         this.loadImages(PUFFER_FISH_RED_TRANSITION_IMG);
@@ -34,27 +41,43 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         this.loadImages(PUFFER_FISH_RED_DEAD_IMG);
     }
 
+
+    /**
+     * animates the object if game isnt paused
+     */
     animate() {
         setInterval(() => {
             if (!pauseGame) {
-                if (this.enemyDead && this.deadAnimationCount <= 2) {
-                    this.deadAnimation();
-                }
-                else if (this.characterNearby() && this.transitionAnimationRunning()) {
-                    this.transitionAnimation();
-                }
-                else if (!this.enemyDead) {
-                    if (this.transitionDone) {
-                        this.playAnimation(PUFFER_FISH_RED_ATTACK_IMG);
-                    }
-                    else {
-                        this.playAnimation(PUFFER_FISH_RED_SWIM_IMG);
-                    }
-                }
+                this.playAnimations();
             }
         }, this.animationTime);
     }
 
+
+    /**
+    * plays the enemy animations based on the enemy´s state and position
+    */
+    playAnimations() {
+        if (this.isDead()) {
+            this.deadAnimation();
+        }
+        else if (this.characterNearby() && this.transitionAnimationRunning()) {
+            this.transitionAnimation();
+        }
+        else if (!this.enemyDead) {
+            if (this.transitionDone) {
+                this.playAnimation(PUFFER_FISH_RED_ATTACK_IMG);
+            }
+            else {
+                this.playAnimation(PUFFER_FISH_RED_SWIM_IMG);
+            }
+        }
+    }
+
+
+    /**
+     * moves object to the left
+     */
     moveLeft() {
         setInterval(() => {
             if (!pauseGame) {
@@ -63,6 +86,10 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         }, 1000 / 60);
     }
 
+
+    /**
+     * performs enemy dead animation, moves enemy away when animation finished and removes object
+     */
     deadAnimation() {
         if (this.deadAnimationStarted()) {
             this.resetCurrentImage();
@@ -75,6 +102,10 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         this.deadAnimationCount++;
     }
 
+
+    /**
+     * shoots enemy away after dead
+     */
     shootEnemyAwayAfterSlap() {
         setInterval(() => {
             this.y -= this.randomFlyingSpeed_x;
@@ -82,11 +113,19 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         }, 1);
     }
 
+
+    /**
+     * deletes object
+     */
     deleteEnemy() {
         world.deleteObject(enemyToKill[0]);
         enemyToKill = [];
     }
 
+
+    /**
+     * performs transition animation when character nearby, changes speed
+     */
     transitionAnimation() {
         if (this.transitionAnimationStarted()) {
             this.resetCurrentImage();
@@ -107,33 +146,69 @@ class Enemy_1 extends MovableObject {  // Pufferfish
         this.y = Math.floor(Math.random() * 640) + 250;
     }
 
+
+    /**
+     * generates random speed parameter and dead animation speed parameter in a given range
+     */
     getRandomSpeed() {
         this.speed = casualEnemyMinSpeed + Math.random() * casualEnemyMaxSpeed;
         this.randomFlyingSpeed_x = 3.5 + Math.random() * 5;
         this.randomFlyingSpeed_y = 3 + Math.random() * 5;
     }
 
-    characterNearby() { // character is within 1000px near enemy
+
+    /**
+     *  checks if character is within 1000px to enemy
+     */
+    characterNearby() {
         return characterPosition + 1000 > this.x;
     }
 
-    transitionAnimationStarted() { // first img of transition is shown
+
+    /**
+     * checks if enemy is dead and dead animation is still running
+     */
+    isDead() {
+        return this.enemyDead && this.deadAnimationCount <= 2;
+    }
+
+
+    /**
+    * returns true when first img of transition animation is shown
+    */
+    transitionAnimationStarted() {
         return this.transitionAnimationCount == 0;
     }
 
-    transitionAnimationRunning() { // last img of transition is not reached yet
+
+    /**
+    * returns true when last img of transition animation isnt reached yet
+    */
+    transitionAnimationRunning() {
         return this.transitionAnimationCount <= 4;
     }
 
-    transitionAnimationEnded() { // last img of transition is shown
+
+    /**
+    * returns true when last img of transition animation is shown
+    */
+    transitionAnimationEnded() {
         return this.transitionAnimationCount == 4;
     }
 
-    deadAnimationStarted() { // first img of dead is shown
+
+    /**
+    * returns true when first img of dead animation is shown
+    */
+    deadAnimationStarted() {
         return this.deadAnimationCount == 0;
     }
 
-    deadAnimationEnded() { // last img of dead is shown
+
+    /**
+    * returns true when last img of dead animation is shown
+    */
+    deadAnimationEnded() {
         return this.deadAnimationCount == 2;
     }
 }
