@@ -189,12 +189,11 @@ class World {
     */
     checkEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && !this.character.isAttacking && !enemy.enemyDead) {
+            if (this.canGetHittedByEnemy(enemy)) {
                 this.characterGetsHitted(characterHitFromCasualEnemy);
             }
-            if (this.character.isColliding(enemy) && this.character.isAttacking) {
-                enemy.enemyDead = true;
-                enemyToKill.push(enemy);
+            if (this.canNotGetHittedByEnemy(enemy)) {
+                this.killEnemy(enemy);
             }
         });
     }
@@ -205,13 +204,12 @@ class World {
     */
     checkEndbossCollision() {
         let endboss = this.level.endboss[0];
-        if (this.character.isColliding(endboss) && !this.character.isAttacking && endboss.endbossAlive) {
+        if (this.canGetHittedByEndboss(endboss)) {
             this.characterGetsHitted(characterHitFromEndboss);
         }
-        if (this.character.isColliding(endboss) && this.character.isAttacking && endboss.endbossAlive) {
-            if (endboss.attackTimeoutActive && !endboss.wasHitted) {
-                endboss.hit();
-                endboss.wasHitted = true;
+        if (this.canNotGetHittedByEndboss(endboss)) {
+            if (this.isNotInAttack(endboss)) {
+                this.endbossGetsHitted(endboss);
             } else {
                 this.characterGetsHitted(characterHitFromEndboss);
             }
@@ -220,31 +218,39 @@ class World {
 
 
     /**
-    * checks for collisions between the bubble and enemies
+    * checks for collisions between the bubble and objects
     */
     checkBubbleCollision(bubble) {
         let bblCollisionInterval = setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (bubble.isColliding(enemy)) {
-                    enemy.enemyDead = true;
-                    enemyToKill.push(enemy);
-                    this.movableBubbles.pop();
-                    clearInterval(bblCollisionInterval);
-                    playSound(ENEMY_DEAD_SOUND);
-                }
-            });
-            let endboss = this.level.endboss[0];
-            if (bubble.isColliding(endboss)) {
-                endboss.hit();
-                endboss.wasHitted = true;
-                this.movableBubbles.pop();
-                clearInterval(bblCollisionInterval);
-            }
-            if (bubble.x > this.character.x + 1700) {
-                this.movableBubbles.pop();
-                clearInterval(bblCollisionInterval);
+            this.checkBubbleCollisionWithEnemy(bblCollisionInterval);
+            this.checkBubbleCollisionWithEndboss(bblCollisionInterval);
+            if (this.bubbleOutsideObservedWorld(bubble)) {
+                this.deleteBubble();
             }
         }, 200);
+    }
+
+
+    /**
+    * checks for collisions between the bubble and a standard enemy
+    */
+    checkBubbleCollisionWithEnemy(bblCollisionInterval) {
+        this.level.enemies.forEach((enemy) => {
+            if (bubble.isColliding(enemy)) {
+                this.killEnemyWithBubble(enemy, bblCollisionInterval);
+            }
+        });
+    }
+
+
+    /**
+    * checks for collisions between the bubble and endboss
+    */
+    characterHitFromEndboss(bblCollisionInterval) {
+        let endboss = this.level.endboss[0];
+        if (bubble.isColliding(endboss)) {
+            this.hitEndbossWithBubble(endboss, bblCollisionInterval);
+        }
     }
 
 
@@ -266,9 +272,7 @@ class World {
         this.level.coins.forEach((coin) => {
             coinsIndex++;
             if (this.character.isColliding(coin)) {
-                playSound(COLLECT_SOUND);
-                this.coinsCount += 5;
-                this.level.coins.splice(coinsIndex, 1);
+                this.collectCoin(coinsIndex);
             }
         });
     }
@@ -283,9 +287,7 @@ class World {
         this.level.collectibles.forEach((poison) => {
             poisonIndex++;
             if (this.character.isColliding(poison) && collectedPoison < 5) {
-                playSound(COLLECT_SOUND);
-                collectedPoison++;
-                this.level.collectibles.splice(poisonIndex, 1);
+                this.collectPoison(poisonIndex);
             }
         });
     }
@@ -300,6 +302,76 @@ class World {
         this.checkBubbleCollision(bubble);
         playSound(BUBBLE_POP_SOUND);
         collectedPoison--;
+    }
+
+
+    /**
+     * plays collect sound, adds points to score, deletes coin
+     */
+    collectCoin(coinsIndex) {
+        playSound(COLLECT_SOUND);
+        this.coinsCount += 5;
+        this.level.coins.splice(coinsIndex, 1);
+    }
+
+
+    /**
+     * plays collect sound, adds poison to status bar, deletes bottle
+     */
+    collectPoison(poisonIndex) {
+        playSound(COLLECT_SOUND);
+        collectedPoison++;
+        this.level.collectibles.splice(poisonIndex, 1);
+    }
+
+
+    /**
+     * pushes object into array to delete
+     */
+    killEnemy(enemy) {
+        enemy.enemyDead = true;
+        enemyToKill.push(enemy);
+    }
+
+
+    /**
+     * pushes object into array to delete, plays sound, clears interval, deletes bubble
+     */
+    killEnemyWithBubble(enemy, bblCollisionInterval) {
+        enemy.enemyDead = true;
+        enemyToKill.push(enemy);
+        this.movableBubbles.pop();
+        clearInterval(bblCollisionInterval);
+        playSound(ENEMY_DEAD_SOUND);
+    }
+
+
+    /**
+     * endboss gets hitted
+     */
+    endbossGetsHitted(endboss) {
+        endboss.hit();
+        endboss.wasHitted = true;
+    }
+
+
+    /**
+     * hits endboss, deletes bubble, clears interval
+     */
+    hitEndbossWithBubble(endboss, bblCollisionInterval) {
+        endboss.hit();
+        endboss.wasHitted = true;
+        this.movableBubbles.pop();
+        clearInterval(bblCollisionInterval);
+    }
+
+
+    /**
+     * deletes last bubble, clears movement interval
+     */
+    deleteBubble() {
+        this.movableBubbles.pop();
+        clearInterval(bblCollisionInterval);
     }
 
 
@@ -410,5 +482,53 @@ class World {
     */
     inRangeToSpawnNewEnemies() {
         return (characterPosition > this.character.x_default + (this.enemyRespawnDistance * this.enemySpawnCounter)) && !(characterPosition > this.lastEnemyRespawnBeforeEndboss);
+    }
+
+
+    /**
+     * returns true if the bubble position is outside the field of view
+     */
+    bubbleOutsideObservedWorld(bubble) {
+        return bubble.x > this.character.x + 1700;
+    }
+
+
+    /**
+     * returns true if endboss is not attacking and not already hit
+     */
+    isNotInAttack() {
+        return endboss.attackTimeoutActive && !endboss.wasHitted;
+    }
+
+
+    /**
+     * returns true if objects colliding, character not attacking, enemy alive and no damaged timeout active
+     */
+    canGetHittedByEnemy(enemy) {
+        return this.character.isColliding(enemy) && !this.character.isAttacking && !enemy.enemyDead && !this.character.characterDamageTimeout;
+    }
+
+
+    /**
+     * returns true if objects colliding but character is attacking
+     */
+    canNotGetHittedByEnemy(enemy) {
+        return this.character.isColliding(enemy) && this.character.isAttacking;
+    }
+
+
+    /**
+     * returns true if objects colliding, character not attacking, endboss alive and no damaged timeout active
+     */
+    canGetHittedByEndboss(endboss) {
+        return this.character.isColliding(endboss) && !this.character.isAttacking && endboss.endbossAlive && !endboss.characterDamageTimeout;
+    }
+
+
+    /**
+     * returns true if objects colliding but character is attacking and endboss alive and no damaged timeout active
+     */
+    canNotGetHittedByEndboss(endboss) {
+        return this.character.isColliding(endboss) && this.character.isAttacking && endboss.endbossAlive && !endboss.characterDamageTimeout;
     }
 }

@@ -192,7 +192,7 @@ class Character extends MovableObject {
             this.world.gameOver();
         } else if (this.isHurt()) {
             this.changeAnimationTime(130);
-            this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
+            this.hurtAnimation();
         } else if (this.canDoBubble()) {
             this.changeAnimationTime(130);
             this.bubbleAnimation();
@@ -201,16 +201,10 @@ class Character extends MovableObject {
             this.slapAnimation();
         } else if (this.isSwimming()) {
             this.changeAnimationTime(90);
-            this.playAnimation(CHARACTER_SWIMMING_IMG);
+            this.swimAnimation();
         } else {
             this.changeAnimationTime(130);
-            if (this.isntMoving() && this.isIdling) {
-                this.playAnimation(CHARACTER_LONG_IDLE_IMG);
-            } else {
-                this.isIdling = true;
-                this.bubbleAnimationCount = 0;
-                this.playAnimation(CHARACTER_IDLE_IMG);
-            }
+            this.idleAnimation();
         }
     }
 
@@ -221,6 +215,24 @@ class Character extends MovableObject {
     */
     changeAnimationTime(ms) {
         this.animationTime = ms;
+    }
+
+
+    /**
+    * sets damage timeout, performs the hurt animation
+    */
+    hurtAnimation() {
+        this.characterDamageTimeout = true;
+        this.playAnimation(CHARACTER_HURT_FROM_POISON_IMG);
+    }
+
+
+    /**
+    * cancels damage timeout, performs the swim animation
+    */
+    swimAnimation() {
+        this.characterDamageTimeout = false;
+        this.playAnimation(CHARACTER_SWIMMING_IMG);
     }
 
 
@@ -280,6 +292,21 @@ class Character extends MovableObject {
             }
             this.deadAnimationCount++;
         }, 120);
+    }
+
+
+    /**
+    * cancels damage timeout, performs different idle animations based on idle time
+    */
+    idleAnimation() {
+        this.characterDamageTimeout = false;
+        if (this.isntMoving() && this.isIdling) {
+            this.playAnimation(CHARACTER_LONG_IDLE_IMG);
+        } else {
+            this.isIdling = true;
+            this.bubbleAnimationCount = 0;
+            this.playAnimation(CHARACTER_IDLE_IMG);
+        }
     }
 
 
@@ -429,7 +456,7 @@ class Character extends MovableObject {
     slapAnimationEnded() {
         return this.attackAnimationCount == 7;
     }
-    
+
 
     /**
     * returns true when first img of character dead animation is shown
@@ -437,7 +464,7 @@ class Character extends MovableObject {
     deadAnimationStarted() {
         return this.deadAnimationCount == 0;
     }
-    
+
 
     /**
     * returns true when last img of character dead animation is shown

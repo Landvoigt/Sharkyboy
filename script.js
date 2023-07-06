@@ -293,7 +293,7 @@ function showScoredPoints() {
         if (endValue == 0) {
             valueDisplay.textContent = startValue;
         } else {
-            showPointsAnimation(startValue, endValue);
+            showPointsAnimation(valueDisplay, startValue, endValue);
         }
     });
 }
@@ -302,7 +302,7 @@ function showScoredPoints() {
 /**
  * shows a counting up animation for all scored points
  */
-function showPointsAnimation(startValue, endValue) {
+function showPointsAnimation(valueDisplay, startValue, endValue) {
     let duration = Math.floor(1000 / endValue);
     let counter = setInterval(function () {
         startValue += 1;

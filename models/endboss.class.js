@@ -48,7 +48,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Animates the end boss object
+    * animates the end boss object
     */
     animate() {
         setInterval(() => {
@@ -60,14 +60,14 @@ class Endboss extends MovableObject {
             } else if (this.canAttack()) {
                 this.attack();
             } else {
-                this.Idle();
+                this.idle();
             }
         }, this.animationTime);
     }
 
 
     /**
-    * Performs the spawn animation
+    * performs the spawn animation
     */
     spawnAnimation() {
         if (this.characterInRangeForSpawn()) {
@@ -85,7 +85,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Checks if the character is in range for spawn
+    * checks if the character is in range for spawn
     * @returns {boolean} True if the character is in range for spawn, otherwise false
     */
     characterInRangeForSpawn() {
@@ -94,7 +94,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Checks if the end boss can attack
+    * checks if the end boss can attack
     * @returns {boolean} True if character within 700px to end boss and no attack timeout active, otherwise false
     */
     canAttack() {
@@ -103,7 +103,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Performs the attack animation, moves the object towards the character
+    * performs the attack animation, moves the object towards the character
     */
     attack() {
         if (this.attackAnimationStarted()) {
@@ -123,7 +123,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Moves the end boss to the left during the attack
+    * moves the end boss to the left during the attack
     */
     moveLeftDuringAttack() {
         this.x -= 35;
@@ -132,7 +132,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Moves the hitbox of the end boss
+    * moves the hitbox of the end boss
     */
     moveHitbox() {
         this.offset.x = 20;
@@ -140,7 +140,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Handles the attack finishing
+    * handles the attack finishing
     */
     attackFinished() {
         this.isAttacking = false;
@@ -150,7 +150,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Checks the attack timeout, resets after reached time
+    * checks the attack timeout, resets after reached time
     */
     checkAttackTimeout() {
         setInterval(() => {
@@ -165,7 +165,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Resets the attack timeout
+    * resets the attack timeout
     */
     resetAttackTimeout() {
         this.attackImageCount = 0;
@@ -174,9 +174,10 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Performs the idle animation, resets the hitbox
+    * cancels character damage timeout, performs the idle animation, resets the hitbox
     */
-    Idle() {
+    idle() {
+        this.characterDamageTimeout = false;
         if (this.spawned) {
             this.offset.x = 60;
             this.wasHitted = false;
@@ -201,7 +202,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Checks if the end boss is hurt, stays true until 1 sec is reached
+    * checks if the end boss is hurt, stays true until 1 sec is reached
     */
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // difference in ms
@@ -219,15 +220,16 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Performs the hurt animation
+    * sets a timeout for the character getting damaged, performs the hurt animation
     */
     hurtAnimation() {
+        this.characterDamageTimeout = true;
         this.playAnimation(KILLERWHALE_HURT_IMG);
     }
 
 
     /**
-    * Performs the dead animation
+    * performs the dead animation
     */
     deadAnimation() {
         setInterval(() => {
@@ -245,7 +247,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Gets the current time
+    * gets the current time
     * @returns {number} The current time in milliseconds.
     */
     getCurrentTime() {
