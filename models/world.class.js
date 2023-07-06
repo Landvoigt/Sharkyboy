@@ -150,6 +150,7 @@ class World {
         if (obj.otherDirection) {
             this.flipImageBack(obj);
         }
+        obj.drawFrame(this.ctx);
     }
 
 
@@ -222,8 +223,8 @@ class World {
     */
     checkBubbleCollision(bubble) {
         let bblCollisionInterval = setInterval(() => {
-            this.checkBubbleCollisionWithEnemy(bblCollisionInterval);
-            this.checkBubbleCollisionWithEndboss(bblCollisionInterval);
+            this.checkBubbleCollisionWithEnemy(bubble, bblCollisionInterval);
+            this.checkBubbleCollisionWithEndboss(bubble, bblCollisionInterval);
             if (this.bubbleOutsideObservedWorld(bubble)) {
                 this.deleteBubble();
             }
@@ -234,7 +235,7 @@ class World {
     /**
     * checks for collisions between the bubble and a standard enemy
     */
-    checkBubbleCollisionWithEnemy(bblCollisionInterval) {
+    checkBubbleCollisionWithEnemy(bubble, bblCollisionInterval) {
         this.level.enemies.forEach((enemy) => {
             if (bubble.isColliding(enemy)) {
                 this.killEnemyWithBubble(enemy, bblCollisionInterval);
@@ -246,7 +247,7 @@ class World {
     /**
     * checks for collisions between the bubble and endboss
     */
-    characterHitFromEndboss(bblCollisionInterval) {
+    checkBubbleCollisionWithEndboss(bubble, bblCollisionInterval) {
         let endboss = this.level.endboss[0];
         if (bubble.isColliding(endboss)) {
             this.hitEndbossWithBubble(endboss, bblCollisionInterval);
@@ -496,7 +497,7 @@ class World {
     /**
      * returns true if endboss is not attacking and not already hit
      */
-    isNotInAttack() {
+    isNotInAttack(endboss) {
         return endboss.attackTimeoutActive && !endboss.wasHitted;
     }
 

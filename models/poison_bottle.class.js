@@ -2,10 +2,10 @@ class PoisonBottle extends MovableObject {
     width = 90;
     height = 120;
     offset = {
-        x: 15,
-        width: 15,
-        y: 45,
-        height: 4,
+        x: 20,
+        width: 20,
+        y: 50,
+        height: 10,
     };
     animationTime = 130;
 

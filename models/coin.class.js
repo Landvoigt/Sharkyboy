@@ -2,10 +2,10 @@ class Coin extends MovableObject {
     width = 80;
     height = 80;
     offset = {
-        x: 0,
-        width: 0,
-        y: 0,
-        height: 0,
+        x: 4,
+        width: 4,
+        y: 4,
+        height: 4,
     };
     animationTime = 160;
 

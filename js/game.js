@@ -76,8 +76,8 @@ window.addEventListener("keydown", (event) => {
     if (event.keyCode == 32 && !pauseGame) {
         event.preventDefault();
         if (stopAttackTimer > startAttackTimer && !keyboard.SPACEBAR) {
-            // allow attack only after 1 sec has passed, prevent spamming of attack keypress
-            if ((new Date().getTime() - startAttackTimer) > 800) {
+            // allow attack only after 0.7 sec has passed, prevent spamming of attack keypress
+            if ((new Date().getTime() - startAttackTimer) > 700) {
                 startAttackTimer = new Date().getTime();
                 world.character.attackAnimationCount = 0;
             }

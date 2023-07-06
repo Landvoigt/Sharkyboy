@@ -4,10 +4,10 @@ class Endboss extends MovableObject {
     width = 950;
     height = 950;
     offset = {
-        x: 60,
+        x: 70,
         width: 80,
         y: 450,
-        height: 175,
+        height: 185,
     };
     spawnOffset = 1300;
     attackResetTime = 3400;
