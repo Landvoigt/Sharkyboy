@@ -1,6 +1,6 @@
 function getStartpageHMTL() {
     return `
-    <h1>Skarkyboy</h1>
+    <h1>Sharkyboy</h1>
     <div class="startscreen-btn-box">
         <div class="start-button" onclick="startGame()">
             <h2>Start</h2>
