@@ -232,13 +232,16 @@ class Endboss extends MovableObject {
     * performs the dead animation
     */
     deadAnimation() {
-        setInterval(() => {
+        let deadAnimationInterval = setInterval(() => {
             if (this.deadAnimationStarted()) {
                 this.resetCurrentImage();
                 playSound(KILLERWHALE_HURT_SOUND);
             }
             if (this.deadAnimationEnded()) {
                 playSound(WINNING_SOUND);
+                setTimeout(() => {
+                    clearInterval(deadAnimationInterval);
+                }, 600);
             }
             this.deadAnimationCount++;
             this.playAnimation(KILLERWHALE_DEAD_IMG);

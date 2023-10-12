@@ -13,7 +13,7 @@ function initialize() {
 function startGame() {
     let startscreen = document.getElementById('startscreen');
     checkDevice(startscreen);
-    setTimeout(createCanvas, 2500);
+    setTimeout(createCanvas, 3500);
 }
 
 
