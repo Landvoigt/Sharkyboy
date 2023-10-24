@@ -110,6 +110,7 @@ function resetGameVariables() {
     pauseGame = false;
     characterAlive = true;
     endbossReached = false;
+    endbossSpawned = false;
     gameWon = '';
     collectedPoison = 0;
     killedPufferFishCounter = 0;

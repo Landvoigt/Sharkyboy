@@ -52,6 +52,9 @@ class Endboss extends MovableObject {
     */
     animate() {
         setInterval(() => {
+            endbossPosX = this.x;
+            endbossPosY = this.y;
+
             this.spawnAnimation();
             if (this.isDead()) {
                 gameFinished();
@@ -80,6 +83,7 @@ class Endboss extends MovableObject {
         }
         if (this.spawnAnimationEnded()) {
             this.spawned = true;
+            endbossSpawned = true;
         }
     }
 

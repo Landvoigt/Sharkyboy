@@ -4,6 +4,7 @@ class World {
     statusBarHP = new StatusBar(HP_BAR_IMG, 25, -5, 'hp');
     statusBarPoison = new StatusBar(POISON_BAR_IMG, 1510, -5, 'poison');
     statusBarPoisonAnimation = new PoisonBottle(1825, -12);
+    endbossHealthBar = new EndbossHealthBar(new Endboss());
     canvas;
     ctx;
     keyboard;
@@ -87,6 +88,7 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
+        this.addToMap(this.endbossHealthBar);
     }
 
 
@@ -135,6 +137,8 @@ class World {
     * adds an object to the map, mirrors it if wanted
     */
     addToMap(obj) {
+        // console.log(`Drawing [${obj.constructor.name}] at (${obj.x}, ${obj.y})`);
+
         if (obj.otherDirection) {
             this.flipImage(obj);
         }
